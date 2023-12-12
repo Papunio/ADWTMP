@@ -1,13 +1,14 @@
 # CAP FootballApp
 _out
 *.db
-*.sqlite
+*.sqlite*
 connection.properties
 default-*.json
 .cdsrc-private.json
 gen/
 node_modules/
 target/
+.env
 
 # Web IDE, App Studio
 .che/
