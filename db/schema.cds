@@ -8,4 +8,10 @@ entity Players : cuid {
 
     @title: 'Player Last Name'
     lastName : String(100);
+
+    @title: 'Player Position'
+    position : String(100);
+
+    @title: 'Player Age'
+    age      : Integer;
 }
