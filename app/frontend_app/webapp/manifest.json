@@ -17,12 +17,11 @@
     },
     "dataSources": {
       "mainService": {
-        "uri": "/football/",
+        "uri": "/v2/football/",
         "type": "OData",
         "settings": {
           "annotations": [],
-          "localUri": "localService/metadata.xml",
-          "odataVersion": "4.0"
+          "odataVersion": "2.0"
         }
       }
     }
@@ -101,9 +100,22 @@
         {
           "name": "RouteHome",
           "pattern": ":?query:",
-          "target": [
-            "TargetHome"
-          ]
+          "target": ["TargetHome"]
+        },
+        {
+          "name": "AddMatch",
+          "pattern": "AddMatch",
+          "target": ["TargetAddMatch"]
+        },
+        {
+          "name": "TeamsList",
+          "pattern": "TeamsList",
+          "target": ["TargetTeamsList"]
+        },
+        {
+          "name": "PlayersList",
+          "pattern": "PlayersList",
+          "target": ["TargetPlayersList"]
         }
       ],
       "targets": {
@@ -113,6 +125,27 @@
           "clearControlAggregation": false,
           "viewId": "Home",
           "viewName": "Home"
+        },
+        "TargetAddMatch": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "AddMatch",
+          "viewName": "AddMatch"
+        },
+        "TargetTeamsList": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "TeamsList",
+          "viewName": "TeamsList"
+        },
+        "TargetPlayersList": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "PlayersList",
+          "viewName": "PlayersList"
         }
       }
     },
