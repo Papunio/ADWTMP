@@ -1,24 +1,27 @@
 <mvc:View controllerName="frontendapp.controller.Home"
-	xmlns="sap.m"
-	xmlns:f="sap.f"
-	xmlns:core="sap.ui.core"
 	xmlns:mvc="sap.ui.core.mvc"
-	xmlns:smartTable="sap.ui.comp.smarttable" height="100%">
-	<Page id="page" title="{i18n>title}">
-		<FlexBox alignItems="Center" justifyContent="Center">
-			<items>
-				<Button text="{i18n>addMatch}" press="onPressAddMatch"></Button>
-				<Button text="{i18n>teams}" press="onPressTeams"></Button>
-				<Button text="{i18n>players}" press="onPressPlayers"></Button>
-			</items>
-		</FlexBox>
+	xmlns:u="sap.ui.unified"
+	xmlns:c="sap.ui.core"
+	xmlns="sap.m" height="100%">
+	<Page showHeader="true" enableScrolling="false" class="sapUiContentPadding">
+		<content>
+			<Table id="toBePlayedTable" items="{path:'MatchesModel>/'}">
+				<columns>
+					<Column>
+						<Label text="{i18n>team1}"/>
+					</Column>
+					<Column>
+						<Label text="{i18n>team2}"/>
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem >
+						<Text text="{MatchesModel>team1/name}"/>
+						<Text text="{MatchesModel>team2/name}"/>
+					</ColumnListItem>
+				</items>
 
-		<VBox fitContainer="true">
-			<smartTable:SmartTable id="LineItemsSmartTable" entitySet="Matches" initiallyVisibleFields="t1Name,score,t2Name" ignoredFields="ID" tableType="Table" useVariantManagement="true" useTablePersonalisation="true" header="{i18n>matches}" showRowCount="true" persistencyKey="SmartTableAnalytical_Explored" showFullScreenButton="true" enableAutoBinding="true" class="sapUiResponsiveContentPadding" enableAutoColumnWidth="false">
-				<smartTable:layoutData>
-					<FlexItemData growFactor="1" baseSize="0%"/>
-				</smartTable:layoutData>
-			</smartTable:SmartTable>
-		</VBox>
+			</Table>
+		</content>
 	</Page>
 </mvc:View>
