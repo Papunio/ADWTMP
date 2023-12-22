@@ -11,7 +11,7 @@ entity Players : cuid {
     lastName : String(100);
 
     @title: 'Player Position'
-    position : String(100);
+    position : Association to one Positions;
 
     @title: 'Player Age'
     age      : Integer;
@@ -25,6 +25,7 @@ entity Players : cuid {
 entity Teams : cuid {
     @title: 'Team Name'
     name    : String(100);
+
 
     @title: 'Players in team'
     players : Composition of many {
@@ -40,14 +41,33 @@ entity Teams : cuid {
 @title: 'Entity that represents football match'
 entity Matches : cuid {
     @title: 'Team1'
-    team1 : Association to one Teams.matches
-                on team1.match = $self;
+    teams : Association to many Teams.matches
+                on teams.match = $self;
 
     @title: 'Score'
     score : String(5);
 
-    @title: 'Team2'
-    team2 : Association to one Teams.matches
-                on team2.match = $self;
+    @title: 'Match localization'
+    place : Association to one Pitches;
+}
 
+@title: 'Entity that represents positions'
+entity Positions {
+        @title: 'Position abbreviation'
+    key ID   : String(2);
+
+        @title: 'Position full name'
+        name : localized String;
+}
+
+@title: 'Entity that represents football pitch'
+entity Pitches : cuid {
+    @title: 'Pitch country'
+    country : String;
+
+    @title: 'Pitch city'
+    city    : String;
+
+    @title: 'Pitch street address'
+    street  : String;
 }
