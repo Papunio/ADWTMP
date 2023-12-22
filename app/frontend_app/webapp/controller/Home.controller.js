@@ -20,13 +20,18 @@ sap.ui.define(
         const oPromise = new Promise((resolve) => {
           oModel.read("/Matches", {
             urlParameters: {
-              $expand: "teams/up_",
+              $expand: "teams/up_,place",
             },
             success: (oData) => {
               oData.results.forEach((oMatchData) => {
                 const oTeam1 = oMatchData.teams.results[0].up_;
                 const oTeam2 = oMatchData.teams.results[1].up_;
-                aTeams.push({ team1: oTeam1, team2: oTeam2 });
+                aTeams.push({
+                  index: aTeams.length + 1,
+                  team1: oTeam1,
+                  team2: oTeam2,
+                  place: oMatchData.place.name,
+                });
               });
               resolve();
             },
@@ -55,6 +60,9 @@ sap.ui.define(
       onPressPlayers: function () {
         const oRouter = sap.ui.core.UIComponent.getRouterFor(this);
         oRouter.navTo("PlayersList");
+      },
+      onMatchPress: function () {
+        console.log("XD");
       },
       refreshView: function () {
         this.getView().byId("toBePlayedTable").getBinding("items").refresh();

@@ -24,7 +24,7 @@ entity Players : cuid {
 @title: 'Entity that represents football team'
 entity Teams : cuid {
     @title: 'Team Name'
-    name    : String(100);
+    name    : String(30);
 
 
     @title: 'Players in team'
@@ -62,12 +62,12 @@ entity Positions {
 
 @title: 'Entity that represents football pitch'
 entity Pitches : cuid {
+    @title: 'Pitch name'
+    name    : String;
+
     @title: 'Pitch country'
     country : String;
 
     @title: 'Pitch city'
     city    : String;
-
-    @title: 'Pitch street address'
-    street  : String;
 }
