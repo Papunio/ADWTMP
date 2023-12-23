@@ -21,12 +21,25 @@ sap.ui.define(
         this.getView().bindElement({
           path: `/Matches/${oEvent.getParameter("arguments").MatchID}`,
         });
+
         const oModel = new sap.ui.model.odata.v2.ODataModel("/v2/football");
+
         const oMatchDetails =
           this.getOwnerComponent().getModel("matchDetailsModel");
         oModel.read(`/Matches/${oEvent.getParameter("arguments").MatchID}`, {
+          urlParameters: {
+            $expand: "teams",
+          },
           success: (oData) => {
-            oMatchDetails.setData(oData);
+            const aTeams = oData.teams.results;
+            aTeams.forEach((oTeam) => {
+              // console.log(oTeam);
+              oModel.read(`/Teams/${oTeam.up__ID}`, {
+                success: (oTeamData) => {
+                  console.log(oTeamData);
+                },
+              });
+            });
           },
           error: (oErr) => {
             MessageBox.error("{i18n>Something went wrong}");
