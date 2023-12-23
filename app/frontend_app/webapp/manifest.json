@@ -116,6 +116,11 @@
           "name": "PlayersList",
           "pattern": "PlayersList",
           "target": ["TargetPlayersList"]
+        },
+        {
+          "name": "MatchDetails",
+          "pattern": "MatchDetails/{MatchID}",
+          "target": ["TargetMatchDetails"]
         }
       ],
       "targets": {
@@ -146,6 +151,13 @@
           "clearControlAggregation": false,
           "viewId": "PlayersList",
           "viewName": "PlayersList"
+        },
+        "TargetMatchDetails": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "MatchDetails",
+          "viewName": "MatchDetails"
         }
       }
     },

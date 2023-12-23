@@ -27,6 +27,7 @@ sap.ui.define(
                 const oTeam1 = oMatchData.teams.results[0].up_;
                 const oTeam2 = oMatchData.teams.results[1].up_;
                 aTeams.push({
+                  ID: oMatchData.ID,
                   index: aTeams.length + 1,
                   team1: oTeam1,
                   team2: oTeam2,
@@ -45,7 +46,6 @@ sap.ui.define(
         oPromise.then(() => {
           oMatchesModel.setData(aTeams);
           oView.setModel(oMatchesModel, "MatchesModel");
-          console.log(oView);
         });
       },
 
@@ -61,8 +61,15 @@ sap.ui.define(
         const oRouter = sap.ui.core.UIComponent.getRouterFor(this);
         oRouter.navTo("PlayersList");
       },
-      onMatchPress: function () {
-        console.log("XD");
+      onMatchPress: function (oEvent) {
+        const sMatchID = oEvent
+          .getSource()
+          .getBindingContext("MatchesModel")
+          .getObject().ID;
+        const oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+        oRouter.navTo("MatchDetails", {
+          MatchID: sMatchID,
+        });
       },
       refreshView: function () {
         this.getView().byId("toBePlayedTable").getBinding("items").refresh();

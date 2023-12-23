@@ -45,9 +45,7 @@
 						<Text text="{MatchesModel>team2/name}"/>
 						<Text text="{MatchesModel>place}"/>
 					</ColumnListItem>
-
 				</items>
-
 			</Table>
 		</content>
 	</Page>
