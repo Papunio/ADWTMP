@@ -1,9 +1,8 @@
-<mvc:View controllerName="frontendapp.controller.Home"
+<mvc:View xmlns="sap.m"
+	xmlns:f="sap.f"
 	xmlns:mvc="sap.ui.core.mvc"
-	xmlns:u="sap.ui.unified"
-	xmlns:c="sap.ui.core"
-	xmlns="sap.m" height="100%">
-	<Page showHeader="true" showNavButton="false" enableScrolling="false" class="sapUiContentPadding">
+	xmlns:core="sap.ui.core" height="100%" controllerName="frontendapp.controller.Home">
+	<Page showHeader="true" showNavButton="false" enableScrolling="false">
 		<customHeader>
 			<Bar>
 				<contentLeft>
@@ -11,9 +10,6 @@
 				</contentLeft>
 			</Bar>
 		</customHeader>
-		<!-- <headerContent>
-			<Text text="Aplikacja wspomagająca organizacje meczów piłkarskich" textAlign="Left"/>
-		</headerContent> -->
 		<subHeader>
 			<OverflowToolbar>
 				<Button icon="sap-icon://soccer" text="PIŁECZKA"/>
@@ -23,30 +19,64 @@
 			</OverflowToolbar>
 		</subHeader>
 		<content>
-			<Table id="toBePlayedTable" items="{path:'MatchesModel>/'}">
-				<columns>
-					<Column width="5%">
-						<Label text="{i18n>#}"/>
-					</Column>
-					<Column>
-						<Label text="{i18n>team1}"/>
-					</Column>
-					<Column>
-						<Label text="{i18n>team2}"/>
-					</Column>
-					<Column>
-						<Label text="{i18n>place}"/>
-					</Column>
-				</columns>
-				<items>
-					<ColumnListItem type="Navigation" press="onMatchPress">
-						<Text text="{MatchesModel>index}"/>
-						<Text text="{MatchesModel>team1/name}"/>
-						<Text text="{MatchesModel>team2/name}"/>
-						<Text text="{MatchesModel>place}"/>
-					</ColumnListItem>
-				</items>
-			</Table>
+			<f:SidePanel id="homeSidePanel" toggle="onPanelToggle" sidePanelPosition="Right" sidePanelWidth="15%">
+				<f:mainContent>
+					<Table id="toBePlayedTable" items="{path:'MatchesModel>/'}">
+						<columns>
+							<Column width="5%">
+								<Label text="{i18n>#}"/>
+							</Column>
+							<Column>
+								<Label text="{i18n>team1}"/>
+							</Column>
+							<Column>
+								<Label text="{i18n>team2}"/>
+							</Column>
+							<Column>
+								<Label text="{i18n>place}"/>
+							</Column>
+						</columns>
+						<items>
+							<ColumnListItem type="Navigation" press="onMatchPress">
+								<Text text="{MatchesModel>index}"/>
+								<Text text="{MatchesModel>team1/name}"/>
+								<Text text="{MatchesModel>team2/name}"/>
+								<Text text="{MatchesModel>place}"/>
+							</ColumnListItem>
+						</items>
+					</Table>
+				</f:mainContent>
+				<f:items>
+					<f:SidePanelItem icon="sap-icon://soccer" text="Matches">
+						<VBox>
+							<Text text="Static Content" class="sapUiSmallMarginBottom" />
+							<Button text="ADD MATCH" press="onPressAddMatch"/>
+							<Button text="MATCH HISTORY" />
+						</VBox>
+					</f:SidePanelItem>
+					<f:SidePanelItem icon="sap-icon://family-care" text="Teams">
+						<VBox>
+							<Text text="Static Content" class="sapUiSmallMarginBottom" />
+							<Button text="ADD TEAM" />
+							<Button text="TEAMS LIST" press="onPressTeams"/>
+						</VBox>
+					</f:SidePanelItem>
+					<f:SidePanelItem icon="sap-icon://physical-activity" text="Players">
+						<VBox>
+							<Text text="Static Content" class="sapUiSmallMarginBottom" />
+							<Button text="ADD PLAYER" />
+							<Button text="PLAYERS LIST" press="onPressTeams"/>
+						</VBox>
+					</f:SidePanelItem>
+					<f:SidePanelItem icon="sap-icon://addresses" text="Pitches">
+						<VBox>
+							<Text text="Static Content" class="sapUiSmallMarginBottom" />
+							<Button text="ADD FOOTBALL PITCH" />
+							<Button text="FOOTBALL PITCH LIST" />
+						</VBox>
+					</f:SidePanelItem>
+				</f:items>
+			</f:SidePanel>
 		</content>
 	</Page>
 </mvc:View>
