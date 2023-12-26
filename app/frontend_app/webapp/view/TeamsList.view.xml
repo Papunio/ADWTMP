@@ -1,6 +1,8 @@
-<mvc:View controllerName="frontendapp.controller.App"
+<mvc:View controllerName="frontendapp.controller.TeamsList"
     xmlns:html="http://www.w3.org/1999/xhtml"
     xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
     xmlns="sap.m">
-    TeamsList
+    <Page showHeader="true" showNavButton="true" navButtonPress="onNavButton" enableScrolling="false">
+        <Text text="TeamsList"/>
+    </Page>
 </mvc:View>

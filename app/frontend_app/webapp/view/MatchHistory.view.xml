@@ -1,10 +1,10 @@
-<mvc:View controllerName="frontendapp.controller.Home"
+<mvc:View controllerName="frontendapp.controller.MatchHistory"
 	xmlns="sap.m"
 	xmlns:f="sap.f"
 	xmlns:core="sap.ui.core"
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns:smartTable="sap.ui.comp.smarttable" height="100%">
-	<Page id="page" title="{i18n>title}">
+	<Page showHeader="true" showNavButton="true" navButtonPress="onNavButton">
 		<FlexBox alignItems="Center" justifyContent="Center">
 			<items>
 				<Button text="{i18n>addMatch}" press="onPressAddMatch"></Button>

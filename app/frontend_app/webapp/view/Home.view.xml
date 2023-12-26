@@ -65,7 +65,7 @@
 						<VBox>
 							<Text text="Static Content" class="sapUiSmallMarginBottom" />
 							<Button text="ADD PLAYER" />
-							<Button text="PLAYERS LIST" press="onPressTeams"/>
+							<Button text="PLAYERS LIST" press="onPressPlayers"/>
 						</VBox>
 					</f:SidePanelItem>
 					<f:SidePanelItem icon="sap-icon://addresses" text="Pitches">

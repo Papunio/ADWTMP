@@ -97,6 +97,9 @@ sap.ui.define(
           // oView.setModel(oMatchesModel, "MatchesModel");
         });
       },
+      onNavButton: function () {
+        window.history.go(-1);
+      },
     });
   }
 );
