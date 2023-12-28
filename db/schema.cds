@@ -11,7 +11,7 @@ entity Players : cuid {
     lastName : String(100);
 
     @title: 'Player Position'
-    position : Association to one Positions;
+    position : String(100);
 
     @title: 'Player Age'
     age      : Integer;
@@ -51,14 +51,6 @@ entity Matches : cuid {
     place : Association to one Pitches;
 }
 
-@title: 'Entity that represents positions'
-entity Positions {
-        @title: 'Position abbreviation'
-    key ID   : String(2);
-
-        @title: 'Position full name'
-        name : localized String;
-}
 
 @title: 'Entity that represents football pitch'
 entity Pitches : cuid {
