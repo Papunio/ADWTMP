@@ -1,0 +1,20 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+    <Dialog id="addNewPlayerDialog" title="{i18n>addNewPlayer}" class="sapUiTinyMargin">
+        <Input id="playerName" placeholder="playerName" showSuggestion="true"/>
+        <Input id="playerLastName" placeholder="playerLastName" showSuggestion="true" />
+        <!-- suwaczek xd -->
+        <Input id="playerAge" placeholder="playerAge" showSuggestion="true" />
+        <!-- Select -->
+        <Input id="playerPosition" placeholder="playerPosition" showSuggestion="true" />
+        <Bar>
+            <contentRight>
+                <Button id="confirmBtn" icon="sap-icon://accept" text="Submit" press="addPlayer" />
+            </contentRight>
+            <contentLeft>
+                <Button id="cancelBtn" icon="sap-icon://decline" text="Cancel" press="onPressCancel" />
+            </contentLeft>
+        </Bar>
+
+    </Dialog>
+</core:FragmentDefinition>

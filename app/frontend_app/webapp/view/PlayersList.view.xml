@@ -1,8 +1,38 @@
 <mvc:View controllerName="frontendapp.controller.PlayersList"
-    xmlns:html="http://www.w3.org/1999/xhtml"
-    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
-    xmlns="sap.m">
-    <Page showHeader="true" showNavButton="true" navButtonPress="onNavButton" enableScrolling="false">
-        <Text text="PlayersList"/>
-    </Page>
+	xmlns="sap.m"
+	xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:mvc="sap.ui.core.mvc">
+	<Page showHeader="true" showNavButton="true" navButtonPress="onNavButton" enableScrolling="false">
+
+			<Bar>
+				<contentRight>
+					<Button icon="sap-icon://add" text="ADD PLAYER" press="onPressAddPlayer"/>
+				</contentRight>
+			</Bar>
+		
+		<Table id="playersTable" items="{path:'/Players'}">
+			<columns>
+				<Column>
+					<Label text="{i18n>name}"/>
+				</Column>
+				<Column>
+					<Label text="{i18n>lastName}"/>
+				</Column>
+				<Column>
+					<Label text="{i18n>position}"/>
+				</Column>
+				<Column>
+					<Label text="{i18n>age}"/>
+				</Column>
+			</columns>
+			<items>
+				<ColumnListItem type="Navigation" press="onPlayerPress">
+					<Text text="{name}"/>
+					<Text text="{lastName}"/>
+					<Text text="{position_ID}"/>
+					<Text text="{age}"/>
+				</ColumnListItem>
+			</items>
+		</Table>
+	</Page>
 </mvc:View>
