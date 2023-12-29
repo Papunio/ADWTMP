@@ -8,7 +8,27 @@ sap.ui.define(
     "use strict";
 
     return BaseController.extend("frontendapp.controller.PlayersList", {
-      onInit: function () {},
+      onInit: function () {
+        const oSelectPosition = [
+          {
+            Name: "Attacker",
+            Icon: "sap-icon://feeder-arrow",
+          },
+          {
+            Name: "Midfielder",
+            Icon: "sap-icon://feeder-arrow",
+          },
+          {
+            Name: "Defender",
+            Icon: "sap-icon://feeder-arrow",
+          },
+          {
+            Name: "Goalkeeper",
+            Icon: "sap-icon://feeder-arrow",
+          },
+        ];
+        this.getView().setModel(new JSONModel(oSelectPosition), "SelectModel");
+      },
 
       onPressAddPlayer: function () {
         if (!this.createNewTeamDialog) {
@@ -32,7 +52,7 @@ sap.ui.define(
         const oPayload = {
           name: sName,
           lastName: sLastName,
-          //position: sPosition,
+          position: sPosition,
           age: sAge,
         };
 
@@ -54,7 +74,7 @@ sap.ui.define(
       clearFields: function () {
         this.getView().byId("playerName").setValue("");
         this.getView().byId("playerLastName").setValue("");
-        this.getView().byId("playerAge").setValue("");
+        this.getView().byId("playerAge").setValue(16);
         this.getView().byId("playerPosition").setValue("");
       },
 

@@ -1,12 +1,16 @@
 <core:FragmentDefinition xmlns="sap.m"
     xmlns:core="sap.ui.core">
     <Dialog id="addNewPlayerDialog" title="{i18n>addNewPlayer}" class="sapUiTinyMargin">
-        <Input id="playerName" placeholder="playerName" showSuggestion="true"/>
-        <Input id="playerLastName" placeholder="playerLastName" showSuggestion="true" />
-        <!-- suwaczek xd -->
-        <Input id="playerAge" placeholder="playerAge" showSuggestion="true" />
-        <!-- Select -->
-        <Input id="playerPosition" placeholder="playerPosition" showSuggestion="true" />
+        <Input required="true" id="playerName" placeholder="playerName" showSuggestion="true"/>
+        <Input required="true" id="playerLastName" placeholder="playerLastName" showSuggestion="true" />
+
+        <Slider id="playerAge" value="16" width="100%" min="16" max="100" showAdvancedTooltip="true" showHandleTooltip="false" />
+
+        <Select width="100%" required="true" selectedKey="{/SelectedKey}" forceSelection="false" items="{
+						path: 'SelectModel>/'
+					}">
+            <core:ListItem text="{SelectModel>Name}" icon="{SelectModel>Icon}"/>
+        </Select>
         <Bar>
             <contentRight>
                 <Button id="confirmBtn" icon="sap-icon://accept" text="Submit" press="addPlayer" />

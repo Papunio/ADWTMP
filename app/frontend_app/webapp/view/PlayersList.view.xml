@@ -3,13 +3,12 @@
 	xmlns:html="http://www.w3.org/1999/xhtml"
 	xmlns:mvc="sap.ui.core.mvc">
 	<Page showHeader="true" showNavButton="true" navButtonPress="onNavButton" enableScrolling="false">
+		<Bar>
+			<contentRight>
+				<Button icon="sap-icon://add" text="ADD PLAYER" press="onPressAddPlayer"/>
+			</contentRight>
+		</Bar>
 
-			<Bar>
-				<contentRight>
-					<Button icon="sap-icon://add" text="ADD PLAYER" press="onPressAddPlayer"/>
-				</contentRight>
-			</Bar>
-		
 		<Table id="playersTable" items="{path:'/Players'}">
 			<columns>
 				<Column>
@@ -29,7 +28,7 @@
 				<ColumnListItem type="Navigation" press="onPlayerPress">
 					<Text text="{name}"/>
 					<Text text="{lastName}"/>
-					<Text text="{position_ID}"/>
+					<Text text="{position}"/>
 					<Text text="{age}"/>
 				</ColumnListItem>
 			</items>
