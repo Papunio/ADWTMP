@@ -43,12 +43,12 @@ sap.ui.define(
 
       addPlayer: function () {
         const oModel = this.getView().getModel();
-        // walidacja
+        // WALIDACJA!
         const sName = this.getView().byId("playerName").getValue();
         const sLastName = this.getView().byId("playerLastName").getValue();
         const sAge = this.getView().byId("playerAge").getValue();
-        const sPosition = this.getView().byId("playerPosition").getValue();
-
+        const sPosition = this.getView().byId("playerPosition").getSelectedItem().getText();
+        
         const oPayload = {
           name: sName,
           lastName: sLastName,
@@ -75,7 +75,7 @@ sap.ui.define(
         this.getView().byId("playerName").setValue("");
         this.getView().byId("playerLastName").setValue("");
         this.getView().byId("playerAge").setValue(16);
-        this.getView().byId("playerPosition").setValue("");
+        this.getView().byId("playerPosition").setSelectedItem("");
       },
 
       refreshView: function () {

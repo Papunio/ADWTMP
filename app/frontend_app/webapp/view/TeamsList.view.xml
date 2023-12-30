@@ -3,6 +3,22 @@
     xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
     xmlns="sap.m">
     <Page showHeader="true" showNavButton="true" navButtonPress="onNavButton" enableScrolling="false">
-        <Text text="TeamsList"/>
+        <Bar>
+            <contentRight>
+                <Button icon="sap-icon://add" text="ADD TEAM" press="onPressAddTeam"/>
+            </contentRight>
+        </Bar>
+        <Table id="teamsTable" items="{path:'/Teams'}">
+            <columns>
+                <Column>
+                    <Label text="{i18n>name}"/>
+                </Column>
+            </columns>
+            <items>
+                <ColumnListItem type="Navigation" press="onTeamPress">
+                    <Text text="{name}"/>
+                </ColumnListItem>
+            </items>
+        </Table>
     </Page>
 </mvc:View>

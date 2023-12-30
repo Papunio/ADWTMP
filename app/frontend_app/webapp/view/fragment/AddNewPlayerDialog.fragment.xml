@@ -6,7 +6,7 @@
 
         <Slider id="playerAge" value="16" width="100%" min="16" max="100" showAdvancedTooltip="true" showHandleTooltip="false" />
 
-        <Select width="100%" required="true" selectedKey="{/SelectedKey}" forceSelection="false" items="{
+        <Select id="playerPosition" width="100%" required="true" selectedKey="{/SelectedKey}" forceSelection="false" items="{
 						path: 'SelectModel>/'
 					}">
             <core:ListItem text="{SelectModel>Name}" icon="{SelectModel>Icon}"/>
@@ -19,6 +19,5 @@
                 <Button id="cancelBtn" icon="sap-icon://decline" text="Cancel" press="onPressCancel" />
             </contentLeft>
         </Bar>
-
     </Dialog>
 </core:FragmentDefinition>
