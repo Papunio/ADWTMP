@@ -48,18 +48,5 @@ entity Matches : cuid {
     score : String(5);
 
     @title: 'Match localization'
-    place : Association to one Pitches;
-}
-
-
-@title: 'Entity that represents football pitch'
-entity Pitches : cuid {
-    @title: 'Pitch name'
-    name    : String;
-
-    @title: 'Pitch country'
-    country : String;
-
-    @title: 'Pitch city'
-    city    : String;
+    place : String;
 }

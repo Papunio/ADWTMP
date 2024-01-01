@@ -20,7 +20,7 @@ sap.ui.define(
         const oPromise = new Promise((resolve) => {
           oModel.read("/Matches", {
             urlParameters: {
-              $expand: "teams/up_,place",
+              $expand: "teams/up_",
             },
             success: (oData) => {
               oData.results.forEach((oMatchData) => {
@@ -31,7 +31,7 @@ sap.ui.define(
                   index: aTeams.length + 1,
                   team1: oTeam1,
                   team2: oTeam2,
-                  place: oMatchData.place.name,
+                  place: oMatchData.place,
                 });
               });
               resolve();
