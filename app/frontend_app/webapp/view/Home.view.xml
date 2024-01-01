@@ -12,10 +12,17 @@
 		</customHeader>
 		<subHeader>
 			<OverflowToolbar>
-				<Button icon="sap-icon://soccer" text="PIŁECZKA"/>
-				<Button text="ADD MATCH" press="onPressAddMatch" />
-				<Button text="TEAMS" press="onPressTeams" />
-				<Button text="PLAYERS" press="onPressPlayers" />
+				<Bar>
+					<contentLeft>
+						<Button icon="sap-icon://soccer" text="PIŁECZKA"/>
+						<Button text="MATCH HISTORY" press="onPressMatchHistory" />
+						<Button text="TEAMS" press="onPressTeams" />
+						<Button text="PLAYERS" press="onPressPlayers" />
+					</contentLeft>
+					<contentRight>
+						<Button text="ADD MATCH" icon="sap-icon://add" press="onPressAddMatch" />
+					</contentRight>
+				</Bar>
 			</OverflowToolbar>
 		</subHeader>
 		<content>
@@ -51,7 +58,7 @@
 						<VBox>
 							<Text text="Static Content" class="sapUiSmallMarginBottom" />
 							<Button text="ADD MATCH" press="onPressAddMatch"/>
-							<Button text="MATCH HISTORY" />
+							<Button text="MATCH HISTORY" press="onPressMatchHistory"/>
 						</VBox>
 					</f:SidePanelItem>
 					<f:SidePanelItem icon="sap-icon://family-care" text="Teams">

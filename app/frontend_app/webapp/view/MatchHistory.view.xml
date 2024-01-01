@@ -14,7 +14,7 @@
 		</FlexBox>
 
 		<VBox fitContainer="true">
-			<smartTable:SmartTable id="LineItemsSmartTable" entitySet="Matches" initiallyVisibleFields="t1Name,score,t2Name" ignoredFields="ID" tableType="Table" useVariantManagement="true" useTablePersonalisation="false" header="{i18n>matches}" showRowCount="true" persistencyKey="SmartTableAnalytical_Explored" showFullScreenButton="true" enableAutoBinding="true" class="sapUiResponsiveContentPadding" enableAutoColumnWidth="false">
+			<smartTable:SmartTable id="LineItemsSmartTable" entitySet="Matches"  ignoredFields="ID" tableType="Table" useVariantManagement="true" useTablePersonalisation="false" header="{i18n>matches}" showRowCount="true" persistencyKey="SmartTableAnalytical_Explored" showFullScreenButton="true" enableAutoBinding="true" class="sapUiResponsiveContentPadding" enableAutoColumnWidth="false">
 				<smartTable:layoutData>
 					<FlexItemData growFactor="1" baseSize="0%"/>
 				</smartTable:layoutData>

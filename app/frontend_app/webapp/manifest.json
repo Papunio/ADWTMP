@@ -121,6 +121,11 @@
           "name": "MatchDetails",
           "pattern": "MatchDetails/{MatchID}",
           "target": ["TargetMatchDetails"]
+        },
+        {
+          "name": "MatchHistory",
+          "pattern": "MatchHistory",
+          "target": ["TargetMatchHistory"]
         }
       ],
       "targets": {
@@ -158,6 +163,13 @@
           "clearControlAggregation": false,
           "viewId": "MatchDetails",
           "viewName": "MatchDetails"
+        },
+        "TargetMatchHistory": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "MatchHistory",
+          "viewName": "MatchHistory"
         }
       }
     },

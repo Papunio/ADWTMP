@@ -61,6 +61,10 @@ sap.ui.define(
         const oRouter = sap.ui.core.UIComponent.getRouterFor(this);
         oRouter.navTo("PlayersList");
       },
+      onPressMatchHistory: function () {
+        const oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+        oRouter.navTo("MatchHistory");
+      },
       onMatchPress: function (oEvent) {
         const sMatchID = oEvent
           .getSource()
