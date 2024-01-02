@@ -10,12 +10,18 @@
         </Bar>
         <Table id="teamsTable" items="{path:'/Teams'}">
             <columns>
+                <Column width="2%">
+
+                </Column>
+            </columns>
+            <columns>
                 <Column>
                     <Label text="{i18n>name}"/>
                 </Column>
             </columns>
             <items>
                 <ColumnListItem type="Navigation" press="onTeamPress">
+                    <Image height="100%" width="100%" src="{logo}"/>
                     <Text text="{name}"/>
                 </ColumnListItem>
             </items>

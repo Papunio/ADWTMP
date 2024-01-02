@@ -1,7 +1,31 @@
 <mvc:View controllerName="frontendapp.controller.AddMatch"
     xmlns:html="http://www.w3.org/1999/xhtml"
     xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
-    xmlns="sap.m">
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core">
     <Page showHeader="true" showNavButton="true" navButtonPress="onNavButton" enableScrolling="false">
+        <Panel width="auto" class="sapUiResponsiveMargin">
+            <Select id="homeTeam" width="100%" required="true" selectedKey="{/SelectedKey}" forceSelection="false" items="{
+						path: '/Teams'
+					}">
+                <core:ListItem text="{name}" icon="sap-icon://feeder-arrow"/>
+            </Select>
+            <Select id="guestTeam" width="100%" required="true" selectedKey="{/SelectedKey}" forceSelection="false" items="{
+						path: '/Teams'
+					}">
+                <core:ListItem text="{name}" icon="sap-icon://feeder-arrow"/>
+            </Select>
+
+            <DatePicker id="matchDate" value="{
+						'path':'/valueDP2',
+						'type':'sap.ui.model.type.Date',
+						'formatOptions': {
+							'pattern': 'yyyy-MM-dd'
+						}
+					}" change="handleChange" class="sapUiSmallMarginBottom"/>
+
+            <Input id="matchPlace" placeholder="{i18n>matchPlace}" />
+
+        </Panel>
     </Page>
 </mvc:View>

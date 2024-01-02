@@ -28,30 +28,39 @@
 		<content>
 			<f:SidePanel id="homeSidePanel" toggle="onPanelToggle" sidePanelPosition="Right" sidePanelWidth="15%">
 				<f:mainContent>
-					<Table id="toBePlayedTable" items="{path:'MatchesModel>/'}">
-						<columns>
-							<Column width="5%">
-								<Label text="{i18n>#}"/>
-							</Column>
-							<Column>
-								<Label text="{i18n>team1}"/>
-							</Column>
-							<Column>
-								<Label text="{i18n>team2}"/>
-							</Column>
-							<Column>
-								<Label text="{i18n>place}"/>
-							</Column>
-						</columns>
-						<items>
-							<ColumnListItem type="Navigation" press="onMatchPress">
-								<Text text="{MatchesModel>index}"/>
-								<Text text="{MatchesModel>team1/name}"/>
-								<Text text="{MatchesModel>team2/name}"/>
-								<Text text="{MatchesModel>place}"/>
-							</ColumnListItem>
-						</items>
-					</Table>
+					<Panel width="auto" class="sapUiResponsiveMargin">
+						<Table id="toBePlayedTable" items="{path:'MatchesModel>/'}">
+							<columns>
+								<Column width="5%">
+									<Label text="{i18n>#}"/>
+								</Column>
+
+								<Column width="2%"></Column>
+								<Column>
+									<Label text="{i18n>team1}"/>
+								</Column>
+
+								<Column width="2%"></Column>
+								<Column>
+									<Label text="{i18n>team2}"/>
+								</Column>
+
+								<Column>
+									<Label text="{i18n>place}"/>
+								</Column>
+							</columns>
+							<items>
+								<ColumnListItem type="Navigation" press="onMatchPress">
+									<Text text="{MatchesModel>index}"/>
+									<Image height="100%" width="100%" src="{MatchesModel>team1/logo}"/>
+									<Text text="{MatchesModel>team1/name}"/>
+									<Image height="100%" width="100%" src="{MatchesModel>team2/logo}"/>
+									<Text text="{MatchesModel>team2/name}"/>
+									<Text text="{MatchesModel>place}"/>
+								</ColumnListItem>
+							</items>
+						</Table>
+					</Panel>
 				</f:mainContent>
 				<f:items>
 					<f:SidePanelItem icon="sap-icon://soccer" text="Matches">

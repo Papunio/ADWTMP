@@ -36,6 +36,9 @@ entity Teams : cuid {
     matches : Composition of many {
                   key match : Association to Matches;
               };
+
+    @title: 'Team Logo'
+    logo    : String;
 }
 
 @title: 'Entity that represents football match'
