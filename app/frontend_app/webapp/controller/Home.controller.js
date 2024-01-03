@@ -3,14 +3,17 @@ sap.ui.define(
     "sap/ui/core/mvc/Controller",
     "sap/ui/model/json/JSONModel",
     "sap/m/MessageBox",
+    "sap/ui/core/format/DateFormat",
+    "../model/Formatter",
   ],
   /**
    * @param {typeof sap.ui.core.mvc.Controller} Controller
    */
-  function (Controller, JSONModel, MessageBox) {
+  function (Controller, JSONModel, MessageBox, DateFormat, Formatter) {
     "use strict";
 
     return Controller.extend("frontendapp.controller.Home", {
+      formatter :Formatter,
       onInit: function () {
         const oView = this.getView();
         const oModel = new sap.ui.model.odata.v2.ODataModel("/v2/football/");
@@ -30,7 +33,8 @@ sap.ui.define(
                   ID: oMatchData.ID,
                   index: aTeams.length + 1,
                   team1: oTeam1,
-                  team2: oTeam2,
+                  team2: oTeam2,         
+                  date: oMatchData.date,
                   place: oMatchData.place,
                 });
               });

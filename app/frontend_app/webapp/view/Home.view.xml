@@ -29,7 +29,7 @@
 			<f:SidePanel id="homeSidePanel" toggle="onPanelToggle" sidePanelPosition="Right" sidePanelWidth="15%">
 				<f:mainContent>
 					<Panel width="auto" class="sapUiResponsiveMargin">
-						<Table id="toBePlayedTable" items="{path:'MatchesModel>/'}">
+						<Table id="toBePlayedTable" items="{path:'MatchesModel>/', sorter : {path : 'MatchesModel>date'}}">
 							<columns>
 								<Column width="5%">
 									<Label text="{i18n>#}"/>
@@ -46,6 +46,9 @@
 								</Column>
 
 								<Column>
+									<Label text="{i18n>matchDate}"/>
+								</Column>
+								<Column>
 									<Label text="{i18n>place}"/>
 								</Column>
 							</columns>
@@ -56,6 +59,7 @@
 									<Text text="{MatchesModel>team1/name}"/>
 									<Image height="100%" width="100%" src="{MatchesModel>team2/logo}"/>
 									<Text text="{MatchesModel>team2/name}"/>
+									<Text text="{path: 'MatchesModel>date', formatter: '.formatter.formatDate'}"/>
 									<Text text="{MatchesModel>place}"/>
 								</ColumnListItem>
 							</items>

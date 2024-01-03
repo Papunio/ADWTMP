@@ -52,4 +52,7 @@ entity Matches : cuid {
 
     @title: 'Match localization'
     place : String;
+
+    @title: 'Match date'
+    date  : Date;
 }
