@@ -23,6 +23,13 @@
 				<Column>
 					<Label text="{i18n>age}"/>
 				</Column>
+
+				<Column width="5%">
+
+				</Column>
+				<Column width="5%">
+
+				</Column>
 			</columns>
 			<items>
 				<ColumnListItem type="Navigation" press="onPlayerPress">
@@ -30,6 +37,8 @@
 					<Text text="{lastName}"/>
 					<Text text="{position}"/>
 					<Text text="{age}"/>
+					<Button id="updatePlayer" text="{i18n>update}" type="Neutral" icon="sap-icon://edit" press="onUpdatePlayerPress"/>
+					<Button id="deletePlayer" text="{i18n>delete}" type="Reject" icon="sap-icon://delete" press="onDeletePlayerPress"/>
 				</ColumnListItem>
 			</items>
 		</Table>

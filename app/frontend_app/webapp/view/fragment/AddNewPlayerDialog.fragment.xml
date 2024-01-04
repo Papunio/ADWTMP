@@ -4,7 +4,7 @@
         <Input required="true" id="playerName" placeholder="playerName" showSuggestion="true"/>
         <Input required="true" id="playerLastName" placeholder="playerLastName" showSuggestion="true" />
 
-        <Slider id="playerAge" value="16" width="100%" min="16" max="100" showAdvancedTooltip="true" showHandleTooltip="false" />
+        <Slider id="playerAge" value="16" width="100%" min="16" max="50" showAdvancedTooltip="true" showHandleTooltip="false" />
 
         <Select id="playerPosition" width="100%" required="true" selectedKey="{/SelectedKey}" forceSelection="false" items="{
 						path: 'SelectModel>/'
@@ -13,10 +13,10 @@
         </Select>
         <Bar>
             <contentRight>
-                <Button id="confirmBtn" icon="sap-icon://accept" text="Submit" press="addPlayer" />
+                <Button id="confirmBtn" icon="sap-icon://accept" text="{i18n>submit}" press="addPlayer" />
             </contentRight>
             <contentLeft>
-                <Button id="cancelBtn" icon="sap-icon://decline" text="Cancel" press="onPressCancel" />
+                <Button id="cancelBtn" icon="sap-icon://decline" text="{i18n>cancel}" press="onPressCancel" />
             </contentLeft>
         </Bar>
     </Dialog>

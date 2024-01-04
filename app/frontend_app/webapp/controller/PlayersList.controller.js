@@ -1,94 +1,177 @@
 sap.ui.define(
-  [
-    "sap/ui/core/mvc/Controller",
-    "sap/ui/model/json/JSONModel",
-    "sap/m/MessageBox",
-  ],
-  function (BaseController, JSONModel, MessageBox) {
-    "use strict";
+	[
+		'sap/ui/core/mvc/Controller',
+		'sap/ui/model/json/JSONModel',
+		'sap/m/MessageBox',
+	],
+	function (BaseController, JSONModel, MessageBox) {
+		'use strict';
 
-    return BaseController.extend("frontendapp.controller.PlayersList", {
-      onInit: function () {
-        const oSelectPosition = [
-          {
-            Name: "Attacker",
-            Icon: "sap-icon://feeder-arrow",
-          },
-          {
-            Name: "Midfielder",
-            Icon: "sap-icon://feeder-arrow",
-          },
-          {
-            Name: "Defender",
-            Icon: "sap-icon://feeder-arrow",
-          },
-          {
-            Name: "Goalkeeper",
-            Icon: "sap-icon://feeder-arrow",
-          },
-        ];
-        this.getView().setModel(new JSONModel(oSelectPosition), "SelectModel");
-      },
+		return BaseController.extend('frontendapp.controller.PlayersList', {
+			onInit: function () {
+				const oSelectPosition = [
+					{
+						Name: 'Attacker',
+						Icon: 'sap-icon://feeder-arrow',
+					},
+					{
+						Name: 'Midfielder',
+						Icon: 'sap-icon://feeder-arrow',
+					},
+					{
+						Name: 'Defender',
+						Icon: 'sap-icon://feeder-arrow',
+					},
+					{
+						Name: 'Goalkeeper',
+						Icon: 'sap-icon://feeder-arrow',
+					},
+				];
+				this.getView().setModel(
+					new JSONModel(oSelectPosition),
+					'SelectModel'
+				);
+			},
 
-      onPressAddPlayer: function () {
-        if (!this.createNewTeamDialog) {
-          this.createNewTeamDialog = this.loadFragment({
-            name: "frontendapp.view.fragment.AddNewPlayerDialog",
-          });
-        }
-        this.createNewTeamDialog.then(function (oDialog) {
-          oDialog.open();
-        });
-      },
+			onPressAddPlayer: function () {
+				if (!this.createNewPlayerDialog) {
+					this.createNewPlayerDialog = this.loadFragment({
+						name: 'frontendapp.view.fragment.AddNewPlayerDialog',
+					});
+				}
+				this.createNewPlayerDialog.then(function (oDialog) {
+					oDialog.open();
+				});
+			},
 
-      addPlayer: function () {
-        const oModel = this.getView().getModel();
-        // WALIDACJA!
-        const sName = this.getView().byId("playerName").getValue();
-        const sLastName = this.getView().byId("playerLastName").getValue();
-        const sAge = this.getView().byId("playerAge").getValue();
-        const sPosition = this.getView().byId("playerPosition").getSelectedItem().getText();
-        
-        const oPayload = {
-          name: sName,
-          lastName: sLastName,
-          position: sPosition,
-          age: sAge,
-        };
+			addPlayer: function () {
+				const oView = this.getView();
+				const oModel = oView.getModel();
+				// WALIDACJA!
+				const sName = oView.byId('playerName').getValue();
+				const sLastName = oView.byId('playerLastName').getValue();
+				const sAge = oView.byId('playerAge').getValue();
+				const sPosition = oView
+					.byId('playerPosition')
+					.getSelectedItem()
+					.getText();
 
-        oModel.create("/Players", oPayload, {
-          method: "POST",
-          success: (oRes) => {
-            this.refreshView();
-            MessageBox.success(`Player ${sName} ${sLastName} added`);
-          },
-          error: (oErr) => {
-            MessageBox.error("Something went wrong");
-            console.error(oErr.message);
-          },
-        });
-        this.byId("addNewPlayerDialog").close();
-        this.clearFields();
-      },
+				const oPayload = {
+					name: sName,
+					lastName: sLastName,
+					position: sPosition,
+					age: sAge,
+				};
 
-      clearFields: function () {
-        this.getView().byId("playerName").setValue("");
-        this.getView().byId("playerLastName").setValue("");
-        this.getView().byId("playerAge").setValue(16);
-        this.getView().byId("playerPosition").setSelectedItem("");
-      },
+				oModel.create('/Players', oPayload, {
+					method: 'POST',
+					success: (oRes) => {
+						this.refreshView();
+						MessageBox.success(
+							`Player ${sName} ${sLastName} added`
+						);
+					},
+					error: (oErr) => {
+						MessageBox.error('Something went wrong');
+						console.error(oErr.message);
+					},
+				});
+				this.byId('addNewPlayerDialog').close();
+				this.clearFields();
+			},
 
-      refreshView: function () {
-        this.getView().byId("playersTable").getBinding("items").refresh();
-      },
+			onUpdatePlayerPress: function (oEvent) {
+				const oView = this.getView();
+				const oPlayer = oEvent
+					.getSource()
+					.getBindingContext()
+					.getObject();
 
-      onPressCancel: function () {
-        this.byId("addNewPlayerDialog").close();
-      },
+				const oPlayerModel = new JSONModel(oPlayer);
 
-      onNavButton: function () {
-        window.history.go(-1);
-      },
-    });
-  }
+				if (!this.updatePlayerDialog) {
+					this.updatePlayerDialog = this.loadFragment({
+						name: 'frontendapp.view.fragment.UpdatePlayerDialog',
+					});
+				}
+				this.updatePlayerDialog.then(function (oDialog) {
+					oView.setModel(oPlayerModel, 'playerModel');
+					oDialog.open();
+					oView.byId('playerAgeU').setValue(oPlayer.age);
+					oView
+						.byId('playerPositionU')
+						.setSelectedKey(oPlayer.position);
+				});
+			},
+
+			updatePlayer: function () {
+				const oView = this.getView();
+				const oModel = oView.getModel();
+				// WALIDACJA!
+				const sPlayerID = oView.getModel('playerModel').getData().ID;
+				const sName = oView.byId('playerNameU').getValue();
+				const sLastName = oView.byId('playerLastNameU').getValue();
+				const sAge = oView.byId('playerAgeU').getValue();
+				const sPosition = oView
+					.byId('playerPositionU')
+					.getSelectedItem()
+					.getText();
+
+				const oPayload = {
+					name: sName,
+					lastName: sLastName,
+					position: sPosition,
+					age: sAge,
+				};
+
+				oModel.update(`/Players(${sPlayerID})`, oPayload, {
+					method: 'POST',
+					success: (oRes) => {
+						this.refreshView();
+						MessageBox.success(
+							`Player ${sName} ${sLastName} updated`
+						);
+					},
+					error: (oErr) => {
+						MessageBox.error('Something went wrong');
+						console.error(oErr.message);
+					},
+				});
+				this.byId('updatePlayerDialog').close();
+				this.clearFields();
+			},
+
+			clearFields: function () {
+				if (this.getView().byId('playerName'))
+					this.getView().byId('playerName').setValue('');
+				if (this.getView().byId('playerLastName'))
+					this.getView().byId('playerLastName').setValue('');
+				if (this.getView().byId('playerAge'))
+					this.getView().byId('playerAge').setValue(16);
+				if (this.getView().byId('playerPosition'))
+					this.getView().byId('playerPosition').setSelectedItem('');
+			},
+
+			refreshView: function () {
+				this.getView()
+					.byId('playersTable')
+					.getBinding('items')
+					.refresh();
+			},
+
+			onPressCancel: function () {
+				if (this.byId('addNewPlayerDialog')) {
+					this.byId('addNewPlayerDialog').close();
+				}
+				if (this.byId('updatePlayerDialog')) {
+					this.byId('updatePlayerDialog').close();
+				}
+				this.clearFields();
+			},
+
+			onNavButton: function () {
+				window.history.go(-1);
+			},
+		});
+	}
 );

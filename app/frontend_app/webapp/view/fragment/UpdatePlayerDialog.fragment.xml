@@ -1,0 +1,23 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+    <Dialog id="updatePlayerDialog" title="{i18n>updating}" class="sapUiTinyMargin">
+        <Input required="true" value="{playerModel>/name}" id="playerNameU" placeholder="playerName" showSuggestion="true"/>
+        <Input required="true" value="{playerModel>/lastName}" id="playerLastNameU" placeholder="playerLastName" showSuggestion="true" />
+
+        <Slider id="playerAgeU" value="16" width="100%" min="16" max="50" showAdvancedTooltip="true" showHandleTooltip="false" />
+
+        <Select id="playerPositionU" width="100%" required="true" selectedKey="{/SelectedKey}" forceSelection="false" items="{
+						path: 'SelectModel>/'
+					}">
+            <core:ListItem text="{SelectModel>Name}" icon="{SelectModel>Icon}"/>
+        </Select>
+        <Bar>
+            <contentRight>
+                <Button id="confirmBtnU" icon="sap-icon://accept" text="{i18n>update}" press="updatePlayer" />
+            </contentRight>
+            <contentLeft>
+                <Button id="cancelBtnU" icon="sap-icon://decline" text="{i18n>cancel}" press="onPressCancel" />
+            </contentLeft>
+        </Bar>
+    </Dialog>
+</core:FragmentDefinition>
