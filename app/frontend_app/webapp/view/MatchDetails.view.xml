@@ -3,6 +3,6 @@
     xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
     xmlns="sap.m">
     <Page showHeader="true" showNavButton="true" navButtonPress="onNavButton" enableScrolling="false">
-        <Text text="{score}"/>
+        <Text text="{place}"/>
     </Page>
 </mvc:View>

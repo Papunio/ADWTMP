@@ -33,9 +33,8 @@ entity Teams : cuid {
               };
 
     @title: 'Matched played by team'
-    matches : Composition of many {
-                  key match : Association to Matches;
-              };
+    matches : Association to many Matches.teams
+                  on matches.team = $self;
 
     @title: 'Team Logo'
     logo    : String;
@@ -44,11 +43,9 @@ entity Teams : cuid {
 @title: 'Entity that represents football match'
 entity Matches : cuid {
     @title: 'Team1'
-    teams : Association to many Teams.matches
-                on teams.match = $self;
-
-    @title: 'Score'
-    score : String(5);
+    teams : Composition of many {
+                key team : Association to Teams;
+            };
 
     @title: 'Match localization'
     place : String;

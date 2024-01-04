@@ -4,16 +4,16 @@
     xmlns="sap.m"
     xmlns:core="sap.ui.core">
     <Page showHeader="true" showNavButton="true" navButtonPress="onNavButton" enableScrolling="false">
-        <Panel width="auto" class="sapUiResponsiveMargin">
+        <Panel width="50%" class="sapUiResponsiveMargin">
             <Select id="homeTeam" width="100%" required="true" selectedKey="{/SelectedKey}" forceSelection="false" items="{
 						path: '/Teams'
 					}">
-                <core:ListItem text="{name}" icon="sap-icon://feeder-arrow"/>
+                <core:ListItem key="{ID}" text="{name}" icon="sap-icon://feeder-arrow"/>
             </Select>
             <Select id="guestTeam" width="100%" required="true" selectedKey="{/SelectedKey}" forceSelection="false" items="{
 						path: '/Teams'
 					}">
-                <core:ListItem text="{name}" icon="sap-icon://feeder-arrow"/>
+                <core:ListItem key="{ID}" text="{name}" icon="sap-icon://feeder-arrow"/>
             </Select>
 
             <DatePicker id="matchDate" value="{
@@ -25,7 +25,7 @@
 					}" change="handleChange" class="sapUiSmallMarginBottom"/>
 
             <Input id="matchPlace" placeholder="{i18n>matchPlace}" />
-
+            <Button text="ADD MATCH" press="onPressAccept" />
         </Panel>
     </Page>
 </mvc:View>
