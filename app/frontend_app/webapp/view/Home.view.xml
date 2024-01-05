@@ -51,6 +51,9 @@
 								<Column>
 									<Label text="{i18n>place}"/>
 								</Column>
+
+								<Column width="5%">
+								</Column>
 							</columns>
 							<items>
 								<ColumnListItem type="Navigation" press="onMatchPress">
@@ -61,6 +64,10 @@
 									<Text text="{MatchesModel>team2/name}"/>
 									<Text text="{path: 'MatchesModel>date', formatter: '.formatter.formatDate'}"/>
 									<Text text="{MatchesModel>place}"/>
+									<FlexBox>
+										<Button id="updateMatch" type="Transparent" icon="sap-icon://edit" press="onUpdateMatchPress"/>
+										<Button id="deleteMatch" type="Transparent" icon="sap-icon://delete" press="onDeleteMatchPress"/>
+									</FlexBox>
 								</ColumnListItem>
 							</items>
 						</Table>

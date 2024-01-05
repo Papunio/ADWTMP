@@ -1,183 +1,171 @@
 {
-  "_version": "1.59.0",
-  "sap.app": {
-    "id": "frontendapp",
-    "type": "application",
-    "i18n": "i18n/i18n.properties",
-    "applicationVersion": {
-      "version": "0.0.1"
-    },
-    "title": "{{appTitle}}",
-    "description": "{{appDescription}}",
-    "resources": "resources.json",
-    "sourceTemplate": {
-      "id": "@sap/generator-fiori:basic",
-      "version": "1.11.5",
-      "toolsId": "47b4a744-154a-4d24-9b03-92b206d73e43"
-    },
-    "dataSources": {
-      "mainService": {
-        "uri": "/v2/football/",
-        "type": "OData",
-        "settings": {
-          "annotations": [],
-          "odataVersion": "2.0"
-        }
-      }
-    }
-  },
-  "sap.ui": {
-    "technology": "UI5",
-    "icons": {
-      "icon": "",
-      "favIcon": "",
-      "phone": "",
-      "phone@2": "",
-      "tablet": "",
-      "tablet@2": ""
-    },
-    "deviceTypes": {
-      "desktop": true,
-      "tablet": true,
-      "phone": true
-    }
-  },
-  "sap.ui5": {
-    "flexEnabled": true,
-    "dependencies": {
-      "minUI5Version": "1.120.1",
-      "libs": {
-        "sap.m": {},
-        "sap.ui.core": {},
-        "sap.f": {},
-        "sap.suite.ui.generic.template": {},
-        "sap.ui.comp": {},
-        "sap.ui.generic.app": {},
-        "sap.ui.table": {},
-        "sap.ushell": {}
-      }
-    },
-    "contentDensities": {
-      "compact": true,
-      "cozy": true
-    },
-    "models": {
-      "i18n": {
-        "type": "sap.ui.model.resource.ResourceModel",
-        "settings": {
-          "bundleName": "frontendapp.i18n.i18n"
-        }
-      },
-      "": {
-        "dataSource": "mainService",
-        "preload": true,
-        "settings": {
-          "synchronizationMode": "None",
-          "operationMode": "Server",
-          "autoExpandSelect": true,
-          "earlyRequests": true
-        }
-      }
-    },
-    "resources": {
-      "css": [
-        {
-          "uri": "css/style.css"
-        }
-      ]
-    },
-    "routing": {
-      "config": {
-        "routerClass": "sap.m.routing.Router",
-        "viewType": "XML",
-        "async": true,
-        "viewPath": "frontendapp.view",
-        "controlAggregation": "pages",
-        "controlId": "app",
-        "clearControlAggregation": false
-      },
-      "routes": [
-        {
-          "name": "RouteHome",
-          "pattern": ":?query:",
-          "target": ["TargetHome"]
-        },
-        {
-          "name": "AddMatch",
-          "pattern": "AddMatch",
-          "target": ["TargetAddMatch"]
-        },
-        {
-          "name": "TeamsList",
-          "pattern": "TeamsList",
-          "target": ["TargetTeamsList"]
-        },
-        {
-          "name": "PlayersList",
-          "pattern": "PlayersList",
-          "target": ["TargetPlayersList"]
-        },
-        {
-          "name": "MatchDetails",
-          "pattern": "MatchDetails/{MatchID}",
-          "target": ["TargetMatchDetails"]
-        },
-        {
-          "name": "MatchHistory",
-          "pattern": "MatchHistory",
-          "target": ["TargetMatchHistory"]
-        }
-      ],
-      "targets": {
-        "TargetHome": {
-          "viewType": "XML",
-          "transition": "slide",
-          "clearControlAggregation": false,
-          "viewId": "Home",
-          "viewName": "Home"
-        },
-        "TargetAddMatch": {
-          "viewType": "XML",
-          "transition": "slide",
-          "clearControlAggregation": false,
-          "viewId": "AddMatch",
-          "viewName": "AddMatch"
-        },
-        "TargetTeamsList": {
-          "viewType": "XML",
-          "transition": "slide",
-          "clearControlAggregation": false,
-          "viewId": "TeamsList",
-          "viewName": "TeamsList"
-        },
-        "TargetPlayersList": {
-          "viewType": "XML",
-          "transition": "slide",
-          "clearControlAggregation": false,
-          "viewId": "PlayersList",
-          "viewName": "PlayersList"
-        },
-        "TargetMatchDetails": {
-          "viewType": "XML",
-          "transition": "slide",
-          "clearControlAggregation": false,
-          "viewId": "MatchDetails",
-          "viewName": "MatchDetails"
-        },
-        "TargetMatchHistory": {
-          "viewType": "XML",
-          "transition": "slide",
-          "clearControlAggregation": false,
-          "viewId": "MatchHistory",
-          "viewName": "MatchHistory"
-        }
-      }
-    },
-    "rootView": {
-      "viewName": "frontendapp.view.App",
-      "type": "XML",
-      "async": true,
-      "id": "App"
-    }
-  }
+	"_version": "1.59.0",
+	"sap.app": {
+		"id": "frontendapp",
+		"type": "application",
+		"i18n": "i18n/i18n.properties",
+		"applicationVersion": {
+			"version": "0.0.1"
+		},
+		"title": "{{appTitle}}",
+		"description": "{{appDescription}}",
+		"resources": "resources.json",
+		"sourceTemplate": {
+			"id": "@sap/generator-fiori:basic",
+			"version": "1.11.5",
+			"toolsId": "47b4a744-154a-4d24-9b03-92b206d73e43"
+		},
+		"dataSources": {
+			"mainService": {
+				"uri": "/v2/football/",
+				"type": "OData",
+				"settings": {
+					"annotations": [],
+					"odataVersion": "2.0"
+				}
+			}
+		}
+	},
+	"sap.ui": {
+		"technology": "UI5",
+		"icons": {
+			"icon": "",
+			"favIcon": "",
+			"phone": "",
+			"phone@2": "",
+			"tablet": "",
+			"tablet@2": ""
+		},
+		"deviceTypes": {
+			"desktop": true,
+			"tablet": true,
+			"phone": true
+		}
+	},
+	"sap.ui5": {
+		"flexEnabled": true,
+		"dependencies": {
+			"minUI5Version": "1.120.1",
+			"libs": {
+				"sap.m": {},
+				"sap.ui.core": {},
+				"sap.f": {},
+				"sap.suite.ui.generic.template": {},
+				"sap.ui.comp": {},
+				"sap.ui.generic.app": {},
+				"sap.ui.table": {},
+				"sap.ushell": {}
+			}
+		},
+		"contentDensities": {
+			"compact": true,
+			"cozy": true
+		},
+		"models": {
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"settings": {
+					"bundleName": "frontendapp.i18n.i18n"
+				}
+			},
+			"": {
+				"dataSource": "mainService",
+				"preload": true,
+				"settings": {
+					"synchronizationMode": "None",
+					"operationMode": "Server",
+					"autoExpandSelect": true,
+					"earlyRequests": true
+				}
+			}
+		},
+		"resources": {
+			"css": [
+				{
+					"uri": "css/style.css"
+				}
+			]
+		},
+		"routing": {
+			"config": {
+				"routerClass": "sap.m.routing.Router",
+				"viewType": "XML",
+				"async": true,
+				"viewPath": "frontendapp.view",
+				"controlAggregation": "pages",
+				"controlId": "app",
+				"clearControlAggregation": false
+			},
+			"routes": [
+				{
+					"name": "RouteHome",
+					"pattern": ":?query:",
+					"target": ["TargetHome"]
+				},
+				{
+					"name": "TeamsList",
+					"pattern": "TeamsList",
+					"target": ["TargetTeamsList"]
+				},
+				{
+					"name": "PlayersList",
+					"pattern": "PlayersList",
+					"target": ["TargetPlayersList"]
+				},
+				{
+					"name": "MatchDetails",
+					"pattern": "MatchDetails/{MatchID}",
+					"target": ["TargetMatchDetails"]
+				},
+				{
+					"name": "MatchHistory",
+					"pattern": "MatchHistory",
+					"target": ["TargetMatchHistory"]
+				}
+			],
+			"targets": {
+				"TargetHome": {
+					"viewType": "XML",
+					"transition": "slide",
+					"clearControlAggregation": false,
+					"viewId": "Home",
+					"viewName": "Home"
+				},
+				"TargetTeamsList": {
+					"viewType": "XML",
+					"transition": "slide",
+					"clearControlAggregation": false,
+					"viewId": "TeamsList",
+					"viewName": "TeamsList"
+				},
+				"TargetPlayersList": {
+					"viewType": "XML",
+					"transition": "slide",
+					"clearControlAggregation": false,
+					"viewId": "PlayersList",
+					"viewName": "PlayersList"
+				},
+				"TargetMatchDetails": {
+					"viewType": "XML",
+					"transition": "slide",
+					"clearControlAggregation": false,
+					"viewId": "MatchDetails",
+					"viewName": "MatchDetails"
+				},
+				"TargetMatchHistory": {
+					"viewType": "XML",
+					"transition": "slide",
+					"clearControlAggregation": false,
+					"viewId": "MatchHistory",
+					"viewName": "MatchHistory"
+				}
+			}
+		},
+		"rootView": {
+			"viewName": "frontendapp.view.App",
+			"type": "XML",
+			"async": true,
+			"id": "App"
+		}
+	}
 }

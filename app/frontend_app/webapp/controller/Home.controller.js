@@ -15,6 +15,135 @@ sap.ui.define(
 		return Controller.extend('frontendapp.controller.Home', {
 			formatter: Formatter,
 			onInit: function () {
+				this.refreshView();
+			},
+
+			onPressTeams: function () {
+				const oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+				oRouter.navTo('TeamsList');
+			},
+			onPressPlayers: function () {
+				const oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+				oRouter.navTo('PlayersList');
+			},
+			onPressMatchHistory: function () {
+				const oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+				oRouter.navTo('MatchHistory');
+			},
+
+			onPressAddMatch: function () {
+				const oView = this.getView();
+				if (!this.AddNewMatchDialog) {
+					this.AddNewMatchDialog = this.loadFragment({
+						name: 'frontendapp.view.fragment.AddNewMatchDialog',
+					});
+				}
+				this.AddNewMatchDialog.then(function (oDialog) {
+					oView.byId('matchDate').setMinDate(new Date());
+					oDialog.open();
+				});
+			},
+			addMatch: function () {
+				const oView = this.getView();
+				const oModel = this.getView().getModel();
+
+				const sMatchID = globalThis.crypto.randomUUID();
+				const sMatchPlace = oView.byId('matchPlace').getValue();
+				const sMatchDate = oView.byId('matchDate').getValue();
+				const sHomeTeamID = oView.byId('homeTeam').getSelectedKey();
+				const sGuestTeamID = oView.byId('guestTeam').getSelectedKey();
+
+				const aTeams = [
+					{
+						up__ID: sMatchID,
+						team_ID: sHomeTeamID,
+					},
+					{
+						up__ID: sMatchID,
+						team_ID: sGuestTeamID,
+					},
+				];
+
+				const oPayload = {
+					ID: sMatchID,
+					teams: aTeams,
+					place: sMatchPlace,
+					date: sMatchDate,
+				};
+				oModel.create('/Matches', oPayload, {
+					method: 'POST',
+					success: (oRes) => {
+						this.refreshView();
+						MessageBox.success(`Match between XD added`); // --------
+					},
+					error: (oErr) => {
+						MessageBox.error('Something went wrong');
+						console.error(oErr.message);
+					},
+				});
+				this.byId('addNewMatchDialog').close();
+				this.clearFields();
+			},
+
+			onUpdateMatchPress: function (oEvent) {
+				const oView = this.getView();
+				// const oMatch = oEvent
+				// 	.getSource()
+				// 	.getBindingContext()
+				// 	.getObject();
+
+				// const oMatchModel = new JSONModel(oMatch);
+
+				if (!this.UpdateMatchDialog) {
+					this.UpdateMatchDialog = this.loadFragment({
+						name: 'frontendapp.view.fragment.UpdateMatchDialog',
+					});
+				}
+				this.UpdateMatchDialog.then(function (oDialog) {
+					// oView.setModel(oPlayerModel, 'playerModel');
+					oDialog.open();
+					// oView.byId('playerAgeU').setValue(oPlayer.age);
+					// oView
+					// 	.byId('playerPositionU')
+					// 	.setSelectedKey(oPlayer.position);
+				});
+			},
+			onMatchPress: function (oEvent) {
+				const sMatchID = oEvent
+					.getSource()
+					.getBindingContext('MatchesModel')
+					.getObject().ID;
+				const oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+				oRouter.navTo('MatchDetails', {
+					MatchID: sMatchID,
+				});
+			},
+			onPressCancel: function () {
+				if (this.byId('addNewMatchDialog')) {
+					this.byId('addNewMatchDialog').close();
+				}
+				if (this.byId('updateMatchDialog')) {
+					this.byId('updatePMatchDialog').close();
+				}
+				this.clearFields();
+			},
+			clearFields: function () {
+				const oView = this.getView();
+				if (oView.byId('homeTeam')) {
+					oView.byId('homeTeam').setSelectedKey();
+				}
+				if (oView.byId('guestTeam')) {
+					oView.byId('guestTeam').setSelectedKey();
+				}
+				if (oView.byId('matchDate')) {
+					oView.byId('matchDate').setValue();
+				}
+				if (oView.byId('matchPlace')) {
+					oView.byId('matchPlace').setValue();
+				}
+			},
+
+			refreshView: function () {
 				const oView = this.getView();
 				const oModel = new sap.ui.model.odata.v2.ODataModel(
 					'/v2/football/'
@@ -53,39 +182,6 @@ sap.ui.define(
 					oMatchesModel.setData(aTeams);
 					oView.setModel(oMatchesModel, 'MatchesModel');
 				});
-			},
-
-			onPressAddMatch: function () {
-				const oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-				oRouter.navTo('AddMatch');
-			},
-			onPressTeams: function () {
-				const oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-				oRouter.navTo('TeamsList');
-			},
-			onPressPlayers: function () {
-				const oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-				oRouter.navTo('PlayersList');
-			},
-			onPressMatchHistory: function () {
-				const oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-				oRouter.navTo('MatchHistory');
-			},
-			onMatchPress: function (oEvent) {
-				const sMatchID = oEvent
-					.getSource()
-					.getBindingContext('MatchesModel')
-					.getObject().ID;
-				const oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-				oRouter.navTo('MatchDetails', {
-					MatchID: sMatchID,
-				});
-			},
-			refreshView: function () {
-				this.getView()
-					.byId('toBePlayedTable')
-					.getBinding('items')
-					.refresh();
 			},
 		});
 	}

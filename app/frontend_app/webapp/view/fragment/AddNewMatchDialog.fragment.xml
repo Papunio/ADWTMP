@@ -1,9 +1,6 @@
-<mvc:View controllerName="frontendapp.controller.AddMatch"
-    xmlns:html="http://www.w3.org/1999/xhtml"
-    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
-    xmlns="sap.m"
+<core:FragmentDefinition xmlns="sap.m"
     xmlns:core="sap.ui.core">
-    <Page showHeader="true" showNavButton="true" navButtonPress="onNavButton" enableScrolling="false">
+    <Dialog id="addNewMatchDialog" title="{i18n>addNewMatch}" class="sapUiTinyMargin">
         <Panel width="50%" class="sapUiResponsiveMargin">
             <Select id="homeTeam" width="100%" required="true" selectedKey="{/SelectedKey}" forceSelection="false" items="{
 						path: '/Teams'
@@ -25,7 +22,14 @@
 					}" change="handleChange" class="sapUiSmallMarginBottom"/>
 
             <Input id="matchPlace" placeholder="{i18n>matchPlace}" />
-            <Button text="ADD MATCH" press="onPressAccept" />
+            <Bar>
+                <contentRight>
+                    <Button id="confirmBtn" icon="sap-icon://accept" text="{i18n>submit}" press="addMatch" />
+                </contentRight>
+                <contentLeft>
+                    <Button id="cancelBtn" icon="sap-icon://decline" text="{i18n>cancel}" press="onPressCancel" />
+                </contentLeft>
+            </Bar>
         </Panel>
-    </Page>
-</mvc:View>
+    </Dialog>
+</core:FragmentDefinition>

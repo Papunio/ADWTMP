@@ -141,14 +141,15 @@ sap.ui.define(
 			},
 
 			clearFields: function () {
-				if (this.getView().byId('playerName'))
-					this.getView().byId('playerName').setValue('');
-				if (this.getView().byId('playerLastName'))
-					this.getView().byId('playerLastName').setValue('');
-				if (this.getView().byId('playerAge'))
-					this.getView().byId('playerAge').setValue(16);
-				if (this.getView().byId('playerPosition'))
-					this.getView().byId('playerPosition').setSelectedItem('');
+				const oView = this.getView();
+				if (oView.byId('playerName'))
+					oView.byId('playerName').setValue('');
+				if (oView.byId('playerLastName'))
+					oView.byId('playerLastName').setValue('');
+				if (oView.byId('playerAge'))
+					oView.byId('playerAge').setValue(16);
+				if (oView.byId('playerPosition'))
+					oView.byId('playerPosition').setSelectedItem('');
 			},
 
 			refreshView: function () {

@@ -157,9 +157,10 @@ sap.ui.define(
 			},
 
 			clearFields: function () {
-				this.getView().byId('teamName').setValue('');
-				this.getView().byId('badge').setValue('');
-				this.getView().byId('selectedPlayers').removeAllSelectedItems();
+				const oView = this.getView();
+				oView.byId('teamName').setValue('');
+				oView.byId('badge').setValue('');
+				oView.byId('selectedPlayers').removeAllSelectedItems();
 			},
 
 			onPressCancel: function () {
