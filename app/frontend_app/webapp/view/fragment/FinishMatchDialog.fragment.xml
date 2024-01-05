@@ -1,0 +1,6 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+    <Dialog id="finishMatchDialog" title="{i18n>finishMatch}" class="sapUiTinyMargin">
+        <Input required="true" id="matchScore" placeholder="score" showSuggestion="false"/>
+    </Dialog>
+</core:FragmentDefinition>

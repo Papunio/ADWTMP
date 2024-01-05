@@ -158,8 +158,8 @@ sap.ui.define(
 
 			clearFields: function () {
 				const oView = this.getView();
-				oView.byId('teamName').setValue('');
-				oView.byId('badge').setValue('');
+				oView.byId('teamName').setValue();
+				oView.byId('badge').setValue();
 				oView.byId('selectedPlayers').removeAllSelectedItems();
 			},
 

@@ -65,7 +65,7 @@
 									<Text text="{path: 'MatchesModel>date', formatter: '.formatter.formatDate'}"/>
 									<Text text="{MatchesModel>place}"/>
 									<FlexBox>
-										<Button id="updateMatch" type="Transparent" icon="sap-icon://edit" press="onUpdateMatchPress"/>
+										<Button id="finishMatch" type="Transparent" icon="sap-icon://accept" press="onFinishMatchPress"/>
 										<Button id="deleteMatch" type="Transparent" icon="sap-icon://delete" press="onDeleteMatchPress"/>
 									</FlexBox>
 								</ColumnListItem>

@@ -143,13 +143,13 @@ sap.ui.define(
 			clearFields: function () {
 				const oView = this.getView();
 				if (oView.byId('playerName'))
-					oView.byId('playerName').setValue('');
+					oView.byId('playerName').setValue();
 				if (oView.byId('playerLastName'))
-					oView.byId('playerLastName').setValue('');
+					oView.byId('playerLastName').setValue();
 				if (oView.byId('playerAge'))
 					oView.byId('playerAge').setValue(16);
 				if (oView.byId('playerPosition'))
-					oView.byId('playerPosition').setSelectedItem('');
+					oView.byId('playerPosition').setSelectedItem();
 			},
 
 			refreshView: function () {
