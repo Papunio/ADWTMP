@@ -1,8 +1,8 @@
 <core:FragmentDefinition xmlns="sap.m"
     xmlns:core="sap.ui.core">
     <Dialog id="updatePlayerDialog" title="{i18n>updating}" class="sapUiTinyMargin">
-        <Input required="true" value="{playerModel>/name}" id="playerNameU" placeholder="playerName" showSuggestion="true"/>
-        <Input required="true" value="{playerModel>/lastName}" id="playerLastNameU" placeholder="playerLastName" showSuggestion="true" />
+        <Input required="true" value="{playerModel>/name}" id="playerNameU" />
+        <Input required="true" value="{playerModel>/lastName}" id="playerLastNameU" />
 
         <Slider id="playerAgeU" value="16" width="100%" min="16" max="50" showAdvancedTooltip="true" showHandleTooltip="false" />
 

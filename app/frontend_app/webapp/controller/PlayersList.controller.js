@@ -125,7 +125,6 @@ sap.ui.define(
 				};
 
 				oModel.update(`/Players(${sPlayerID})`, oPayload, {
-					method: 'POST',
 					success: (oRes) => {
 						this.refreshView();
 						MessageBox.success(

@@ -13,16 +13,24 @@
                 <Column width="2%">
 
                 </Column>
-            </columns>
-            <columns>
+
                 <Column>
                     <Label text="{i18n>name}"/>
                 </Column>
+                <Column width="5%">
+
+                </Column>
+                <Column width="5%">
+
+                </Column>
             </columns>
+
             <items>
                 <ColumnListItem type="Navigation" press="onTeamPress">
                     <Image height="100%" width="100%" src="{logo}"/>
                     <Text text="{name}"/>
+                    <Button id="updateTeam" text="{i18n>update}" type="Neutral" icon="sap-icon://edit" press="onUpdateTeamPress"/>
+                    <Button id="deleteTeam" text="{i18n>delete}" type="Reject" icon="sap-icon://delete" press="onDeleteTeamPress"/>
                 </ColumnListItem>
             </items>
         </Table>
