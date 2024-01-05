@@ -1,11 +1,17 @@
 <core:FragmentDefinition xmlns="sap.m"
     xmlns:core="sap.ui.core">
     <Dialog id="updatePlayerDialog" title="{i18n>updating}" class="sapUiTinyMargin">
+
+        <Label text="{i18n>playerName}" labelFor="playerNameU" />
         <Input required="true" value="{playerModel>/name}" id="playerNameU" />
+
+        <Label text="{i18n>playerName}" labelFor="playerLastNameU" />
         <Input required="true" value="{playerModel>/lastName}" id="playerLastNameU" />
 
+        <Label text="{i18n>playerName}" labelFor="playerAgeU" />
         <Slider id="playerAgeU" value="16" width="100%" min="16" max="50" showAdvancedTooltip="true" showHandleTooltip="false" />
 
+        <Label text="{i18n>playerName}" labelFor="playerPositionU" />
         <Select id="playerPositionU" width="100%" required="true" selectedKey="{/SelectedKey}" forceSelection="false" items="{
 						path: 'SelectModel>/'
 					}">

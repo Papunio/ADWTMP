@@ -27,6 +27,7 @@ sap.ui.define(
 						Icon: 'sap-icon://feeder-arrow',
 					},
 				];
+
 				this.getView().setModel(
 					new JSONModel(oSelectPosition),
 					'SelectModel'
@@ -47,14 +48,27 @@ sap.ui.define(
 			addPlayer: function () {
 				const oView = this.getView();
 				const oModel = oView.getModel();
-				// WALIDACJA!
+
 				const sName = oView.byId('playerName').getValue();
 				const sLastName = oView.byId('playerLastName').getValue();
 				const sAge = oView.byId('playerAge').getValue();
-				const sPosition = oView
+				const oPosition = oView
 					.byId('playerPosition')
-					.getSelectedItem()
-					.getText();
+					.getSelectedItem();
+
+				if (sName === '') {
+					MessageBox.error('Enter name!');
+					return;
+				}
+				if (sLastName === '') {
+					MessageBox.error('Enter last name!');
+					return;
+				}
+				if (!oPosition) {
+					MessageBox.error('Select position!');
+					return;
+				}
+				const sPosition = oPosition.getText();
 
 				const oPayload = {
 					name: sName,
@@ -107,15 +121,27 @@ sap.ui.define(
 			updatePlayer: function () {
 				const oView = this.getView();
 				const oModel = oView.getModel();
-				// WALIDACJA!
 				const sPlayerID = oView.getModel('playerModel').getData().ID;
 				const sName = oView.byId('playerNameU').getValue();
 				const sLastName = oView.byId('playerLastNameU').getValue();
 				const sAge = oView.byId('playerAgeU').getValue();
-				const sPosition = oView
+				const oPosition = oView
 					.byId('playerPositionU')
-					.getSelectedItem()
-					.getText();
+					.getSelectedItem();
+
+				if (sName === '') {
+					MessageBox.error('Enter name!');
+					return;
+				}
+				if (sLastName === '') {
+					MessageBox.error('Enter last name!');
+					return;
+				}
+				if (!oPosition) {
+					MessageBox.error('Select position!');
+					return;
+				}
+				const sPosition = oPosition.getText();
 
 				const oPayload = {
 					name: sName,
