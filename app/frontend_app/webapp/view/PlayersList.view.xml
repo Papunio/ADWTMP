@@ -8,39 +8,39 @@
 				<Button icon="sap-icon://add" text="ADD PLAYER" press="onPressAddPlayer"/>
 			</contentRight>
 		</Bar>
+		<Panel width="auto" class="sapUiResponsiveMargin">
+			<Table id="playersTable" items="{path:'/Players'}">
+				<columns>
+					<Column>
+						<Label text="{i18n>name}"/>
+					</Column>
+					<Column>
+						<Label text="{i18n>lastName}"/>
+					</Column>
+					<Column>
+						<Label text="{i18n>position}"/>
+					</Column>
+					<Column>
+						<Label text="{i18n>age}"/>
+					</Column>
 
-		<Table id="playersTable" items="{path:'/Players'}">
-			<columns>
-				<Column>
-					<Label text="{i18n>name}"/>
-				</Column>
-				<Column>
-					<Label text="{i18n>lastName}"/>
-				</Column>
-				<Column>
-					<Label text="{i18n>position}"/>
-				</Column>
-				<Column>
-					<Label text="{i18n>age}"/>
-				</Column>
+					<Column width="5%">
 
-				<Column width="5%">
-
-				</Column>
-				<Column width="5%">
-
-				</Column>
-			</columns>
-			<items>
-				<ColumnListItem type="Navigation" press="onPlayerPress">
-					<Text text="{name}"/>
-					<Text text="{lastName}"/>
-					<Text text="{position}"/>
-					<Text text="{age}"/>
-					<Button id="updatePlayer" text="{i18n>update}" type="Neutral" icon="sap-icon://edit" press="onUpdatePlayerPress"/>
-					<Button id="deletePlayer" text="{i18n>delete}" type="Reject" icon="sap-icon://delete" press="onDeletePlayerPress"/>
-				</ColumnListItem>
-			</items>
-		</Table>
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem type="Navigation" press="onPlayerPress">
+						<Text text="{name}"/>
+						<Text text="{lastName}"/>
+						<Text text="{position}"/>
+						<Text text="{age}"/>
+						<FlexBox>
+							<Button id="updatePlayer" type="Transparent" icon="sap-icon://edit" press="onUpdatePlayerPress"/>
+							<Button id="deletePlayer" type="Transparent" icon="sap-icon://delete" press="onDeletePlayerPress"/>
+						</FlexBox>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</Panel>
 	</Page>
 </mvc:View>

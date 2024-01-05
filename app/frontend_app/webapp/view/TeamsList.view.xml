@@ -8,31 +8,33 @@
                 <Button icon="sap-icon://add" text="ADD TEAM" press="onPressAddTeam"/>
             </contentRight>
         </Bar>
-        <Table id="teamsTable" items="{path:'/Teams'}">
-            <columns>
-                <Column width="2%">
+        <Panel width="auto" class="sapUiResponsiveMargin">
+            <Table id="teamsTable" items="{path:'/Teams'}">
+                <columns>
+                    <Column width="2%">
 
-                </Column>
+                    </Column>
 
-                <Column>
-                    <Label text="{i18n>name}"/>
-                </Column>
-                <Column width="5%">
+                    <Column>
+                        <Label text="{i18n>name}"/>
+                    </Column>
 
-                </Column>
-                <Column width="5%">
+                    <Column width="5%">
 
-                </Column>
-            </columns>
+                    </Column>
+                </columns>
 
-            <items>
-                <ColumnListItem type="Navigation" press="onTeamPress">
-                    <Image height="100%" width="100%" src="{logo}"/>
-                    <Text text="{name}"/>
-                    <Button id="updateTeam" text="{i18n>update}" type="Neutral" icon="sap-icon://edit" press="onUpdateTeamPress"/>
-                    <Button id="deleteTeam" text="{i18n>delete}" type="Reject" icon="sap-icon://delete" press="onDeleteTeamPress"/>
-                </ColumnListItem>
-            </items>
-        </Table>
+                <items>
+                    <ColumnListItem type="Navigation" press="onTeamPress">
+                        <Image height="100%" width="100%" src="{logo}"/>
+                        <Text text="{name}"/>
+                        <FlexBox>
+                            <Button id="updateTeam" type="Transparent" icon="sap-icon://edit" press="onUpdateTeamPress"/>
+                            <Button id="deleteTeam" type="Transparent" icon="sap-icon://delete" press="onDeleteTeamPress"/>
+                        </FlexBox>
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </Panel>
     </Page>
 </mvc:View>
