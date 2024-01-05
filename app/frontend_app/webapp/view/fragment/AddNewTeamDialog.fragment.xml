@@ -1,10 +1,15 @@
 <core:FragmentDefinition xmlns="sap.m"
     xmlns:core="sap.ui.core">
     <Dialog id="addNewTeamDialog" title="{i18n>addNewTeam}" class="sapUiTinyMargin">
-        <Input id="teamName" placeholder="Enter name of team" />
-        <Input id="badge" placeholder="Enter badge url" />
 
-        <MultiComboBox id="selectedPlayers" items="{path: '/Players'}">
+        <Label text="{i18n>teamName}" labelFor="teamName" />
+        <Input id="teamName" required="true"/>
+
+        <Label text="{i18n>badge}" labelFor="badgeLink" />
+        <Input id="badgeLink" />
+
+        <Label text="{i18n>selectedPlayers}" labelFor="selectedPlayers" />
+        <MultiComboBox id="selectedPlayers" items="{path: '/Players'}" required="true">
             <core:Item key="{ID}" text="{name} {lastName}, {position}"/>
         </MultiComboBox>
         <Bar>

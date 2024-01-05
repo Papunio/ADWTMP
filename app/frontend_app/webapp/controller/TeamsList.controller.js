@@ -25,9 +25,20 @@ sap.ui.define(
 				const sTeamID = globalThis.crypto.randomUUID();
 				const oModel = this.getView().getModel();
 				const sTeamName = oView.byId('teamName').getValue();
+				const sLogo = oView.byId('badgeLink').getValue();
 				const aSelectedPlayers = oView
 					.byId('selectedPlayers')
 					.getSelectedKeys();
+
+				if (sTeamName === '') {
+					MessageBox.error('Enter Team Name!');
+					return;
+				}
+
+				if (aSelectedPlayers.length === 0) {
+					MessageBox.error('Select Players!');
+					return;
+				}
 
 				const aPlayers = [];
 				aSelectedPlayers.forEach((sPlayerID) => {
@@ -39,6 +50,7 @@ sap.ui.define(
 				const oPayload = {
 					ID: sTeamID,
 					name: sTeamName,
+					logo: sLogo,
 					players: aPlayers,
 				};
 
@@ -110,6 +122,16 @@ sap.ui.define(
 					.byId('selectedPlayersU')
 					.getSelectedKeys();
 
+				if (sTeamName === '') {
+					MessageBox.error('Enter Team Name!');
+					return;
+				}
+
+				if (aSelectedPlayers.length === 0) {
+					MessageBox.error('Select Players!');
+					return;
+				}
+
 				const oPayload = {
 					name: sTeamName,
 					logo: sLogo,
@@ -159,7 +181,7 @@ sap.ui.define(
 			clearFields: function () {
 				const oView = this.getView();
 				oView.byId('teamName').setValue();
-				oView.byId('badge').setValue();
+				oView.byId('badgeLink').setValue();
 				oView.byId('selectedPlayers').removeAllSelectedItems();
 			},
 
