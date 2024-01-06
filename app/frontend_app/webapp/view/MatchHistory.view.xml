@@ -7,18 +7,15 @@
 	<Page showHeader="true" showNavButton="true" navButtonPress="onNavButton">
 		<FlexBox alignItems="Center" justifyContent="Center">
 			<items>
-				<Button text="{i18n>addMatch}" press="onPressAddMatch"></Button>
-				<Button text="{i18n>teams}" press="onPressTeams"></Button>
-				<Button text="{i18n>players}" press="onPressPlayers"></Button>
+				<Button press="refreshTable" icon="sap-icon://refresh" />
 			</items>
 		</FlexBox>
-
-		<VBox fitContainer="true">
-			<smartTable:SmartTable id="LineItemsSmartTable" entitySet="Matches"  ignoredFields="ID" tableType="Table" useVariantManagement="true" useTablePersonalisation="false" header="{i18n>matches}" showRowCount="true" persistencyKey="SmartTableAnalytical_Explored" showFullScreenButton="true" enableAutoBinding="true" class="sapUiResponsiveContentPadding" enableAutoColumnWidth="false">
+		<Panel width="auto" class="sapUiResponsiveMargin" height="auto">
+			<smartTable:SmartTable id="finishedMatchesTable" entitySet="FinishedMatches" initiallyVisibleFields="homeTeam,score,guestTeam,place" ignoredFields="ID" tableType="Table" useVariantManagement="true" header="{i18n>matches}" showRowCount="true" showFullScreenButton="false" useTablePersonalisation="false" enableAutoBinding="true" class="sapUiResponsiveContentPadding" enableAutoColumnWidth="true">
 				<smartTable:layoutData>
 					<FlexItemData growFactor="1" baseSize="0%"/>
 				</smartTable:layoutData>
 			</smartTable:SmartTable>
-		</VBox>
+		</Panel>
 	</Page>
 </mvc:View>

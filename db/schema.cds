@@ -63,7 +63,7 @@ entity finishedMatches : cuid {
     guestTeam : String;
 
     @title: 'Score'
-    score     : String;
+    score     : String(5);
 
     @title: 'Place'
     place     : String
