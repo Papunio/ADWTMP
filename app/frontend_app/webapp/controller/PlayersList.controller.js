@@ -166,6 +166,60 @@ sap.ui.define(
 				this.clearFields();
 			},
 
+			onDeletePlayerPress: function (oEvent) {
+				const sPlayerID = oEvent
+					.getSource()
+					.getBindingContext()
+					.getObject().ID;
+
+				MessageBox.confirm('Are You Sure?', {
+					onClose: function (oAction) {
+						if (oAction === sap.m.MessageBox.Action.OK) {
+							this.deletePlayer(sPlayerID);
+						}
+					}.bind(this),
+				});
+			},
+
+			deletePlayer: function (sPlayerID) {
+				const oView = this.getView();
+				const oModel = oView.getModel();
+				let bInTeam = false;
+
+				const oPromise = new Promise((resolve) => {
+					oModel.read(`/Teams_players`, {
+						success: (oData) => {
+							oData.results.forEach((oTeamsPlayersLink) => {
+								if (oTeamsPlayersLink.player_ID === sPlayerID) {
+									bInTeam = true;
+									resolve();
+									return;
+								}
+							});
+							resolve();
+						},
+						error: (oErr) => {
+							MessageBox.error('Something went wrong');
+							console.error(oErr.message);
+						},
+					});
+				});
+
+				oPromise.then(() => {
+					if (!bInTeam) {
+						oModel.remove(`/Players(${sPlayerID})`, {
+							error: (oErr) => {
+								MessageBox.error('Something went wrong');
+								console.error(oErr.message);
+							},
+						});
+						this.refreshView();
+					} else {
+						MessageBox.error('Player is in a team!');
+					}
+				});
+			},
+
 			clearFields: function () {
 				const oView = this.getView();
 				if (oView.byId('playerName'))
