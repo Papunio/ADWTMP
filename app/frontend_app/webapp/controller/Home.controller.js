@@ -158,7 +158,7 @@ sap.ui.define(
 					});
 				}
 				this.FinishMatchDialog.then(function (oDialog) {
-					oView.setModel(oMatchModel);
+					oView.setModel(oMatchModel, "matchModel");
 					oDialog.open();
 				});
 			},
@@ -167,7 +167,7 @@ sap.ui.define(
 				const oModel = new sap.ui.model.odata.v2.ODataModel(
 					'/v2/football/'
 				);
-				const oData = oView.getModel().getData();
+				const oData = oView.getModel("matchModel").getData();
 
 				const sHomeTeamScore = oView.byId('homeTeamScore').getValue();
 				const sGuestTeamScore = oView.byId('guestTeamScore').getValue();

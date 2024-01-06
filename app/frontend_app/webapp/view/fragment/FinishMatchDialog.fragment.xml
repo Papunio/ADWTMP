@@ -5,7 +5,7 @@
         <Bar>
             <contentLeft>
                 <!-- <Label text="{i18n>homeTeamScore}" labelFor="homeTeamScore" width="auto"/> -->
-                <Label text="{/homeTeam}" labelFor="homeTeamScore" width="auto"/>
+                <Label text="{matchModel>/homeTeam}" labelFor="homeTeamScore" width="auto"/>
             </contentLeft>
             <contentRight>
                 <StepInput id="homeTeamScore" value="0" min="0" required="true" width="40%"/>
@@ -14,7 +14,7 @@
 
         <Bar>
             <contentLeft>
-                <Label text="{/guestTeam}" labelFor="guestTeamScore" />
+                <Label text="{matchModel>/guestTeam}" labelFor="guestTeamScore" />
             </contentLeft>
             <contentRight>
                 <StepInput id="guestTeamScore" value="0" min="0" required="true" width="40%"/>
