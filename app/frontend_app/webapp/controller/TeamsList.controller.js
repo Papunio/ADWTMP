@@ -170,6 +170,63 @@ sap.ui.define(
 				this.byId('updateTeamDialog').close();
 			},
 
+			onDeleteTeamPress: function (oEvent) {
+				const oTeam = oEvent
+					.getSource()
+					.getBindingContext()
+					.getObject();
+
+				MessageBox.confirm(
+					`Are you sure you want to delete ${oTeam.name}?`,
+					{
+						onClose: function (oAction) {
+							if (oAction === sap.m.MessageBox.Action.OK) {
+								this.deleteTeam(oTeam.ID);
+							}
+						}.bind(this),
+					}
+				);
+			},
+
+			deleteTeam: function (sTeamID) {
+				const oView = this.getView();
+				const oModel = oView.getModel();
+				let bTeamInMatch = false;
+
+				const oPromise = new Promise((resolve) => {
+					oModel.read(`/Matches_teams`, {
+						success: (oData) => {
+							oData.results.forEach((oMatchTeamLink) => {
+								if (oMatchTeamLink.team_ID === sTeamID) {
+									bTeamInMatch = true;
+									resolve();
+									return;
+								}
+								resolve();
+							});
+						},
+						error: (oErr) => {
+							MessageBox.error('Something went wrong');
+							console.error(oErr.message);
+						},
+					});
+				});
+
+				oPromise.then(() => {
+					if (!bTeamInMatch) {
+						oModel.remove(`/Teams(${sTeamID})`, {
+							error: (oErr) => {
+								MessageBox.error('Something went wrong');
+								console.error(oErr.message);
+							},
+						});
+						this.refreshView();
+					} else {
+						MessageBox.error('Team is in a match!');
+					}
+				});
+			},
+
 			onTeamPress: function () {
 				console.log('XD ON TEAMPRESS');
 			},

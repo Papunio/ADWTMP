@@ -167,15 +167,15 @@ sap.ui.define(
 			},
 
 			onDeletePlayerPress: function (oEvent) {
-				const sPlayerID = oEvent
+				const oPlayer = oEvent
 					.getSource()
 					.getBindingContext()
-					.getObject().ID;
+					.getObject();
 
-				MessageBox.confirm('Are You Sure?', {
+				MessageBox.confirm(`Are you sure you want to delete ${oPlayer.name} ${oPlayer.lastName}?`, {
 					onClose: function (oAction) {
 						if (oAction === sap.m.MessageBox.Action.OK) {
-							this.deletePlayer(sPlayerID);
+							this.deletePlayer(oPlayer.ID);
 						}
 					}.bind(this),
 				});
@@ -189,8 +189,8 @@ sap.ui.define(
 				const oPromise = new Promise((resolve) => {
 					oModel.read(`/Teams_players`, {
 						success: (oData) => {
-							oData.results.forEach((oTeamsPlayersLink) => {
-								if (oTeamsPlayersLink.player_ID === sPlayerID) {
+							oData.results.forEach((oTeamPlayerLink) => {
+								if (oTeamPlayerLink.player_ID === sPlayerID) {
 									bInTeam = true;
 									resolve();
 									return;
