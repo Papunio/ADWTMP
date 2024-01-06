@@ -2,18 +2,23 @@
     xmlns:core="sap.ui.core">
     <Dialog id="addNewMatchDialog" title="{i18n>addNewMatch}" class="sapUiTinyMargin">
         <Panel width="50%" class="sapUiResponsiveMargin">
+
+            <Label text="{i18n>homeTeam}" labelFor="homeTeam" />
             <Select id="homeTeam" width="100%" required="true" selectedKey="{/SelectedKey}" forceSelection="false" items="{
 						path: '/Teams'
 					}">
                 <core:ListItem key="{ID}" text="{name}" icon="sap-icon://feeder-arrow"/>
             </Select>
+
+            <Label text="{i18n>guestTeam}" labelFor="guestTeam" />
             <Select id="guestTeam" width="100%" required="true" selectedKey="{/SelectedKey}" forceSelection="false" items="{
 						path: '/Teams'
 					}">
                 <core:ListItem key="{ID}" text="{name}" icon="sap-icon://feeder-arrow"/>
             </Select>
 
-            <DatePicker id="matchDate" value="{
+            <Label text="{i18n>matchDate}" labelFor="matchDate" />
+            <DatePicker id="matchDate" required="true" value="{
 						'path':'/valueDP2',
 						'type':'sap.ui.model.type.Date',
 						'formatOptions': {
@@ -21,7 +26,9 @@
 						}
 					}" change="handleChange" class="sapUiSmallMarginBottom"/>
 
-            <Input id="matchPlace" placeholder="{i18n>matchPlace}" />
+            <Label text="{i18n>matchPlace}" labelFor="matchPlace" />
+            <Input id="matchPlace" required="true" placeholder="{i18n>matchPlace}" />
+
             <Bar>
                 <contentRight>
                     <Button id="confirmBtn" icon="sap-icon://accept" text="{i18n>submit}" press="addMatch" />

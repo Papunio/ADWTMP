@@ -55,6 +55,23 @@ sap.ui.define(
 				const sHomeTeamID = oView.byId('homeTeam').getSelectedKey();
 				const sGuestTeamID = oView.byId('guestTeam').getSelectedKey();
 
+				if (sHomeTeamID === '') {
+					MessageBox.error('Choose home team!');
+					return;
+				}
+				if (sGuestTeamID === '') {
+					MessageBox.error('Choose guest team!');
+					return;
+				}
+				if (sMatchDate === '') {
+					MessageBox.error('Pick date!');
+					return;
+				}
+				if (sMatchPlace === '') {
+					MessageBox.error('Pick match place!');
+					return;
+				}
+
 				const aTeams = [
 					{
 						up__ID: sMatchID,
