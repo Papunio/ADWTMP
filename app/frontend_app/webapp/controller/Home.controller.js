@@ -124,8 +124,9 @@ sap.ui.define(
 			},
 
 			deleteMatch: function (sMatchID) {
-				const oView = this.getView();
-				const oModel = oView.getModel();
+				const oModel = new sap.ui.model.odata.v2.ODataModel(
+					'/v2/football/'
+				);
 
 				oModel.remove(`/Matches(${sMatchID})`, {
 					success: () => {
@@ -138,15 +139,56 @@ sap.ui.define(
 				});
 			},
 
-			onFinishMatchPress: function () {
+			onFinishMatchPress: function (oEvent) {
 				const oView = this.getView();
+				const oMatch = oEvent
+					.getSource()
+					.getBindingContext('MatchesModel');
+
+				const oMatchModel = new JSONModel({
+					ID: oMatch.getProperty('ID'),
+					homeTeam: oMatch.getProperty('team1/name'),
+					guestTeam: oMatch.getProperty('team2/name'),
+					place: oMatch.getProperty('place'),
+				});
+
 				if (!this.FinishMatchDialog) {
 					this.FinishMatchDialog = this.loadFragment({
 						name: 'frontendapp.view.fragment.FinishMatchDialog',
 					});
 				}
 				this.FinishMatchDialog.then(function (oDialog) {
+					oView.setModel(oMatchModel);
 					oDialog.open();
+				});
+			},
+			submitMatch: function () {
+				const oView = this.getView();
+				const oModel = new sap.ui.model.odata.v2.ODataModel(
+					'/v2/football/'
+				);
+				const oData = oView.getModel().getData();
+
+				const sHomeTeamScore = oView.byId('homeTeamScore').getValue();
+				const sGuestTeamScore = oView.byId('guestTeamScore').getValue();
+
+				const oPayload = {
+					homeTeam: oData.homeTeam,
+					guestTeam: oData.guestTeam,
+					score: `${sHomeTeamScore}:${sGuestTeamScore}`,
+					place: oData.place,
+				};
+
+				oModel.create(`/FinishedMatches`, oPayload, {
+					success: (oRes) => {
+						oView.byId('finishMatchDialog').close();
+						this.deleteMatch(oData.ID);
+						this.clearFields();
+					},
+					error: (oErr) => {
+						MessageBox.error('Something went wrong');
+						console.error(oErr.message);
+					},
 				});
 			},
 
@@ -165,8 +207,8 @@ sap.ui.define(
 				if (this.byId('addNewMatchDialog')) {
 					this.byId('addNewMatchDialog').close();
 				}
-				if (this.byId('updateMatchDialog')) {
-					this.byId('updateMatchDialog').close();
+				if (this.byId('finishMatchDialog')) {
+					this.byId('finishMatchDialog').close();
 				}
 				this.clearFields();
 			},
@@ -184,6 +226,15 @@ sap.ui.define(
 				}
 				if (oView.byId('matchPlace')) {
 					oView.byId('matchPlace').setValue();
+				}
+				if (oView.byId('matchScore')) {
+					oView.byId('matchScore').setValue();
+				}
+				if (oView.byId('homeTeamScore')) {
+					oView.byId('homeTeamScore').setValue();
+				}
+				if (oView.byId('guestTeamScore')) {
+					oView.byId('guestTeamScore').setValue();
 				}
 			},
 
