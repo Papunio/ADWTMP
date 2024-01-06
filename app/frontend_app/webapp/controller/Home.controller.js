@@ -87,6 +87,40 @@ sap.ui.define(
 				this.clearFields();
 			},
 
+			onDeleteMatchPress: function (oEvent) {
+				const oMatch = oEvent
+					.getSource()
+					.getBindingContext('MatchesModel');
+				const oHomeTeam = oMatch.getProperty('team1');
+				const oGuestTeam = oMatch.getProperty('team2');
+
+				MessageBox.confirm(
+					`Are you sure you want to delete match between ${oHomeTeam.name} and ${oGuestTeam.name}?`,
+					{
+						onClose: function (oAction) {
+							if (oAction === sap.m.MessageBox.Action.OK) {
+								this.deleteMatch(oMatch.getProperty('ID'));
+							}
+						}.bind(this),
+					}
+				);
+			},
+
+			deleteMatch: function (sMatchID) {
+				const oView = this.getView();
+				const oModel = oView.getModel();
+
+				oModel.remove(`/Matches(${sMatchID})`, {
+					success: () => {
+						this.refreshView();
+					},
+					error: (oErr) => {
+						MessageBox.error('Something went wrong');
+						console.error(oErr.message);
+					},
+				});
+			},
+
 			onFinishMatchPress: function () {
 				const oView = this.getView();
 				if (!this.FinishMatchDialog) {
