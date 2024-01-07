@@ -1,0 +1,63 @@
+<mvc:View controllerName="frontendapp.controller.TeamsList"
+    xmlns="sap.uxap"
+    xmlns:m="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:mvc="sap.ui.core.mvc">
+    <ObjectPageLayout id="ObjectPageLayout" alwaysShowContentHeader="false" preserveHeaderStateOnScroll="false" headerContentPinnable="true" isChildPage="true" upperCaseAnchorBar="false">
+        <headerTitle>
+            <ObjectPageDynamicHeaderTitle>
+                <snappedHeading>
+                    <m:FlexBox wrap="Wrap" fitContainer="true" alignItems="Center">
+                        <m:FlexBox wrap="NoWrap" fitContainer="true" alignItems="Center" class="sapUiTinyMarginEnd">
+                            <m:Avatar src="{teamModel>/logo}" displaySize="S" displayShape="Square"/>
+                            <m:Title text="{teamModel>/name}" wrapping="true" class="sapUiTinyMarginEnd"/>
+                        </m:FlexBox>
+                    </m:FlexBox>
+                </snappedHeading>
+
+            </ObjectPageDynamicHeaderTitle>
+        </headerTitle>
+        <headerContent>
+            <m:Bar>
+                <m:contentRight>
+                    <m:OverflowToolbarButton type="Transparent" icon="sap-icon://decline" press="handleClose" tooltip="Close middle column" visible="{= ${/actionButtonsInfo/midColumn/closeColumn} !== null }"/>
+                </m:contentRight>
+            </m:Bar>
+            <m:FlexBox wrap="Wrap" fitContainer="true" alignItems="Stretch">
+                <m:Avatar src="{teamModel>/logo}" displaySize="L" displayShape="Square" class="sapUiTinyMarginEnd">
+                </m:Avatar>
+                <m:Title text="{teamModel>/name}" wrapping="true" class="sapUiTinyMargin"/>
+            </m:FlexBox>
+        </headerContent>
+        <sections>
+            <ObjectPageSection title="Players in team">
+                <subSections>
+                    <ObjectPageSubSection>
+                        <blocks>
+                            <m:Table id="teamsTable" items="{path:'teamPlayersModel>/'}">
+                                <m:columns>
+                                    <m:Column>
+                                        <m:Label text="{i18n>name}"/>
+                                    </m:Column>
+
+                                    <m:Column>
+                                        <m:Label text="{i18n>lastName}"/>
+                                    </m:Column>
+                                </m:columns>
+
+                                <m:items>
+                                    <m:ColumnListItem>
+                                        <m:Text text="{teamPlayersModel>player/name}"/>
+                                        <m:Text text="{teamPlayersModel>player/lastName}"/>
+                                    </m:ColumnListItem>
+                                </m:items>
+                            </m:Table>
+                        </blocks>
+                    </ObjectPageSubSection>
+                </subSections>
+            </ObjectPageSection>
+
+        </sections>
+    </ObjectPageLayout>
+</mvc:View>

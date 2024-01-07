@@ -5,8 +5,16 @@ sap.ui.define(
 		'sap/m/MessageBox',
 		'sap/ui/model/Filter',
 		'sap/ui/model/FilterOperator',
+		'sap/f/library',
 	],
-	function (BaseController, JSONModel, MessageBox, Filter, FilterOperator) {
+	function (
+		BaseController,
+		JSONModel,
+		MessageBox,
+		Filter,
+		FilterOperator,
+		FioriLibrary
+	) {
 		'use strict';
 
 		return BaseController.extend('frontendapp.controller.TeamsList', {
@@ -245,8 +253,42 @@ sap.ui.define(
 					.filter(oTableSearchState, 'Application');
 			},
 
-			onTeamPress: function () {
-				console.log('XD ON TEAMPRESS');
+			onTeamPress: function (oEvent) {
+				// Jak klikamy przy otwartym to zamykamy
+				const oView = this.getView();
+				const oModel = oView.getModel();
+				const oTeam = oEvent
+					.getSource()
+					.getBindingContext()
+					.getObject();
+				let aPlayers;
+
+				const oPromise = new Promise((resolve) => {
+					oModel.read(`/Teams(${oTeam.ID})`, {
+						urlParameters: {
+							$expand: 'players/player',
+						},
+						success: (oData) => {
+							aPlayers = oData.players.results;
+							// oTeam.players = aPlayers;
+							resolve();
+						},
+						error: (oErr) => {
+							MessageBox.error('Something went wrong');
+							console.error(oErr.message);
+						},
+					});
+				});
+
+				oPromise.then(() => {
+					const oFCL = oView.getParent().getParent();
+					oFCL.setModel(new JSONModel(oTeam), 'teamModel');
+					oFCL.setModel(new JSONModel(aPlayers), 'teamPlayersModel');
+
+					oFCL.setLayout(
+						FioriLibrary.LayoutType.TwoColumnsMidExpanded
+					);
+				});
 			},
 
 			refreshView: function () {

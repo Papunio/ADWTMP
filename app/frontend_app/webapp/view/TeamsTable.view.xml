@@ -1,0 +1,46 @@
+<mvc:View controllerName="frontendapp.controller.TeamsList"
+    xmlns:html="http://www.w3.org/1999/xhtml"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m">
+    <Page showHeader="true" showNavButton="true" navButtonPress="onNavButton" enableScrolling="false">
+        <Bar>
+            <contentRight>
+                <Button icon="sap-icon://add" text="ADD TEAM" press="onPressAddTeam"/>
+            </contentRight>
+        </Bar>
+        <Panel width="auto" class="sapUiResponsiveMargin">
+            <Bar>
+                <contentRight>
+                    <SearchField search="onSearch" width="17.5rem"/>
+                </contentRight>
+            </Bar>
+
+            <Table id="teamsTable" items="{path:'/Teams'}">
+                <columns>
+                    <Column width="2%">
+
+                    </Column>
+
+                    <Column>
+                        <Label text="{i18n>name}"/>
+                    </Column>
+
+                    <Column width="5%">
+
+                    </Column>
+                </columns>
+
+                <items>
+                    <ColumnListItem type="Navigation" press="onTeamPress">
+                        <Image height="100%" width="100%" src="{logo}"/>
+                        <Text text="{name}"/>
+                        <FlexBox>
+                            <Button id="updateTeam" type="Transparent" icon="sap-icon://edit" press="onUpdateTeamPress"/>
+                            <Button id="deleteTeam" type="Transparent" icon="sap-icon://delete" press="onDeleteTeamPress"/>
+                        </FlexBox>
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </Panel>
+    </Page>
+</mvc:View>
