@@ -56,7 +56,7 @@ entity Matches : cuid {
 
 @title: 'Entity that represents already played matches'
 entity finishedMatches : cuid {
-    @tile : 'Home Team'
+    @title: 'Home Team'
     homeTeam  : String;
 
     @title: 'Guest Team'

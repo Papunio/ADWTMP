@@ -3,8 +3,10 @@ sap.ui.define(
 		'sap/ui/core/mvc/Controller',
 		'sap/ui/model/json/JSONModel',
 		'sap/m/MessageBox',
+		'sap/ui/model/Filter',
+		'sap/ui/model/FilterOperator',
 	],
-	function (BaseController, JSONModel, MessageBox) {
+	function (BaseController, JSONModel, MessageBox, Filter, FilterOperator) {
 		'use strict';
 
 		return BaseController.extend('frontendapp.controller.TeamsList', {
@@ -225,6 +227,22 @@ sap.ui.define(
 						MessageBox.error('Team is in a match!');
 					}
 				});
+			},
+
+			onSearch: function (oEvent) {
+				let oTableSearchState = [],
+					sQuery = oEvent.getParameter('query');
+
+				if (sQuery && sQuery.length > 0) {
+					oTableSearchState = [
+						new Filter('name', FilterOperator.Contains, sQuery),
+					];
+				}
+
+				this.oView
+					.byId('teamsTable')
+					.getBinding('items')
+					.filter(oTableSearchState, 'Application');
 			},
 
 			onTeamPress: function () {

@@ -9,6 +9,12 @@
 			</contentRight>
 		</Bar>
 		<Panel width="auto" class="sapUiResponsiveMargin">
+			<Bar>
+				<contentRight>
+					<SearchField search="onSearch" width="17.5rem"/>
+				</contentRight>
+			</Bar>
+			
 			<Table id="playersTable" items="{path:'/Players'}">
 				<columns>
 					<Column>

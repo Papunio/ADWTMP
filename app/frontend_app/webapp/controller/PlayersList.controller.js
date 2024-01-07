@@ -3,8 +3,10 @@ sap.ui.define(
 		'sap/ui/core/mvc/Controller',
 		'sap/ui/model/json/JSONModel',
 		'sap/m/MessageBox',
+		'sap/ui/model/Filter',
+		'sap/ui/model/FilterOperator',
 	],
-	function (BaseController, JSONModel, MessageBox) {
+	function (BaseController, JSONModel, MessageBox, Filter, FilterOperator) {
 		'use strict';
 
 		return BaseController.extend('frontendapp.controller.PlayersList', {
@@ -172,13 +174,16 @@ sap.ui.define(
 					.getBindingContext()
 					.getObject();
 
-				MessageBox.confirm(`Are you sure you want to delete ${oPlayer.name} ${oPlayer.lastName}?`, {
-					onClose: function (oAction) {
-						if (oAction === sap.m.MessageBox.Action.OK) {
-							this.deletePlayer(oPlayer.ID);
-						}
-					}.bind(this),
-				});
+				MessageBox.confirm(
+					`Are you sure you want to delete ${oPlayer.name} ${oPlayer.lastName}?`,
+					{
+						onClose: function (oAction) {
+							if (oAction === sap.m.MessageBox.Action.OK) {
+								this.deletePlayer(oPlayer.ID);
+							}
+						}.bind(this),
+					}
+				);
 			},
 
 			deletePlayer: function (sPlayerID) {
@@ -218,6 +223,22 @@ sap.ui.define(
 						MessageBox.error('Player is in a team!');
 					}
 				});
+			},
+
+			onSearch: function (oEvent) {
+				let oTableSearchState = [],
+					sQuery = oEvent.getParameter('query');
+
+				if (sQuery && sQuery.length > 0) {
+					oTableSearchState = [
+						new Filter('lastName', FilterOperator.Contains, sQuery),
+					];
+				}
+
+				this.oView
+					.byId('playersTable')
+					.getBinding('items')
+					.filter(oTableSearchState, 'Application');
 			},
 
 			clearFields: function () {
