@@ -11,7 +11,7 @@
 			</items>
 		</FlexBox>
 		<Panel width="auto" class="sapUiResponsiveMargin" height="auto">
-			<smartTable:SmartTable id="finishedMatchesTable" entitySet="FinishedMatches" initiallyVisibleFields="homeTeam,score,guestTeam,place" ignoredFields="ID" tableType="Table" useVariantManagement="true" header="{i18n>matches}" showRowCount="true" showFullScreenButton="false" useTablePersonalisation="false" enableAutoBinding="true" class="sapUiResponsiveContentPadding" enableAutoColumnWidth="true">
+			<smartTable:SmartTable id="finishedMatchesTable" entitySet="FinishedMatches" initiallyVisibleFields="homeTeam,score,guestTeam,place" ignoredFields="ID" tableType="Table" useVariantManagement="true" header="{i18n>matches}" showRowCount="true" showFullScreenButton="false" useTablePersonalisation="true" enableAutoBinding="true" class="sapUiResponsiveContentPadding" enableAutoColumnWidth="true">
 				<smartTable:layoutData>
 					<FlexItemData growFactor="1" baseSize="0%"/>
 				</smartTable:layoutData>
