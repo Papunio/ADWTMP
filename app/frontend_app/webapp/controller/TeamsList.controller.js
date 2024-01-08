@@ -262,6 +262,11 @@ sap.ui.define(
 					.getBindingContext()
 					.getObject();
 				let aPlayers;
+				let sOldTeamID;
+
+				if (oView.getModel('teamModel')) {
+					sOldTeamID = oView.getModel('teamModel').getData().ID;
+				}
 
 				const oPromise = new Promise((resolve) => {
 					oModel.read(`/Teams(${oTeam.ID})`, {
@@ -291,6 +296,12 @@ sap.ui.define(
 						oFCL.setLayout(
 							FioriLibrary.LayoutType.TwoColumnsMidExpanded
 						);
+					} else if (
+						oFCL.getLayout() ===
+							FioriLibrary.LayoutType.TwoColumnsMidExpanded &&
+						sOldTeamID !== oTeam.ID
+					) {
+						FioriLibrary.LayoutType.TwoColumnsMidExpanded;
 					} else {
 						oFCL.setLayout(FioriLibrary.LayoutType.OneColumn);
 					}
