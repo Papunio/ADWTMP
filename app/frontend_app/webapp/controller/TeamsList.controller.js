@@ -285,10 +285,22 @@ sap.ui.define(
 					oFCL.setModel(new JSONModel(oTeam), 'teamModel');
 					oFCL.setModel(new JSONModel(aPlayers), 'teamPlayersModel');
 
-					oFCL.setLayout(
-						FioriLibrary.LayoutType.TwoColumnsMidExpanded
-					);
+					if (
+						oFCL.getLayout() === FioriLibrary.LayoutType.OneColumn
+					) {
+						oFCL.setLayout(
+							FioriLibrary.LayoutType.TwoColumnsMidExpanded
+						);
+					} else {
+						oFCL.setLayout(FioriLibrary.LayoutType.OneColumn);
+					}
 				});
+			},
+
+			handleClose: function () {
+				const oView = this.getView();
+				const oFCL = oView.getParent().getParent();
+				oFCL.setLayout(FioriLibrary.LayoutType.OneColumn);
 			},
 
 			refreshView: function () {
