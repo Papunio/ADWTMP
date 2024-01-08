@@ -5,11 +5,19 @@ sap.ui.define(
 		'sap/m/MessageBox',
 		'sap/ui/core/format/DateFormat',
 		'../model/Formatter',
+		'sap/ui/core/Theming',
 	],
 	/**
 	 * @param {typeof sap.ui.core.mvc.Controller} Controller
 	 */
-	function (Controller, JSONModel, MessageBox, DateFormat, Formatter) {
+	function (
+		Controller,
+		JSONModel,
+		MessageBox,
+		DateFormat,
+		Formatter,
+		Theming
+	) {
 		'use strict';
 
 		return Controller.extend('frontendapp.controller.Home', {
@@ -35,6 +43,7 @@ sap.ui.define(
 
 			onPressAddMatch: function () {
 				const oView = this.getView();
+
 				if (!this.AddNewMatchDialog) {
 					this.AddNewMatchDialog = this.loadFragment({
 						name: 'frontendapp.view.fragment.AddNewMatchDialog',
@@ -47,7 +56,7 @@ sap.ui.define(
 			},
 			addMatch: function () {
 				const oView = this.getView();
-				const oModel = this.getView().getModel();
+				const oModel = oView.getModel();
 
 				const sMatchID = globalThis.crypto.randomUUID();
 				const sMatchPlace = oView.byId('matchPlace').getValue();
@@ -93,7 +102,7 @@ sap.ui.define(
 					method: 'POST',
 					success: (oRes) => {
 						this.refreshView();
-						MessageBox.success(`Match between XD added`); // --------
+						MessageBox.success(`Match added`);
 					},
 					error: (oErr) => {
 						MessageBox.error('Something went wrong');
@@ -158,7 +167,7 @@ sap.ui.define(
 					});
 				}
 				this.FinishMatchDialog.then(function (oDialog) {
-					oView.setModel(oMatchModel, "matchModel");
+					oView.setModel(oMatchModel, 'matchModel');
 					oDialog.open();
 				});
 			},
@@ -167,7 +176,7 @@ sap.ui.define(
 				const oModel = new sap.ui.model.odata.v2.ODataModel(
 					'/v2/football/'
 				);
-				const oData = oView.getModel("matchModel").getData();
+				const oData = oView.getModel('matchModel').getData();
 
 				const sHomeTeamScore = oView.byId('homeTeamScore').getValue();
 				const sGuestTeamScore = oView.byId('guestTeamScore').getValue();
@@ -235,6 +244,19 @@ sap.ui.define(
 				}
 				if (oView.byId('guestTeamScore')) {
 					oView.byId('guestTeamScore').setValue();
+				}
+			},
+
+			changeTheme: function () {
+				const oButton = this.getView().byId('changeThemeButton');
+				const sTheme = Theming.getTheme();
+
+				if (sTheme === 'sap_horizon') {
+					oButton.setIcon('sap-icon://light-mode');
+					Theming.setTheme('sap_fiori_3_dark');
+				} else {
+					oButton.setIcon('sap-icon://dark-mode');
+					Theming.setTheme('sap_horizon');
 				}
 			},
 

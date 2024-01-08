@@ -8,6 +8,10 @@
 				<contentLeft>
 					<Text text="Aplikacja wspomagająca organizacje meczów piłkarskich"/>
 				</contentLeft>
+
+				<contentRight>
+					<Button id="changeThemeButton" type="Neutral" icon="sap-icon://dark-mode" press="changeTheme"/>
+				</contentRight>
 			</Bar>
 		</customHeader>
 		<subHeader>
@@ -29,7 +33,7 @@
 			<f:SidePanel id="homeSidePanel" toggle="onPanelToggle" sidePanelPosition="Right" sidePanelWidth="15%">
 				<f:mainContent>
 					<Panel width="auto" class="sapUiResponsiveMargin">
-						<Table id="toBePlayedTable" items="{path:'MatchesModel>/', sorter : {path : 'MatchesModel>date'}}">
+						<Table id="toBePlayedTable" items="{path:'MatchesModel>/', sorter : {path : 'MatchesModel>date'}}" alternateRowColors="true">
 							<columns>
 								<Column width="5%">
 									<Label text="{i18n>#}"/>

@@ -15,7 +15,7 @@
                 </contentRight>
             </Bar>
 
-            <Table id="teamsTable" items="{path:'/Teams'}">
+            <Table id="teamsTable" items="{path:'/Teams'}" alternateRowColors="true">
                 <columns>
                     <Column width="2%">
 
