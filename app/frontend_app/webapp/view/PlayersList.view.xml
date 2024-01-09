@@ -35,7 +35,7 @@
 					</Column>
 				</columns>
 				<items>
-					<ColumnListItem type="Navigation" press="onPlayerPress">
+					<ColumnListItem type="Active" press="onPlayerPress">
 						<Text text="{name}"/>
 						<Text text="{lastName}"/>
 						<Text text="{position}"/>
