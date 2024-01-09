@@ -1,23 +1,45 @@
 <core:FragmentDefinition xmlns="sap.m"
-    xmlns:core="sap.ui.core">
-    <Dialog id="addNewPlayerDialog" title="{i18n>addNewPlayer}" class="sapUiTinyMargin">
-
-        <Label text="{i18n>playerName}" labelFor="playerName" />
-        <Input required="true" id="playerName" showSuggestion="true"/>
-
-        <Label text="{i18n>playerLastName}" labelFor="playerLastName" />
-        <Input required="true" id="playerLastName" showSuggestion="true" />
-
-        <Label text="{i18n>playerAge}" labelFor="playerAge" />
-        <Slider id="playerAge" value="16" width="100%" min="16" max="50" showAdvancedTooltip="true" showHandleTooltip="false" />
-
-        <Label text="{i18n>playerPosition}" labelFor="playerPosition" />
-        <Select id="playerPosition" width="100%" required="true" selectedKey="{/SelectedKey}" forceSelection="false" items="{
-						path: 'SelectModel>/'
-					}">
-            <core:ListItem text="{SelectModel>Name}" icon="{SelectModel>Icon}"/>
-        </Select>
-        <Bar>
+    xmlns:mvc="sap.ui.core.mvc"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core">
+	<Dialog id="addNewPlayerDialog" title="{i18n>addNewPlayer}" class="sapUiTinyMargin">
+    	 <f:Form>
+            <f:layout>
+                <f:ResponsiveGridLayout labelSpanXL="4" labelSpanL="3" labelSpanM="4" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="1" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="2" columnsM="2" singleContainerFullSize="false" />
+            </f:layout>
+            <f:formContainers>
+                <f:FormContainer >
+                    <f:formElements>
+                        <f:FormElement label="{i18n>playerName}">
+                            <f:fields>
+                                <Input required="true" id="playerName" showSuggestion="true"/>
+                            </f:fields>
+                        </f:FormElement>
+						<f:FormElement label="{i18n>playerLastName}">
+                            <f:fields>
+                                <Input required="true" id="playerLastName" showSuggestion="true" />
+                            </f:fields>
+                        </f:FormElement>
+						<f:FormElement label="{i18n>playerAge}">
+                            <f:fields>
+                                 <Slider id="playerAge" value="16" width="100%" min="16" max="50" showAdvancedTooltip="true" showHandleTooltip="false" />
+                            </f:fields>
+                        </f:FormElement>
+						<f:FormElement label="{i18n>playerPosition}">
+                            <f:fields>
+                               <Select id="playerPosition" width="100%" required="true" selectedKey="{/SelectedKey}" forceSelection="false" items="{
+									path: 'SelectModel>/'
+								}">
+								<core:ListItem text="{SelectModel>Name}" icon="{SelectModel>Icon}"/>
+							</Select>
+                            </f:fields>
+                        </f:FormElement>
+                    </f:formElements>
+                </f:FormContainer>
+            </f:formContainers>
+        </f:Form>
+		 <Bar>
             <contentRight>
                 <Button id="confirmBtn" icon="sap-icon://accept" text="{i18n>submit}" press="addPlayer" />
             </contentRight>
@@ -25,5 +47,5 @@
                 <Button id="cancelBtn" icon="sap-icon://decline" text="{i18n>cancel}" press="onPressCancel" />
             </contentLeft>
         </Bar>
-    </Dialog>
+	</Dialog>
 </core:FragmentDefinition>

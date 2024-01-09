@@ -2,7 +2,7 @@
 	xmlns:f="sap.f"
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns:core="sap.ui.core" height="100%" controllerName="frontendapp.controller.Home">
-	<Page showHeader="true" showNavButton="false" enableScrolling="false">
+	<Page showHeader="true" showNavButton="false" enableScrolling="true">
 		<customHeader>
 			<Bar>
 				<contentLeft>
@@ -36,7 +36,7 @@
 						<Table id="toBePlayedTable" items="{path:'MatchesModel>/', sorter : {path : 'MatchesModel>date'}}" alternateRowColors="true">
 							<columns>
 								<Column width="5%">
-									<Label text="{i18n>#}"/>
+									<Label text="{i18n>#}" />
 								</Column>
 
 								<Column width="2%"></Column>
@@ -61,7 +61,7 @@
 							</columns>
 							<items>
 								<ColumnListItem type="Navigation" press="onMatchPress">
-									<Text text="{MatchesModel>index}"/>
+									<Text text="{path: '' , formatter:'.formatter.rowNumber'}"/>
 									<Image height="100%" width="100%" src="{MatchesModel>team1/logo}"/>
 									<Text text="{MatchesModel>team1/name}"/>
 									<Image height="100%" width="100%" src="{MatchesModel>team2/logo}"/>
