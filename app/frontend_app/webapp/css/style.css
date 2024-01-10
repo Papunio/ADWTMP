@@ -1,1 +1,13 @@
 /* Enter your custom styles here */
+
+.greenText{
+    color: #12b034;
+}
+
+.redText{
+    color: red;
+}
+
+.greyText{
+    color: grey;
+}

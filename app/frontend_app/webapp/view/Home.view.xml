@@ -60,7 +60,7 @@
 								</Column>
 							</columns>
 							<items>
-								<ColumnListItem type="Navigation" press="onMatchPress">
+								<ColumnListItem type="Navigation" press="onMatchPress" >
 									<Text text=""/>
 									<Image height="100%" width="100%" src="{MatchesModel>team1/logo}"/>
 									<Text text="{MatchesModel>team1/name}"/>

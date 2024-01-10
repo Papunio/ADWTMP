@@ -65,6 +65,11 @@ sap.ui.define(
 					.getItemByKey(sGuestTeamID)
 					.getProperty("text");
 
+				if (sHomeTeamID === sGuestTeamID) {
+					MessageBox.error("Cant have the same team!");
+					return;
+				}
+
 				if (sHomeTeamID === "") {
 					MessageBox.error("Choose home team!");
 					return;

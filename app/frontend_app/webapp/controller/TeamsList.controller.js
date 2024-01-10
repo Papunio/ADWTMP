@@ -62,6 +62,11 @@ sap.ui.define(
 					name: sTeamName,
 					logo: sLogo,
 					players: aPlayers,
+					wins: 0,
+					draws: 0,
+					losses: 0,
+					scored: 0,
+					conceded: 0,
 				};
 
 				oModel.create("/Teams", oPayload, {
@@ -296,13 +301,7 @@ sap.ui.define(
 						oFCL.setLayout(
 							FioriLibrary.LayoutType.TwoColumnsMidExpanded
 						);
-					} else if (
-						oFCL.getLayout() ===
-							FioriLibrary.LayoutType.TwoColumnsMidExpanded &&
-						sOldTeamID !== oTeam.ID
-					) {
-						FioriLibrary.LayoutType.TwoColumnsMidExpanded;
-					} else {
+					} else if (sOldTeamID === oTeam.ID) {
 						oFCL.setLayout(FioriLibrary.LayoutType.OneColumn);
 					}
 				});
@@ -330,6 +329,7 @@ sap.ui.define(
 					this.byId("addNewTeamDialog").close();
 				if (this.byId("updateTeamDialog"))
 					this.byId("updateTeamDialog").close();
+				this.clearFields();
 			},
 
 			onNavButton: function () {

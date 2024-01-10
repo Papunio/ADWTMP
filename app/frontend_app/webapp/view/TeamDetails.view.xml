@@ -16,14 +16,14 @@
                 </m:Avatar>
                 <m:Title text="{teamModel>/name}" titleStyle="H3" wrapping="true"/>
                 <m:HBox >
-                    <m:Text text="W: {teamModel>/wins}" wrapping="true" class="sapUiMediumMarginEnd"/>
+                    <m:Text text="W: {teamModel>/wins}" wrapping="true" class="sapUiMediumMarginEnd greenText" />
                     <m:Text text="Goals scored: {teamModel>/scored}" wrapping="true" />
                 </m:HBox>
                 <m:HBox >
-                    <m:Text text="D: {teamModel>/draws}" wrapping="true" class="sapUiMediumMarginEnd"/>
+                    <m:Text text="D: {teamModel>/draws}" wrapping="true" class="sapUiMediumMarginEnd greyText"/>
                     <m:Text text="Goals conceded: {teamModel>/conceded}" wrapping="true" />
                 </m:HBox>
-                <m:Text text="L: {teamModel>/loses}" wrapping="true" />
+                <m:Text text="L: {teamModel>/loses}" wrapping="true" class="redText"/>
             </m:FlexBox>
         </headerContent>
         <sections>
