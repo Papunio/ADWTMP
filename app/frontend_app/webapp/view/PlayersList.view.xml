@@ -18,7 +18,7 @@
 			<Table id="playersTable" items="{path:'/Players'}" alternateRowColors="true">
 				<columns>
 					<Column width="5%">
-						
+
 					</Column>
 					<Column>
 						<Label text="{i18n>name}"/>
@@ -38,7 +38,7 @@
 					</Column>
 				</columns>
 				<items>
-					<ColumnListItem type="Active" press="onPlayerPress">
+					<ColumnListItem type="Active" press="onPlayerPress" highlight="{= ${position} === 'Attacker' ? 'Error' : ${position} === 'Defender' ? 'Warning' : ${position} === 'Midfielder' ? 'Information' : ${position} === 'Goalkeeper' ? 'Success' : 'None' }">
 						<Text text=""/>
 						<Text text="{name}"/>
 						<Text text="{lastName}"/>

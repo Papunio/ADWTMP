@@ -160,7 +160,9 @@ sap.ui.define(
 				const oMatchModel = new JSONModel({
 					ID: oMatch.getProperty("ID"),
 					homeTeam: oMatch.getProperty("team1/name"),
+					homeTeamID: oMatch.getProperty("team1/ID"),
 					guestTeam: oMatch.getProperty("team2/name"),
+					guestTeamID: oMatch.getProperty("team2/ID"),
 					place: oMatch.getProperty("place"),
 				});
 
@@ -183,6 +185,8 @@ sap.ui.define(
 
 				const sHomeTeamScore = oView.byId("homeTeamScore").getValue();
 				const sGuestTeamScore = oView.byId("guestTeamScore").getValue();
+				const sHomeTeamID = oData.homeTeamID;
+				const sGuestTeamID = oData.guestTeamID;
 
 				const oPayload = {
 					homeTeam: oData.homeTeam,
@@ -196,12 +200,89 @@ sap.ui.define(
 						oView.byId("finishMatchDialog").close();
 						MessageBox.success("Score submitted!");
 						this.deleteMatch(oData.ID);
+						this.updateTeamStats(
+							sHomeTeamID,
+							sGuestTeamID,
+							sHomeTeamScore,
+							sGuestTeamScore
+						);
 						this.clearFields();
 					},
 					error: (oErr) => {
 						MessageBox.error("Something went wrong");
 						console.error(oErr.message);
 					},
+				});
+			},
+
+			updateTeamStats: function (
+				sHomeTeamID,
+				sGuestTeamID,
+				sHomeTeamScore,
+				sGuestTeamScore
+			) {
+				const oView = this.getView();
+				const oModel = oView.getModel();
+
+				let oHomeData;
+				let oGuestData;
+
+				const oHomePromise = new Promise((resolve) => {
+					oModel.read(`/Teams(${sHomeTeamID})`, {
+						success: (oData) => {
+							oHomeData = oData;
+							resolve();
+						},
+						error: (oErr) => {
+							MessageBox.error("Something went wrong");
+							console.error(oErr.message);
+						},
+					});
+				});
+
+				const oGuestPromise = new Promise((resolve) => {
+					oModel.read(`/Teams(${sGuestTeamID})`, {
+						success: (oData) => {
+							oGuestData = oData;
+							resolve();
+						},
+						error: (oErr) => {
+							MessageBox.error("Something went wrong");
+							console.error(oErr.message);
+						},
+					});
+				});
+
+				Promise.all([oHomePromise, oGuestPromise]).then(() => {
+					oHomeData.scored += sHomeTeamScore;
+					oHomeData.conceded += sGuestTeamScore;
+
+					oGuestData.scored += sGuestTeamScore;
+					oGuestData.conceded += sHomeTeamScore;
+
+					if (sHomeTeamScore > sGuestTeamScore) {
+						oHomeData.wins += 1;
+						oGuestData.loses += 1;
+					} else if (sHomeTeamScore < sGuestTeamScore) {
+						oGuestData.wins += 1;
+						oHomeData.loses += 1;
+					} else {
+						oHomeData.draws += 1;
+						oGuestData.draws += 1;
+					}
+
+					oModel.update(`/Teams(${sHomeTeamID})`, oHomeData, {
+						error: (oErr) => {
+							MessageBox.error("Something went wrong");
+							console.error(oErr.message);
+						},
+					});
+					oModel.update(`/Teams(${sGuestTeamID})`, oGuestData, {
+						error: (oErr) => {
+							MessageBox.error("Something went wrong");
+							console.error(oErr.message);
+						},
+					});
 				});
 			},
 

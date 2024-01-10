@@ -24,20 +24,35 @@ entity Players : cuid {
 @title: 'Entity that represents football team'
 entity Teams : cuid {
     @title: 'Team Name'
-    name    : String(30);
+    name     : String(30);
 
 
     @title: 'Players in team'
-    players : Composition of many {
-                  key player : Association to Players;
-              };
+    players  : Composition of many {
+                   key player : Association to Players;
+               };
 
     @title: 'Matched played by team'
-    matches : Association to many Matches.teams
-                  on matches.team = $self;
+    matches  : Association to many Matches.teams
+                   on matches.team = $self;
 
     @title: 'Team Logo'
-    logo    : String;
+    logo     : String;
+
+    @title: 'Team Wins'
+    wins     : Integer;
+
+    @title: 'Team Draws'
+    draws    : Integer;
+
+    @title: 'Team Loses'
+    loses    : Integer;
+
+    @title: 'Goals Scored'
+    scored   : Integer;
+
+    @title: 'Goals Conceded'
+    conceded : Integer;
 }
 
 @title: 'Entity that represents football match'
