@@ -6,7 +6,7 @@
 		<customHeader>
 			<Bar>
 				<contentLeft>
-					<Text text="Aplikacja wspomagająca organizacje meczów piłkarskich"/>
+					<Title titleStyle="Auto" text="Aplikacja wspomagająca organizacje meczów piłkarskich"/>
 				</contentLeft>
 
 				<contentRight>
@@ -19,9 +19,9 @@
 				<Bar>
 					<contentLeft>
 						<Button icon="sap-icon://soccer" text="PIŁECZKA"/>
-						<Button text="MATCH HISTORY" press="onPressMatchHistory" />
-						<Button text="TEAMS" press="onPressTeams" />
-						<Button text="PLAYERS" press="onPressPlayers" />
+						<Button text="{i18n>matchHistory}" press="onPressMatchHistory" />
+						<Button text="{i18n>teams}" press="onPressTeams" />
+						<Button text="{i18n>players}" press="onPressPlayers" />
 					</contentLeft>
 					<contentRight>
 						<Button text="ADD MATCH" icon="sap-icon://add" press="onPressAddMatch" />
@@ -36,24 +36,24 @@
 						<Table id="toBePlayedTable" items="{path:'MatchesModel>/', sorter : {path : 'MatchesModel>date'}}" alternateRowColors="true">
 							<columns>
 								<Column width="5%">
-									<Label text="{i18n>#}" />
+									<Label text="" />
 								</Column>
 
 								<Column width="2%"></Column>
 								<Column>
-									<Label text="{i18n>team1}"/>
+									<Label text="{i18n>homeTeam}"/>
 								</Column>
 
 								<Column width="2%"></Column>
 								<Column>
-									<Label text="{i18n>team2}"/>
+									<Label text="{i18n>guestTeam}"/>
 								</Column>
 
 								<Column>
 									<Label text="{i18n>matchDate}"/>
 								</Column>
 								<Column>
-									<Label text="{i18n>place}"/>
+									<Label text="{i18n>matchPlace}"/>
 								</Column>
 
 								<Column width="5%">
@@ -61,7 +61,7 @@
 							</columns>
 							<items>
 								<ColumnListItem type="Navigation" press="onMatchPress">
-									<Text text="{path: '' , formatter:'.formatter.rowNumber'}"/>
+									<Text text=""/>
 									<Image height="100%" width="100%" src="{MatchesModel>team1/logo}"/>
 									<Text text="{MatchesModel>team1/name}"/>
 									<Image height="100%" width="100%" src="{MatchesModel>team2/logo}"/>

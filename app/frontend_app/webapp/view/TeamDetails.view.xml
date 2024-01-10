@@ -4,20 +4,7 @@
     xmlns:f="sap.f"
     xmlns:form="sap.ui.layout.form"
     xmlns:mvc="sap.ui.core.mvc">
-    <ObjectPageLayout id="ObjectPageLayout" alwaysShowContentHeader="false" preserveHeaderStateOnScroll="false" headerContentPinnable="true" isChildPage="true" upperCaseAnchorBar="false">
-        <headerTitle>
-            <ObjectPageDynamicHeaderTitle>
-                <snappedHeading>
-                    <m:FlexBox wrap="Wrap" fitContainer="true" alignItems="Center">
-                        <m:FlexBox wrap="NoWrap" fitContainer="true" alignItems="Center" class="sapUiTinyMarginEnd">
-                            <m:Avatar src="{teamModel>/logo}" displaySize="S" displayShape="Square"/>
-                            <m:Title text="{teamModel>/name}" wrapping="true" class="sapUiTinyMarginEnd"/>
-                        </m:FlexBox>
-                    </m:FlexBox>
-                </snappedHeading>
-
-            </ObjectPageDynamicHeaderTitle>
-        </headerTitle>
+    <ObjectPageLayout alwaysShowContentHeader="false" preserveHeaderStateOnScroll="false" headerContentPinnable="true" isChildPage="true" upperCaseAnchorBar="false">
         <headerContent>
             <m:Bar>
                 <m:contentRight>
@@ -25,9 +12,9 @@
                 </m:contentRight>
             </m:Bar>
             <m:FlexBox wrap="Wrap" fitContainer="true" alignItems="Stretch">
-                <m:Avatar src="{teamModel>/logo}" displaySize="L" displayShape="Square" class="sapUiTinyMarginEnd">
+                <m:Avatar src="{teamModel>/logo}" displaySize="XL" displayShape="Square" class="sapUiTinyMarginEnd">
                 </m:Avatar>
-                <m:Title text="{teamModel>/name}" wrapping="true" class="sapUiTinyMargin"/>
+                <m:Title text="{teamModel>/name}" titleStyle="H3" wrapping="true" class="sapUiTinyMargin"/>
             </m:FlexBox>
         </headerContent>
         <sections>

@@ -17,6 +17,9 @@
 
             <Table id="teamsTable" items="{path:'/Teams'}" alternateRowColors="true">
                 <columns>
+                    <Column width="5%">
+
+                    </Column>
                     <Column width="2%">
 
                     </Column>
@@ -32,6 +35,7 @@
 
                 <items>
                     <ColumnListItem type="Navigation" press="onTeamPress">
+                        <Text text="" />
                         <Image height="100%" width="100%" src="{logo}"/>
                         <Text text="{name}"/>
                         <FlexBox>
