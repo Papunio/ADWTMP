@@ -1,26 +1,18 @@
 sap.ui.define(
 	[
-		'sap/ui/core/mvc/Controller',
-		'sap/ui/model/json/JSONModel',
-		'sap/m/MessageBox',
-		'sap/ui/core/format/DateFormat',
-		'../model/Formatter',
-		'sap/ui/core/Theming',
+		"sap/ui/core/mvc/Controller",
+		"sap/ui/model/json/JSONModel",
+		"sap/m/MessageBox",
+		"../model/Formatter",
+		"sap/ui/core/Theming",
 	],
 	/**
 	 * @param {typeof sap.ui.core.mvc.Controller} Controller
 	 */
-	function (
-		Controller,
-		JSONModel,
-		MessageBox,
-		DateFormat,
-		Formatter,
-		Theming
-	) {
-		'use strict';
+	function (Controller, JSONModel, MessageBox, Formatter, Theming) {
+		"use strict";
 
-		return Controller.extend('frontendapp.controller.Home', {
+		return Controller.extend("frontendapp.controller.Home", {
 			formatter: Formatter,
 			onInit: function () {
 				this.refreshView();
@@ -28,17 +20,17 @@ sap.ui.define(
 
 			onPressTeams: function () {
 				const oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-				oRouter.navTo('TeamsList');
+				oRouter.navTo("TeamsList");
 			},
 
 			onPressPlayers: function () {
 				const oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-				oRouter.navTo('PlayersList');
+				oRouter.navTo("PlayersList");
 			},
 
 			onPressMatchHistory: function () {
 				const oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-				oRouter.navTo('MatchHistory');
+				oRouter.navTo("MatchHistory");
 			},
 
 			onPressAddMatch: function () {
@@ -46,11 +38,11 @@ sap.ui.define(
 
 				if (!this.AddNewMatchDialog) {
 					this.AddNewMatchDialog = this.loadFragment({
-						name: 'frontendapp.view.fragment.AddNewMatchDialog',
+						name: "frontendapp.view.fragment.AddNewMatchDialog",
 					});
 				}
 				this.AddNewMatchDialog.then(function (oDialog) {
-					oView.byId('matchDate').setMinDate(new Date());
+					oView.byId("matchDate").setMinDate(new Date());
 					oDialog.open();
 				});
 			},
@@ -59,25 +51,34 @@ sap.ui.define(
 				const oModel = oView.getModel();
 
 				const sMatchID = globalThis.crypto.randomUUID();
-				const sMatchPlace = oView.byId('matchPlace').getValue();
-				const sMatchDate = oView.byId('matchDate').getValue();
-				const sHomeTeamID = oView.byId('homeTeam').getSelectedKey();
-				const sGuestTeamID = oView.byId('guestTeam').getSelectedKey();
+				const sMatchPlace = oView.byId("matchPlace").getValue();
+				const sMatchDate = oView.byId("matchDate").getValue();
+				const sHomeTeamID = oView.byId("homeTeam").getSelectedKey();
+				const sGuestTeamID = oView.byId("guestTeam").getSelectedKey();
 
-				if (sHomeTeamID === '') {
-					MessageBox.error('Choose home team!');
+				const sHomeTeamName = oView
+					.byId("homeTeam")
+					.getItemByKey(sHomeTeamID)
+					.getProperty("text");
+				const sGuestTeamName = oView
+					.byId("homeTeam")
+					.getItemByKey(sGuestTeamID)
+					.getProperty("text");
+
+				if (sHomeTeamID === "") {
+					MessageBox.error("Choose home team!");
 					return;
 				}
-				if (sGuestTeamID === '') {
-					MessageBox.error('Choose guest team!');
+				if (sGuestTeamID === "") {
+					MessageBox.error("Choose guest team!");
 					return;
 				}
-				if (sMatchDate === '') {
-					MessageBox.error('Pick date!');
+				if (sMatchDate === "") {
+					MessageBox.error("Pick date!");
 					return;
 				}
-				if (sMatchPlace === '') {
-					MessageBox.error('Pick match place!');
+				if (sMatchPlace === "") {
+					MessageBox.error("Pick match place!");
 					return;
 				}
 
@@ -98,34 +99,36 @@ sap.ui.define(
 					place: sMatchPlace,
 					date: sMatchDate,
 				};
-				oModel.create('/Matches', oPayload, {
-					method: 'POST',
+				oModel.create("/Matches", oPayload, {
+					method: "POST",
 					success: (oRes) => {
 						this.refreshView();
-						MessageBox.success(`Match added`);
+						MessageBox.success(
+							`Added match between ${sHomeTeamName} and ${sGuestTeamName} at ${sMatchPlace} on ${sMatchDate}`
+						);
 					},
 					error: (oErr) => {
-						MessageBox.error('Something went wrong');
+						MessageBox.error("Something went wrong");
 						console.error(oErr.message);
 					},
 				});
-				this.byId('addNewMatchDialog').close();
+				this.byId("addNewMatchDialog").close();
 				this.clearFields();
 			},
 
 			onDeleteMatchPress: function (oEvent) {
 				const oMatch = oEvent
 					.getSource()
-					.getBindingContext('MatchesModel');
-				const oHomeTeam = oMatch.getProperty('team1');
-				const oGuestTeam = oMatch.getProperty('team2');
+					.getBindingContext("MatchesModel");
+				const oHomeTeam = oMatch.getProperty("team1");
+				const oGuestTeam = oMatch.getProperty("team2");
 
 				MessageBox.confirm(
 					`Are you sure you want to delete match between ${oHomeTeam.name} and ${oGuestTeam.name}?`,
 					{
 						onClose: function (oAction) {
 							if (oAction === sap.m.MessageBox.Action.OK) {
-								this.deleteMatch(oMatch.getProperty('ID'));
+								this.deleteMatch(oMatch.getProperty("ID"));
 							}
 						}.bind(this),
 					}
@@ -134,7 +137,7 @@ sap.ui.define(
 
 			deleteMatch: function (sMatchID) {
 				const oModel = new sap.ui.model.odata.v2.ODataModel(
-					'/v2/football/'
+					"/v2/football/"
 				);
 
 				oModel.remove(`/Matches(${sMatchID})`, {
@@ -142,7 +145,7 @@ sap.ui.define(
 						this.refreshView();
 					},
 					error: (oErr) => {
-						MessageBox.error('Something went wrong');
+						MessageBox.error("Something went wrong");
 						console.error(oErr.message);
 					},
 				});
@@ -152,34 +155,34 @@ sap.ui.define(
 				const oView = this.getView();
 				const oMatch = oEvent
 					.getSource()
-					.getBindingContext('MatchesModel');
+					.getBindingContext("MatchesModel");
 
 				const oMatchModel = new JSONModel({
-					ID: oMatch.getProperty('ID'),
-					homeTeam: oMatch.getProperty('team1/name'),
-					guestTeam: oMatch.getProperty('team2/name'),
-					place: oMatch.getProperty('place'),
+					ID: oMatch.getProperty("ID"),
+					homeTeam: oMatch.getProperty("team1/name"),
+					guestTeam: oMatch.getProperty("team2/name"),
+					place: oMatch.getProperty("place"),
 				});
 
 				if (!this.FinishMatchDialog) {
 					this.FinishMatchDialog = this.loadFragment({
-						name: 'frontendapp.view.fragment.FinishMatchDialog',
+						name: "frontendapp.view.fragment.FinishMatchDialog",
 					});
 				}
 				this.FinishMatchDialog.then(function (oDialog) {
-					oView.setModel(oMatchModel, 'matchModel');
+					oView.setModel(oMatchModel, "matchModel");
 					oDialog.open();
 				});
 			},
 			submitMatch: function () {
 				const oView = this.getView();
 				const oModel = new sap.ui.model.odata.v2.ODataModel(
-					'/v2/football/'
+					"/v2/football/"
 				);
-				const oData = oView.getModel('matchModel').getData();
+				const oData = oView.getModel("matchModel").getData();
 
-				const sHomeTeamScore = oView.byId('homeTeamScore').getValue();
-				const sGuestTeamScore = oView.byId('guestTeamScore').getValue();
+				const sHomeTeamScore = oView.byId("homeTeamScore").getValue();
+				const sGuestTeamScore = oView.byId("guestTeamScore").getValue();
 
 				const oPayload = {
 					homeTeam: oData.homeTeam,
@@ -190,12 +193,13 @@ sap.ui.define(
 
 				oModel.create(`/FinishedMatches`, oPayload, {
 					success: (oRes) => {
-						oView.byId('finishMatchDialog').close();
+						oView.byId("finishMatchDialog").close();
+						MessageBox.success("Score submitted!");
 						this.deleteMatch(oData.ID);
 						this.clearFields();
 					},
 					error: (oErr) => {
-						MessageBox.error('Something went wrong');
+						MessageBox.error("Something went wrong");
 						console.error(oErr.message);
 					},
 				});
@@ -204,74 +208,74 @@ sap.ui.define(
 			onMatchPress: function (oEvent) {
 				const sMatchID = oEvent
 					.getSource()
-					.getBindingContext('MatchesModel')
+					.getBindingContext("MatchesModel")
 					.getObject().ID;
 				const oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-				oRouter.navTo('MatchDetails', {
+				oRouter.navTo("MatchDetails", {
 					MatchID: sMatchID,
 				});
 			},
 
 			onPressCancel: function () {
-				if (this.byId('addNewMatchDialog')) {
-					this.byId('addNewMatchDialog').close();
+				if (this.byId("addNewMatchDialog")) {
+					this.byId("addNewMatchDialog").close();
 				}
-				if (this.byId('finishMatchDialog')) {
-					this.byId('finishMatchDialog').close();
+				if (this.byId("finishMatchDialog")) {
+					this.byId("finishMatchDialog").close();
 				}
 				this.clearFields();
 			},
 
 			clearFields: function () {
 				const oView = this.getView();
-				if (oView.byId('homeTeam')) {
-					oView.byId('homeTeam').setSelectedKey();
+				if (oView.byId("homeTeam")) {
+					oView.byId("homeTeam").setSelectedKey();
 				}
-				if (oView.byId('guestTeam')) {
-					oView.byId('guestTeam').setSelectedKey();
+				if (oView.byId("guestTeam")) {
+					oView.byId("guestTeam").setSelectedKey();
 				}
-				if (oView.byId('matchDate')) {
-					oView.byId('matchDate').setValue();
+				if (oView.byId("matchDate")) {
+					oView.byId("matchDate").setValue();
 				}
-				if (oView.byId('matchPlace')) {
-					oView.byId('matchPlace').setValue();
+				if (oView.byId("matchPlace")) {
+					oView.byId("matchPlace").setValue();
 				}
-				if (oView.byId('matchScore')) {
-					oView.byId('matchScore').setValue();
+				if (oView.byId("matchScore")) {
+					oView.byId("matchScore").setValue();
 				}
-				if (oView.byId('homeTeamScore')) {
-					oView.byId('homeTeamScore').setValue();
+				if (oView.byId("homeTeamScore")) {
+					oView.byId("homeTeamScore").setValue();
 				}
-				if (oView.byId('guestTeamScore')) {
-					oView.byId('guestTeamScore').setValue();
+				if (oView.byId("guestTeamScore")) {
+					oView.byId("guestTeamScore").setValue();
 				}
 			},
 
 			changeTheme: function () {
-				const oButton = this.getView().byId('changeThemeButton');
+				const oButton = this.getView().byId("changeThemeButton");
 				const sTheme = Theming.getTheme();
 
-				if (sTheme === 'sap_horizon') {
-					oButton.setIcon('sap-icon://light-mode');
-					Theming.setTheme('sap_fiori_3_dark');
+				if (sTheme === "sap_horizon") {
+					oButton.setIcon("sap-icon://light-mode");
+					Theming.setTheme("sap_fiori_3_dark");
 				} else {
-					oButton.setIcon('sap-icon://dark-mode');
-					Theming.setTheme('sap_horizon');
+					oButton.setIcon("sap-icon://dark-mode");
+					Theming.setTheme("sap_horizon");
 				}
 			},
 
 			refreshView: function () {
 				const oView = this.getView();
 				const oModel = new sap.ui.model.odata.v2.ODataModel(
-					'/v2/football/'
+					"/v2/football/"
 				);
 				const oMatchesModel = new JSONModel();
 				const aTeams = [];
 
 				const oPromise = new Promise((resolve) => {
-					oModel.read('/Matches', {
+					oModel.read("/Matches", {
 						urlParameters: {
-							$expand: 'teams/team',
+							$expand: "teams/team",
 						},
 						success: (oData) => {
 							oData.results.forEach((oMatchData) => {
@@ -289,7 +293,7 @@ sap.ui.define(
 							resolve();
 						},
 						error: (oErr) => {
-							MessageBox.error('{i18n>Something went wrong}');
+							MessageBox.error("{i18n>Something went wrong}");
 							console.error(oErr.message);
 						},
 					});
@@ -297,7 +301,7 @@ sap.ui.define(
 
 				oPromise.then(() => {
 					oMatchesModel.setData(aTeams);
-					oView.setModel(oMatchesModel, 'MatchesModel');
+					oView.setModel(oMatchesModel, "MatchesModel");
 				});
 			},
 		});

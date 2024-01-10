@@ -99,13 +99,6 @@
 							<Button text="PLAYERS LIST" press="onPressPlayers"/>
 						</VBox>
 					</f:SidePanelItem>
-					<f:SidePanelItem icon="sap-icon://addresses" text="Pitches">
-						<VBox>
-							<Text text="Static Content" class="sapUiSmallMarginBottom" />
-							<Button text="ADD FOOTBALL PITCH" />
-							<Button text="FOOTBALL PITCH LIST" />
-						</VBox>
-					</f:SidePanelItem>
 				</f:items>
 			</f:SidePanel>
 		</content>
