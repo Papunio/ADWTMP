@@ -127,7 +127,7 @@ sap.ui.define(
 
 				const sTeamID = oTeamModel.getData().ID;
 				const sTeamName = oView.byId('teamNameU').getValue();
-				const sLogo = oView.byId('badgeU').getValue();
+				const sLogo = oView.byId('badgeLinkU').getValue();
 				const aSelectedPlayers = oView
 					.byId('selectedPlayersU')
 					.getSelectedKeys();
@@ -306,6 +306,14 @@ sap.ui.define(
 						oFCL.setLayout(FioriLibrary.LayoutType.OneColumn);
 					}
 				});
+			},
+
+			getGroupHeader: function (oGroup) {
+				console.log(oGroup);
+				// return new SeparatorItem( {
+				// 	text: oGroup.key
+				// });
+				return 1;
 			},
 
 			handleClose: function () {

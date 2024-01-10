@@ -113,10 +113,6 @@ sap.ui.define(
 				this.updatePlayerDialog.then(function (oDialog) {
 					oView.setModel(oPlayerModel, "playerModel");
 					oDialog.open();
-					oView.byId("playerAgeU").setValue(oPlayer.age);
-					oView
-						.byId("playerPositionU")
-						.setSelectedKey(oPlayer.position);
 				});
 			},
 
