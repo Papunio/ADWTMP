@@ -217,8 +217,8 @@ sap.ui.define(
 									resolve();
 									return;
 								}
-								resolve();
 							});
+							resolve();
 						},
 						error: (oErr) => {
 							MessageBox.error("Something went wrong");
@@ -259,7 +259,6 @@ sap.ui.define(
 			},
 
 			onTeamPress: function (oEvent) {
-				// Jak klikamy przy otwartym to zamykamy
 				const oView = this.getView();
 				const oModel = oView.getModel();
 				const oTeam = oEvent
