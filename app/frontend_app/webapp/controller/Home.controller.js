@@ -122,9 +122,7 @@ sap.ui.define(
 			},
 
 			onDeleteMatchPress: function (oEvent) {
-				const oMatch = oEvent
-					.getSource()
-					.getBindingContext("MatchesModel");
+				const oMatch = oEvent.getSource().getBindingContext("MatchesModel");
 				const oHomeTeam = oMatch.getProperty("team1");
 				const oGuestTeam = oMatch.getProperty("team2");
 
@@ -141,9 +139,7 @@ sap.ui.define(
 			},
 
 			deleteMatch: function (sMatchID) {
-				const oModel = new sap.ui.model.odata.v2.ODataModel(
-					"/v2/football/"
-				);
+				const oModel = new sap.ui.model.odata.v2.ODataModel("/v2/football/");
 
 				oModel.remove(`/Matches(${sMatchID})`, {
 					success: () => {
@@ -158,9 +154,7 @@ sap.ui.define(
 
 			onFinishMatchPress: function (oEvent) {
 				const oView = this.getView();
-				const oMatch = oEvent
-					.getSource()
-					.getBindingContext("MatchesModel");
+				const oMatch = oEvent.getSource().getBindingContext("MatchesModel");
 
 				const oMatchModel = new JSONModel({
 					ID: oMatch.getProperty("ID"),
@@ -169,6 +163,7 @@ sap.ui.define(
 					guestTeam: oMatch.getProperty("team2/name"),
 					guestTeamID: oMatch.getProperty("team2/ID"),
 					place: oMatch.getProperty("place"),
+					date: oMatch.getProperty("date"),
 				});
 
 				if (!this.FinishMatchDialog) {
@@ -183,9 +178,7 @@ sap.ui.define(
 			},
 			submitMatch: function () {
 				const oView = this.getView();
-				const oModel = new sap.ui.model.odata.v2.ODataModel(
-					"/v2/football/"
-				);
+				const oModel = new sap.ui.model.odata.v2.ODataModel("/v2/football/");
 				const oData = oView.getModel("matchModel").getData();
 
 				const sHomeTeamScore = oView.byId("homeTeamScore").getValue();
@@ -198,6 +191,7 @@ sap.ui.define(
 					guestTeam: oData.guestTeam,
 					score: `${sHomeTeamScore}:${sGuestTeamScore}`,
 					place: oData.place,
+					date: oData.date,
 				};
 
 				oModel.create(`/FinishedMatches`, oPayload, {
@@ -220,12 +214,7 @@ sap.ui.define(
 				});
 			},
 
-			updateTeamStats: function (
-				sHomeTeamID,
-				sGuestTeamID,
-				sHomeTeamScore,
-				sGuestTeamScore
-			) {
+			updateTeamStats: function (sHomeTeamID, sGuestTeamID, sHomeTeamScore, sGuestTeamScore) {
 				const oView = this.getView();
 				const oModel = oView.getModel();
 
@@ -352,9 +341,7 @@ sap.ui.define(
 
 			refreshView: function () {
 				const oView = this.getView();
-				const oModel = new sap.ui.model.odata.v2.ODataModel(
-					"/v2/football/"
-				);
+				const oModel = new sap.ui.model.odata.v2.ODataModel("/v2/football/");
 				const oMatchesModel = new JSONModel();
 				const aTeams = [];
 

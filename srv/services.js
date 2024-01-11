@@ -20,4 +20,10 @@ module.exports = (srv) => {
 			return oTeam.name.localeCompare(oOtherTeam.name);
 		});
 	});
+
+	srv.after("READ", "FinishedMatches", (aMatches) => {
+		aMatches.sort((oMatch, oOtherMatch) => {
+			return Date.parse(oMatch.date) > Date.parse(oOtherMatch.date) ? 1 : -1;
+		});
+	});
 };

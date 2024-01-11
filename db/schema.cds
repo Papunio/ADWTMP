@@ -70,7 +70,7 @@ entity Matches : cuid {
 }
 
 @title: 'Entity that represents already played matches'
-entity finishedMatches : cuid {
+entity FinishedMatches : cuid {
     @title: 'Home Team'
     homeTeam  : String;
 
@@ -81,5 +81,8 @@ entity finishedMatches : cuid {
     score     : String(5);
 
     @title: 'Place'
-    place     : String
+    place     : String;
+
+    @title: 'Match date'
+    date      : Date;
 }

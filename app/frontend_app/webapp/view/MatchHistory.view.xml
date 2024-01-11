@@ -5,7 +5,7 @@
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns:smartTable="sap.ui.comp.smarttable">
 	<Page showHeader="true" showNavButton="true" navButtonPress="onNavButton">
-		<smartTable:SmartTable class="customSmartTable" width="80%" id="finishedMatchesTable" enableAutoColumnWidth="false" entitySet="FinishedMatches" initiallyVisibleFields="homeTeam,score,guestTeam,place" ignoredFields="ID" tableType="Table" useVariantManagement="true" header="{i18n>matches}" showRowCount="true" showFullScreenButton="false" useTablePersonalisation="true" enableAutoBinding="true">
+		<smartTable:SmartTable class="customSmartTable" width="89%" id="finishedMatchesTable" enableAutoColumnWidth="false" entitySet="FinishedMatches" initiallyVisibleFields="homeTeam,score,guestTeam,place,date" ignoredFields="ID" tableType="Table" useVariantManagement="true" header="{i18n>matches}" showRowCount="true" showFullScreenButton="false" useTablePersonalisation="true" enableAutoBinding="true">
 			<smartTable:layoutData>
 				<FlexItemData growFactor="1" baseSize="0%"/>
 			</smartTable:layoutData>

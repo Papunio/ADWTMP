@@ -1,8 +1,77 @@
 <mvc:View controllerName="frontendapp.controller.MatchDetails"
     xmlns:html="http://www.w3.org/1999/xhtml"
     xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
-    xmlns="sap.m">
-    <Page showHeader="true" showNavButton="true" navButtonPress="onNavButton" enableScrolling="false">
-        <Text text="{place}"/>
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout">
+    <Page showHeader="true" showNavButton="true" navButtonPress="onNavButton" enableScrolling="true">
+        <Panel>
+            <l:BlockLayout id="BlockLayout" background="{/selectedBackground}">
+                <l:BlockLayoutRow>
+                    <l:BlockLayoutCell title="{homeTeamDetailsModel>/name}">
+                        <Avatar src="{homeTeamDetailsModel>/logo}" displaySize="XL" displayShape="Square" class="sapUiTinyMarginEnd">
+                        </Avatar>
+                        <HBox >
+                            <Text text="W: {homeTeamDetailsModel>/wins}" wrapping="true" class="sapUiMediumMarginEnd greenText" />
+                            <Text text="Goals scored: {homeTeamDetailsModel>/scored}" wrapping="true" />
+                        </HBox>
+                        <HBox >
+                            <Text text="D: {homeTeamDetailsModel>/draws}" wrapping="true" class="sapUiMediumMarginEnd greyText"/>
+                            <Text text="Goals conceded: {homeTeamDetailsModel>/conceded}" wrapping="true" />
+                        </HBox>
+                        <Text text="L: {homeTeamDetailsModel>/loses}" wrapping="true" class="redText"/>
+                        <Table id="homeTeamTable" items="{path:'homePlayersModel>/'}">
+                            <columns>
+                                <Column>
+                                    <Label text="{i18n>name}"/>
+                                </Column>
+
+                                <Column>
+                                    <Label text="{i18n>lastName}"/>
+                                </Column>
+                            </columns>
+
+                            <items>
+                                <ColumnListItem>
+                                    <Text text="{homePlayersModel>player/name}"/>
+                                    <Text text="{homePlayersModel>player/lastName}"/>
+                                </ColumnListItem>
+                            </items>
+                        </Table>
+                    </l:BlockLayoutCell>
+
+                    <l:BlockLayoutCell title="{guestTeamDetailsModel>/name}">
+                        <Avatar src="{guestTeamDetailsModel>/logo}" displaySize="XL" displayShape="Square" class="sapUiTinyMarginEnd">
+                        </Avatar>
+                        <HBox >
+                            <Text text="W: {guestTeamDetailsModel>/wins}" wrapping="true" class="sapUiMediumMarginEnd greenText" />
+                            <Text text="Goals scored: {guestTeamDetailsModel>/scored}" wrapping="true" />
+                        </HBox>
+                        <HBox >
+                            <Text text="D: {guestTeamDetailsModel>/draws}" wrapping="true" class="sapUiMediumMarginEnd greyText"/>
+                            <Text text="Goals conceded: {guestTeamDetailsModel>/conceded}" wrapping="true" />
+                        </HBox>
+                        <Text text="L: {guestTeamDetailsModel>/loses}" wrapping="true" class="redText"/>
+                        <Table id="guestTeamTable" items="{path:'guestPlayersModel>/'}">
+                            <columns>
+                                <Column>
+                                    <Label text="{i18n>name}"/>
+                                </Column>
+
+                                <Column>
+                                    <Label text="{i18n>lastName}"/>
+                                </Column>
+                            </columns>
+
+                            <items>
+                                <ColumnListItem>
+                                    <Text text="{guestPlayersModel>player/name}"/>
+                                    <Text text="{guestPlayersModel>player/lastName}"/>
+                                </ColumnListItem>
+                            </items>
+                        </Table>
+                    </l:BlockLayoutCell>
+                </l:BlockLayoutRow>
+            </l:BlockLayout>
+        </Panel>
     </Page>
 </mvc:View>

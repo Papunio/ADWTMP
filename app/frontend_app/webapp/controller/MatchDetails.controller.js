@@ -8,12 +8,17 @@ sap.ui.define(
 				const oComponent = this.getOwnerComponent();
 				const oHomeTeamDetails = new JSONModel();
 				const oGuestTeamDetails = new JSONModel();
+				const oHomePlayers = new JSONModel();
+				const oGuestPlayers = new JSONModel();
 
 				oComponent.setModel(oHomeTeamDetails, "homeTeamDetailsModel");
 				oComponent.setModel(oGuestTeamDetails, "guestTeamDetailsModel");
+				oComponent.setModel(oHomePlayers, "homePlayersModel");
+				oComponent.setModel(oGuestPlayers, "guestPlayersModel");
 				const oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 				oRouter.getRoute("MatchDetails").attachPatternMatched(this._onPatternMatched, this);
 			},
+
 			_onPatternMatched: function (oEvent) {
 				this.getView().bindElement({
 					path: `/Matches/${oEvent.getParameter("arguments").MatchID}`,
@@ -24,6 +29,8 @@ sap.ui.define(
 				const oHomeTeamDetails = this.getOwnerComponent().getModel("homeTeamDetailsModel");
 				const oGuestTeamDetails =
 					this.getOwnerComponent().getModel("guestTeamDetailsModel");
+				const oHomePlayers = this.getOwnerComponent().getModel("homePlayersModel");
+				const oGuestPlayers = this.getOwnerComponent().getModel("guestPlayersModel");
 
 				const oPromise = new Promise((resolve) => {
 					oModel.read(`/Matches/${oEvent.getParameter("arguments").MatchID}`, {
@@ -34,26 +41,18 @@ sap.ui.define(
 							const aTeams = oData.teams.results;
 							let bHomeTeam = true;
 							aTeams.forEach((oTeam) => {
-								oModel.read(`/Teams/${oTeam.team_ID}`, {
+								oModel.read(`/Teams(${oTeam.team_ID})`, {
 									urlParameters: {
-										$expand: "players",
+										$expand: "players/player",
 									},
 									success: (oTeamData) => {
-										const aTeamData = {};
-										aTeamData.name = oTeamData.name;
-										const aPlayers = [];
-
-										oTeamData.players.results.forEach((oPlayer) => {
-											oModel.read(`/Players/${oPlayer.player_ID}`, {
-												success: (oPlayerData) => {
-													aPlayers.push(oPlayerData);
-												},
-											});
-										});
-										aTeamData.players = aPlayers;
-										bHomeTeam
-											? oHomeTeamDetails.setData(aTeamData)
-											: oGuestTeamDetails.setData(aTeamData);
+										if (bHomeTeam) {
+											oHomeTeamDetails.setData(oTeamData);
+											oHomePlayers.setData(oTeamData.players.results);
+										} else {
+											oGuestTeamDetails.setData(oTeamData);
+											oGuestPlayers.setData(oTeamData.players.results);
+										}
 										bHomeTeam = false;
 									},
 								});
@@ -68,12 +67,14 @@ sap.ui.define(
 				});
 
 				oPromise.then(() => {
-					console.log(oHomeTeamDetails);
-					console.log(oGuestTeamDetails);
+					console.log(this.getView().getModel("homePlayersModel"));
+					// console.log(oHomeTeamDetails);
+					// console.log(oGuestTeamDetails);
 					// oMatchesModel.setData(aTeams);
 					// oView.setModel(oMatchesModel, "MatchesModel");
 				});
 			},
+
 			onNavButton: function () {
 				window.history.go(-1);
 			},
