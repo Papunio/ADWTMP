@@ -7,14 +7,7 @@ sap.ui.define(
 		"sap/ui/model/FilterOperator",
 		"sap/f/library",
 	],
-	function (
-		BaseController,
-		JSONModel,
-		MessageBox,
-		Filter,
-		FilterOperator,
-		FioriLibrary
-	) {
+	function (BaseController, JSONModel, MessageBox, Filter, FilterOperator, FioriLibrary) {
 		"use strict";
 
 		return BaseController.extend("frontendapp.controller.TeamsList", {
@@ -36,9 +29,7 @@ sap.ui.define(
 				const oModel = this.getView().getModel();
 				const sTeamName = oView.byId("teamName").getValue();
 				const sLogo = oView.byId("badgeLink").getValue();
-				const aSelectedPlayers = oView
-					.byId("selectedPlayers")
-					.getSelectedKeys();
+				const aSelectedPlayers = oView.byId("selectedPlayers").getSelectedKeys();
 
 				if (sTeamName === "") {
 					MessageBox.error("Enter Team Name!");
@@ -87,10 +78,7 @@ sap.ui.define(
 			onUpdateTeamPress: function (oEvent) {
 				const oView = this.getView();
 				const oModel = oView.getModel();
-				const oTeam = oEvent
-					.getSource()
-					.getBindingContext()
-					.getObject();
+				const oTeam = oEvent.getSource().getBindingContext().getObject();
 
 				const oTeamModel = new JSONModel(oTeam);
 				const aSelectedPlayers = [];
@@ -113,9 +101,7 @@ sap.ui.define(
 							aPlayersData.forEach((oPlayer) => {
 								aSelectedPlayers.push(oPlayer.player_ID);
 							});
-							oView
-								.byId("selectedPlayersU")
-								.setSelectedKeys(aSelectedPlayers);
+							oView.byId("selectedPlayersU").setSelectedKeys(aSelectedPlayers);
 						},
 						error: (oErr) => {
 							MessageBox.error("{i18n>Something went wrong}");
@@ -133,9 +119,7 @@ sap.ui.define(
 				const sTeamID = oTeamModel.getData().ID;
 				const sTeamName = oView.byId("teamNameU").getValue();
 				const sLogo = oView.byId("badgeLinkU").getValue();
-				const aSelectedPlayers = oView
-					.byId("selectedPlayersU")
-					.getSelectedKeys();
+				const aSelectedPlayers = oView.byId("selectedPlayersU").getSelectedKeys();
 
 				if (sTeamName === "") {
 					MessageBox.error("Enter Team Name!");
@@ -161,18 +145,12 @@ sap.ui.define(
 								up__ID: sTeamID,
 								player_ID: sPlayerID,
 							};
-							oModel.create(
-								`/Teams_players`,
-								oPlayerInTeamPayload,
-								{
-									error: (oErr) => {
-										MessageBox.error(
-											"Something went wrong"
-										);
-										console.error(oErr.message);
-									},
-								}
-							);
+							oModel.create(`/Teams_players`, oPlayerInTeamPayload, {
+								error: (oErr) => {
+									MessageBox.error("Something went wrong");
+									console.error(oErr.message);
+								},
+							});
 						});
 						this.refreshView();
 						MessageBox.success(`Team ${sTeamName} updated`);
@@ -186,21 +164,15 @@ sap.ui.define(
 			},
 
 			onDeleteTeamPress: function (oEvent) {
-				const oTeam = oEvent
-					.getSource()
-					.getBindingContext()
-					.getObject();
+				const oTeam = oEvent.getSource().getBindingContext().getObject();
 
-				MessageBox.confirm(
-					`Are you sure you want to delete ${oTeam.name}?`,
-					{
-						onClose: function (oAction) {
-							if (oAction === sap.m.MessageBox.Action.OK) {
-								this.deleteTeam(oTeam.ID);
-							}
-						}.bind(this),
-					}
-				);
+				MessageBox.confirm(`Are you sure you want to delete ${oTeam.name}?`, {
+					onClose: function (oAction) {
+						if (oAction === sap.m.MessageBox.Action.OK) {
+							this.deleteTeam(oTeam.ID);
+						}
+					}.bind(this),
+				});
 			},
 
 			deleteTeam: function (sTeamID) {
@@ -247,9 +219,7 @@ sap.ui.define(
 					sQuery = oEvent.getParameter("query");
 
 				if (sQuery && sQuery.length > 0) {
-					oTableSearchState = [
-						new Filter("name", FilterOperator.Contains, sQuery),
-					];
+					oTableSearchState = [new Filter("name", FilterOperator.Contains, sQuery)];
 				}
 
 				this.oView
@@ -261,10 +231,7 @@ sap.ui.define(
 			onTeamPress: function (oEvent) {
 				const oView = this.getView();
 				const oModel = oView.getModel();
-				const oTeam = oEvent
-					.getSource()
-					.getBindingContext()
-					.getObject();
+				const oTeam = oEvent.getSource().getBindingContext().getObject();
 				let aPlayers;
 				let sOldTeamID;
 
@@ -294,12 +261,8 @@ sap.ui.define(
 					oFCL.setModel(new JSONModel(oTeam), "teamModel");
 					oFCL.setModel(new JSONModel(aPlayers), "teamPlayersModel");
 
-					if (
-						oFCL.getLayout() === FioriLibrary.LayoutType.OneColumn
-					) {
-						oFCL.setLayout(
-							FioriLibrary.LayoutType.TwoColumnsMidExpanded
-						);
+					if (oFCL.getLayout() === FioriLibrary.LayoutType.OneColumn) {
+						oFCL.setLayout(FioriLibrary.LayoutType.TwoColumnsMidExpanded);
 					} else if (sOldTeamID === oTeam.ID) {
 						oFCL.setLayout(FioriLibrary.LayoutType.OneColumn);
 					}
@@ -318,16 +281,20 @@ sap.ui.define(
 
 			clearFields: function () {
 				const oView = this.getView();
-				oView.byId("teamName").setValue();
-				oView.byId("badgeLink").setValue();
-				oView.byId("selectedPlayers").removeAllSelectedItems();
+				if (oView.byId("teamName")) {
+					oView.byId("teamName").setValue();
+				}
+				if (oView.byId("badgeLink")) {
+					oView.byId("badgeLink").setValue();
+				}
+				if (oView.byId("selectedPlayers")) {
+					oView.byId("selectedPlayers").removeAllSelectedItems();
+				}
 			},
 
 			onPressCancel: function () {
-				if (this.byId("addNewTeamDialog"))
-					this.byId("addNewTeamDialog").close();
-				if (this.byId("updateTeamDialog"))
-					this.byId("updateTeamDialog").close();
+				if (this.byId("addNewTeamDialog")) this.byId("addNewTeamDialog").close();
+				if (this.byId("updateTeamDialog")) this.byId("updateTeamDialog").close();
 				this.clearFields();
 			},
 

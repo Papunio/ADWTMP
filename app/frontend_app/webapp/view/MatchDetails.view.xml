@@ -18,7 +18,7 @@
                             <Text text="D: {homeTeamDetailsModel>/draws}" wrapping="true" class="sapUiMediumMarginEnd greyText"/>
                             <Text text="Goals conceded: {homeTeamDetailsModel>/conceded}" wrapping="true" />
                         </HBox>
-                        <Text text="L: {homeTeamDetailsModel>/loses}" wrapping="true" class="redText"/>
+                        <Text text="L: {homeTeamDetailsModel>/losses}" wrapping="true" class="redText"/>
                         <Table id="homeTeamTable" items="{path:'homePlayersModel>/'}">
                             <columns>
                                 <Column>
@@ -50,7 +50,7 @@
                             <Text text="D: {guestTeamDetailsModel>/draws}" wrapping="true" class="sapUiMediumMarginEnd greyText"/>
                             <Text text="Goals conceded: {guestTeamDetailsModel>/conceded}" wrapping="true" />
                         </HBox>
-                        <Text text="L: {guestTeamDetailsModel>/loses}" wrapping="true" class="redText"/>
+                        <Text text="L: {guestTeamDetailsModel>/losses}" wrapping="true" class="redText"/>
                         <Table id="guestTeamTable" items="{path:'guestPlayersModel>/'}">
                             <columns>
                                 <Column>

@@ -45,8 +45,8 @@ entity Teams : cuid {
     @title: 'Team Draws'
     draws    : Integer;
 
-    @title: 'Team Loses'
-    loses    : Integer;
+    @title: 'Team Losses'
+    losses    : Integer;
 
     @title: 'Goals Scored'
     scored   : Integer;

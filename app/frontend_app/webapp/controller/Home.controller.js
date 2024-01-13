@@ -256,10 +256,10 @@ sap.ui.define(
 
 					if (sHomeTeamScore > sGuestTeamScore) {
 						oHomeData.wins += 1;
-						oGuestData.loses += 1;
+						oGuestData.losses += 1;
 					} else if (sHomeTeamScore < sGuestTeamScore) {
 						oGuestData.wins += 1;
-						oHomeData.loses += 1;
+						oHomeData.losses += 1;
 					} else {
 						oHomeData.draws += 1;
 						oGuestData.draws += 1;

@@ -30,10 +30,7 @@ sap.ui.define(
 					},
 				];
 
-				this.getView().setModel(
-					new JSONModel(oSelectPosition),
-					"SelectModel"
-				);
+				this.getView().setModel(new JSONModel(oSelectPosition), "SelectModel");
 			},
 
 			onPressAddPlayer: function () {
@@ -54,9 +51,7 @@ sap.ui.define(
 				const sName = oView.byId("playerName").getValue();
 				const sLastName = oView.byId("playerLastName").getValue();
 				const sAge = oView.byId("playerAge").getValue();
-				const oPosition = oView
-					.byId("playerPosition")
-					.getSelectedItem();
+				const oPosition = oView.byId("playerPosition").getSelectedItem();
 
 				if (sName === "") {
 					MessageBox.error("Enter name!");
@@ -83,9 +78,7 @@ sap.ui.define(
 					method: "POST",
 					success: (oRes) => {
 						this.refreshView();
-						MessageBox.success(
-							`Player ${sName} ${sLastName} added`
-						);
+						MessageBox.success(`Player ${sName} ${sLastName} added`);
 					},
 					error: (oErr) => {
 						MessageBox.error("Something went wrong");
@@ -98,10 +91,7 @@ sap.ui.define(
 
 			onUpdatePlayerPress: function (oEvent) {
 				const oView = this.getView();
-				const oPlayer = oEvent
-					.getSource()
-					.getBindingContext()
-					.getObject();
+				const oPlayer = oEvent.getSource().getBindingContext().getObject();
 
 				const oPlayerModel = new JSONModel(oPlayer);
 
@@ -123,9 +113,7 @@ sap.ui.define(
 				const sName = oView.byId("playerNameU").getValue();
 				const sLastName = oView.byId("playerLastNameU").getValue();
 				const sAge = oView.byId("playerAgeU").getValue();
-				const oPosition = oView
-					.byId("playerPositionU")
-					.getSelectedItem();
+				const oPosition = oView.byId("playerPositionU").getSelectedItem();
 
 				if (sName === "") {
 					MessageBox.error("Enter name!");
@@ -151,9 +139,7 @@ sap.ui.define(
 				oModel.update(`/Players(${sPlayerID})`, oPayload, {
 					success: (oRes) => {
 						this.refreshView();
-						MessageBox.success(
-							`Player ${sName} ${sLastName} updated`
-						);
+						MessageBox.success(`Player ${sName} ${sLastName} updated`);
 					},
 					error: (oErr) => {
 						MessageBox.error("Something went wrong");
@@ -165,10 +151,7 @@ sap.ui.define(
 			},
 
 			onDeletePlayerPress: function (oEvent) {
-				const oPlayer = oEvent
-					.getSource()
-					.getBindingContext()
-					.getObject();
+				const oPlayer = oEvent.getSource().getBindingContext().getObject();
 
 				MessageBox.confirm(
 					`Are you sure you want to delete ${oPlayer.name} ${oPlayer.lastName}?`,
@@ -224,10 +207,7 @@ sap.ui.define(
 			onPlayerPress: function (oEvent) {
 				const oView = this.getView();
 				const oModel = oView.getModel();
-				const oPlayer = oEvent
-					.getSource()
-					.getBindingContext()
-					.getObject();
+				const oPlayer = oEvent.getSource().getBindingContext().getObject();
 
 				let sTeams = "";
 
@@ -252,13 +232,9 @@ sap.ui.define(
 
 				oPromise.then(() => {
 					if (sTeams.length !== 0) {
-						MessageBox.information(
-							"Player is currently in:\n" + sTeams
-						);
+						MessageBox.information("Player is currently in:\n" + sTeams);
 					} else {
-						MessageBox.information(
-							"Player isn't currently in any team"
-						);
+						MessageBox.information("Player isn't currently in any team");
 					}
 				});
 			},
@@ -268,9 +244,7 @@ sap.ui.define(
 					sQuery = oEvent.getParameter("query");
 
 				if (sQuery && sQuery.length > 0) {
-					oTableSearchState = [
-						new Filter("lastName", FilterOperator.Contains, sQuery),
-					];
+					oTableSearchState = [new Filter("lastName", FilterOperator.Contains, sQuery)];
 				}
 
 				this.oView
@@ -281,21 +255,14 @@ sap.ui.define(
 
 			clearFields: function () {
 				const oView = this.getView();
-				if (oView.byId("playerName"))
-					oView.byId("playerName").setValue();
-				if (oView.byId("playerLastName"))
-					oView.byId("playerLastName").setValue();
-				if (oView.byId("playerAge"))
-					oView.byId("playerAge").setValue(16);
-				if (oView.byId("playerPosition"))
-					oView.byId("playerPosition").setSelectedItem();
+				if (oView.byId("playerName")) oView.byId("playerName").setValue();
+				if (oView.byId("playerLastName")) oView.byId("playerLastName").setValue();
+				if (oView.byId("playerAge")) oView.byId("playerAge").setValue(16);
+				if (oView.byId("playerPosition")) oView.byId("playerPosition").setSelectedItem();
 			},
 
 			refreshView: function () {
-				this.getView()
-					.byId("playersTable")
-					.getBinding("items")
-					.refresh();
+				this.getView().byId("playersTable").getBinding("items").refresh();
 			},
 
 			onPressCancel: function () {
