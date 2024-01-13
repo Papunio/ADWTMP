@@ -158,14 +158,14 @@ sap.ui.define(
 					{
 						onClose: function (oAction) {
 							if (oAction === sap.m.MessageBox.Action.OK) {
-								this.deletePlayer(oPlayer.ID);
+								this.deletePlayer(oPlayer.ID, oPlayer.name, oPlayer.lastName);
 							}
 						}.bind(this),
 					}
 				);
 			},
 
-			deletePlayer: function (sPlayerID) {
+			deletePlayer: function (sPlayerID, sPlayerName, sPlayerLastName) {
 				const oView = this.getView();
 				const oModel = oView.getModel();
 				let bInTeam = false;
@@ -192,6 +192,9 @@ sap.ui.define(
 				oPromise.then(() => {
 					if (!bInTeam) {
 						oModel.remove(`/Players(${sPlayerID})`, {
+							success: () => {
+								MessageBox.success(`${sPlayerName} ${sPlayerLastName} deleted!`);
+							},
 							error: (oErr) => {
 								MessageBox.error("Something went wrong");
 								console.error(oErr.message);
@@ -208,7 +211,6 @@ sap.ui.define(
 				const oView = this.getView();
 				const oModel = oView.getModel();
 				const oPlayer = oEvent.getSource().getBindingContext().getObject();
-
 				let sTeams = "";
 
 				const oPromise = new Promise((resolve) => {
@@ -232,7 +234,9 @@ sap.ui.define(
 
 				oPromise.then(() => {
 					if (sTeams.length !== 0) {
-						MessageBox.information("Player is currently in:\n" + sTeams);
+						MessageBox.information(
+							`${oPlayer.name} ${oPlayer.lastName} is currently in:\n  ${sTeams}`
+						);
 					} else {
 						MessageBox.information("Player isn't currently in any team");
 					}

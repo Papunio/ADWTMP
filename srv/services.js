@@ -11,7 +11,7 @@ module.exports = (srv) => {
 
 	srv.after("READ", "Players", (aPlayers) => {
 		aPlayers.sort((oPlayer, oOtherPlayer) => {
-			return oPlayer.lastName.localeCompare(oOtherPlayer.lastName);
+			return oPlayer.position.localeCompare(oOtherPlayer.position);
 		});
 	});
 
