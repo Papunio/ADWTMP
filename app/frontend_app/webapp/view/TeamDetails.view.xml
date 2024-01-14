@@ -1,9 +1,12 @@
 <mvc:View controllerName="frontendapp.controller.TeamsList"
     xmlns="sap.uxap"
+    xmlns:core="sap.ui.core"
     xmlns:m="sap.m"
     xmlns:f="sap.f"
+    xmlns:l="sap.ui.layout"
     xmlns:form="sap.ui.layout.form"
-    xmlns:mvc="sap.ui.core.mvc">
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:chart="sap.suite.ui.microchart">
     <ObjectPageLayout alwaysShowContentHeader="false" preserveHeaderStateOnScroll="false" headerContentPinnable="true" isChildPage="true" upperCaseAnchorBar="false">
         <headerContent>
             <m:Bar>
@@ -11,21 +14,33 @@
                     <m:OverflowToolbarButton type="Transparent" icon="sap-icon://decline" press="handleClose" tooltip="Close middle column" visible="{= ${/actionButtonsInfo/midColumn/closeColumn} !== null }"/>
                 </m:contentRight>
             </m:Bar>
-            <m:FlexBox wrap="Wrap" fitContainer="true" alignItems="Stretch">
-                <m:Avatar src="{teamModel>/logo}" displaySize="XL" displayShape="Square" class="sapUiTinyMarginEnd">
-                </m:Avatar>
-                <m:Title text="{teamModel>/name}" titleStyle="H3" wrapping="true"/>
-                <m:HBox >
-                    <m:Text text="W: {teamModel>/wins}" wrapping="true" class="sapUiMediumMarginEnd greenText" />
-                    <m:Text text="Goals scored: {teamModel>/scored}" wrapping="true" />
+            <m:Avatar src="{teamModel>/logo}" displaySize="XL" displayShape="Square" class="sapUiTinyMarginEnd">
+            </m:Avatar>
+            <form:SimpleForm editable="false" layout="ResponsiveGridLayout" title="{teamModel>/name}" labelSpanXL="4" labelSpanL="4" labelSpanM="12" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="2" columnsM="1" singleContainerFullSize="false">
+                <form:content>
+                    <core:Title text="{i18n>teamStats}" />
+                    <m:VBox >
+                        <m:HBox >
+                            <m:Text text="W: {teamModel>/wins}" wrapping="true" class="sapUiMediumMarginEnd greenText" />
+                            <m:Text text="D: {teamModel>/draws}" wrapping="true" class="sapUiMediumMarginEnd greyText"/>
+                            <m:Text text="L: {teamModel>/losses}" wrapping="true" class="redText"/>
+                        </m:HBox>
+                        <m:HBox >
+                            <m:Text text="Goals scored: {teamModel>/scored}" wrapping="true" />
+                        </m:HBox>
+                        <m:HBox >
+                            <m:Text text="Goals conceded: {teamModel>/conceded}" wrapping="true" />
+                        </m:HBox>
+                    </m:VBox>
 
-                </m:HBox>
-                <m:HBox >
-                    <m:Text text="D: {teamModel>/draws}" wrapping="true" class="sapUiMediumMarginEnd greyText"/>
-                    <m:Text text="Goals conceded: {teamModel>/conceded}" wrapping="true" />
-                </m:HBox>
-                <m:Text text="L: {teamModel>/losses}" wrapping="true" class="redText"/>
-            </m:FlexBox>
+                    <core:Title text="{i18n>wins}" />
+                    <chart:HarveyBallMicroChart size="L" total="{teamModel>/allMatches}" press="">
+                        <chart:items>
+                            <chart:HarveyBallMicroChartItem fraction="{teamModel>/wins}" color="Good"/>
+                        </chart:items>
+                    </chart:HarveyBallMicroChart>
+                </form:content>
+            </form:SimpleForm>
         </headerContent>
         <sections>
             <ObjectPageSection title="Players in team">

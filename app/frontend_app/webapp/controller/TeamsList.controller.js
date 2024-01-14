@@ -21,7 +21,14 @@ sap.ui.define(
 
 		return BaseController.extend("frontendapp.controller.TeamsList", {
 			formatter: Formatter,
-			onInit: function () {},
+			onInit: function () {
+				const oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+				oRouter.getRoute("TeamsList").attachPatternMatched(this._onPatternMatched, this);
+			},
+
+			_onPatternMatched: function () {
+				this.handleClose();
+			},
 			onPressAddTeam: function () {
 				if (!this.createNewTeamDialog) {
 					this.createNewTeamDialog = this.loadFragment({
@@ -299,6 +306,7 @@ sap.ui.define(
 				// Tutaj bedzie promise all
 				Promise.all([oPlayersPromise, oMatchesPromise]).then(() => {
 					const oFCL = oView.getParent().getParent();
+					oTeam.allMatches = oTeam.wins + oTeam.losses + oTeam.draws;
 					oFCL.setModel(new JSONModel(oTeam), "teamModel");
 					oFCL.setModel(new JSONModel(aPlayers), "teamPlayersModel");
 					oFCL.setModel(new JSONModel(aMatches), "matchesModel");
@@ -314,7 +322,11 @@ sap.ui.define(
 			handleClose: function () {
 				const oView = this.getView();
 				const oFCL = oView.getParent().getParent();
-				oFCL.setLayout(FioriLibrary.LayoutType.OneColumn);
+				try {
+					oFCL.setLayout(FioriLibrary.LayoutType.OneColumn);
+				} catch (oErr) {
+					return;
+				}
 			},
 
 			refreshView: function () {

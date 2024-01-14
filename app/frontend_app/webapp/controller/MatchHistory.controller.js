@@ -4,9 +4,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller"], function (BaseController) {
 	return BaseController.extend("frontendapp.controller.MatchHistory", {
 		onInit: function () {
 			const oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-			oRouter
-				.getRoute("MatchHistory")
-				.attachPatternMatched(this._onPatternMatched, this);
+			oRouter.getRoute("MatchHistory").attachPatternMatched(this._onPatternMatched, this);
 		},
 
 		_onPatternMatched: function () {

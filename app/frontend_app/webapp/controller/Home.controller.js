@@ -160,10 +160,10 @@ sap.ui.define(
 
 				const oMatchModel = new JSONModel({
 					ID: oMatch.getProperty("ID"),
-					homeTeam: oMatch.getProperty("team1/name"),
-					homeTeamID: oMatch.getProperty("team1/ID"),
-					guestTeam: oMatch.getProperty("team2/name"),
-					guestTeamID: oMatch.getProperty("team2/ID"),
+					homeTeam: oMatch.getProperty("homeTeam/name"),
+					homeTeamID: oMatch.getProperty("homeTeam/ID"),
+					guestTeam: oMatch.getProperty("guestTeam/name"),
+					guestTeamID: oMatch.getProperty("guestTeam/ID"),
 					place: oMatch.getProperty("place"),
 					date: oMatch.getProperty("date"),
 				});
