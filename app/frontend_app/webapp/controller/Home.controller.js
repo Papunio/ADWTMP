@@ -61,7 +61,7 @@ sap.ui.define(
 					.getItemByKey(sHomeTeamID)
 					.getProperty("text");
 				const sGuestTeamName = oView
-					.byId("homeTeam")
+					.byId("guestTeam")
 					.getItemByKey(sGuestTeamID)
 					.getProperty("text");
 
@@ -104,6 +104,8 @@ sap.ui.define(
 					place: sMatchPlace,
 					date: sMatchDate,
 				};
+				console.log(oPayload);
+
 				oModel.create("/Matches", oPayload, {
 					method: "POST",
 					success: (oRes) => {
@@ -123,8 +125,8 @@ sap.ui.define(
 
 			onDeleteMatchPress: function (oEvent) {
 				const oMatch = oEvent.getSource().getBindingContext("MatchesModel");
-				const oHomeTeam = oMatch.getProperty("team1");
-				const oGuestTeam = oMatch.getProperty("team2");
+				const oHomeTeam = oMatch.getProperty("homeTeam");
+				const oGuestTeam = oMatch.getProperty("guestTeam");
 
 				MessageBox.confirm(
 					`Are you sure you want to delete match between ${oHomeTeam.name} and ${oGuestTeam.name}?`,
@@ -351,14 +353,14 @@ sap.ui.define(
 							$expand: "teams/team",
 						},
 						success: (oData) => {
+							console.log(oData);
 							oData.results.forEach((oMatchData) => {
-								const oTeam1 = oMatchData.teams.results[0].team;
-								const oTeam2 = oMatchData.teams.results[1].team;
+								const oHomeTeam = oMatchData.teams.results[0].team;
+								const oGuestTeam = oMatchData.teams.results[1].team;
 								aTeams.push({
 									ID: oMatchData.ID,
-									index: aTeams.length + 1,
-									team1: oTeam1,
-									team2: oTeam2,
+									homeTeam: oHomeTeam,
+									guestTeam: oGuestTeam,
 									date: oMatchData.date,
 									place: oMatchData.place,
 								});

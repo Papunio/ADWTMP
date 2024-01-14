@@ -239,23 +239,46 @@ sap.ui.define(
 					sOldTeamID = oView.getModel("teamModel").getData().ID;
 				}
 
-				const oPromise = new Promise((resolve) => {
+				const oPromise = new Promise((resolve, reject) => {
 					oModel.read(`/Teams(${oTeam.ID})`, {
 						urlParameters: {
 							$expand: "players/player",
 						},
 						success: (oData) => {
 							aPlayers = oData.players.results;
-							// oTeam.players = aPlayers;
 							resolve();
 						},
 						error: (oErr) => {
 							MessageBox.error("Something went wrong");
 							console.error(oErr.message);
+							reject();
 						},
 					});
 				});
 
+				const oMatchesPromise = new Promise((resolve, reject) => {
+					oModel.read(`/Matches_teams`, {
+						urlParameters: {
+							$expand: "up_/teams/team",
+						},
+						success: (oMatches) => {
+							const aScheludedMatches = oMatches.results.filter(
+								// Czy od razu tutaj tego foreacha nizej
+								(oMatch) => oMatch.team_ID === oTeam.ID
+							);
+							aScheludedMatches.forEach((oMatch) => {
+								console.log(oMatch.up_.teams.results[0].team.name);
+							});
+						},
+						error: (oErr) => {
+							MessageBox.error("Something went wrong");
+							console.error(oErr.message);
+							reject();
+						},
+					});
+				});
+
+				// Tutaj bedzie promise all
 				oPromise.then(() => {
 					const oFCL = oView.getParent().getParent();
 					oFCL.setModel(new JSONModel(oTeam), "teamModel");

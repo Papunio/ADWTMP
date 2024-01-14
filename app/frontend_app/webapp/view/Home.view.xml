@@ -62,10 +62,10 @@
 							<items>
 								<ColumnListItem type="Navigation" press="onMatchPress">
 									<Text text=""/>
-									<Image height="100%" width="100%" src="{MatchesModel>team1/logo}"/>
-									<Text text="{MatchesModel>team1/name}"/>
-									<Image height="100%" width="100%" src="{MatchesModel>team2/logo}"/>
-									<Text text="{MatchesModel>team2/name}"/>
+									<Image height="100%" width="100%" src="{MatchesModel>homeTeam/logo}"/>
+									<Text text="{MatchesModel>homeTeam/name}"/>
+									<Image height="100%" width="100%" src="{MatchesModel>guestTeam/logo}"/>
+									<Text text="{MatchesModel>guestTeam/name}"/>
 									<Text text="{path: 'MatchesModel>date', formatter: '.formatter.formatDate'}"/>
 									<Text text="{MatchesModel>place}"/>
 									<FlexBox>
