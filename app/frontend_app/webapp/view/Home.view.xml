@@ -60,7 +60,7 @@
 								</Column>
 							</columns>
 							<items>
-								<ColumnListItem type="Navigation" press="onMatchPress">
+								<ColumnListItem type="Navigation" press="onMatchPress" highlight="{path: 'MatchesModel>date', formatter: '.formatter.checkDate'}">
 									<Text text=""/>
 									<Image height="100%" width="100%" src="{MatchesModel>homeTeam/logo}"/>
 									<Text text="{MatchesModel>homeTeam/name}"/>
