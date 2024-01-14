@@ -47,7 +47,7 @@
                 <subSections>
                     <ObjectPageSubSection>
                         <blocks>
-                            <m:Table id="teamsTable" items="{path:'teamPlayersModel>/'}">
+                            <m:Table id="teamsTable" items="{path:'teamPlayersModel>/'}" growing="true" growingThreshold="11">
                                 <m:columns>
                                     <m:Column width="5%">
 
@@ -85,7 +85,7 @@
                 <subSections>
                     <ObjectPageSubSection>
                         <blocks>
-                            <m:Table id="matchesTable" items="{path:'matchesModel>/'}">
+                            <m:Table id="matchesTable" items="{path:'matchesModel>/'}" growing="true" growingThreshold="11">
                                 <m:columns>
                                     <m:Column width="5%">
                                         <m:Label text="" />

@@ -15,7 +15,7 @@
 				</contentRight>
 			</Bar>
 
-			<Table id="playersTable" items="{path:'/Players'}" alternateRowColors="true">
+			<Table id="playersTable" items="{path:'/Players'}" alternateRowColors="true" growing="true" growingThreshold="22" growingScrollToLoad="true">
 				<columns>
 					<Column width="5%">
 
@@ -38,7 +38,7 @@
 					</Column>
 				</columns>
 				<items>
-					<ColumnListItem type="Active" press="onPlayerPress" highlight="{= ${position} === 'Attacker' ? 'Error' : ${position} === 'Defender' ? 'Warning' : ${position} === 'Midfielder' ? 'Information' : ${position} === 'Goalkeeper' ? 'Success' : 'None' }">
+					<ColumnListItem type="Active" press="onPlayerPress" highlight="{= ${position} === 'Attacker' ? 'Error' : ${position} === 'Defender' ? 'Indication07' : ${position} === 'Midfielder' ? 'Information' : ${position} === 'Goalkeeper' ? 'Success' : 'None' }">
 						<Text text=""/>
 						<Text text="{name}"/>
 						<Text text="{lastName}"/>
