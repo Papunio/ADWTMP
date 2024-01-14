@@ -6,11 +6,21 @@ sap.ui.define(
 		"sap/ui/model/Filter",
 		"sap/ui/model/FilterOperator",
 		"sap/f/library",
+		"../model/Formatter",
 	],
-	function (BaseController, JSONModel, MessageBox, Filter, FilterOperator, FioriLibrary) {
+	function (
+		BaseController,
+		JSONModel,
+		MessageBox,
+		Filter,
+		FilterOperator,
+		FioriLibrary,
+		Formatter
+	) {
 		"use strict";
 
 		return BaseController.extend("frontendapp.controller.TeamsList", {
+			formatter: Formatter,
 			onInit: function () {},
 			onPressAddTeam: function () {
 				if (!this.createNewTeamDialog) {
@@ -232,6 +242,7 @@ sap.ui.define(
 				const oView = this.getView();
 				const oModel = oView.getModel();
 				const oTeam = oEvent.getSource().getBindingContext().getObject();
+				const aMatches = [];
 				let aPlayers;
 				let sOldTeamID;
 
@@ -239,7 +250,7 @@ sap.ui.define(
 					sOldTeamID = oView.getModel("teamModel").getData().ID;
 				}
 
-				const oPromise = new Promise((resolve, reject) => {
+				const oPlayersPromise = new Promise((resolve, reject) => {
 					oModel.read(`/Teams(${oTeam.ID})`, {
 						urlParameters: {
 							$expand: "players/player",
@@ -267,8 +278,15 @@ sap.ui.define(
 								(oMatch) => oMatch.team_ID === oTeam.ID
 							);
 							aScheludedMatches.forEach((oMatch) => {
-								console.log(oMatch.up_.teams.results[0].team.name);
+								aMatches.push({
+									homeTeam: oMatch.up_.teams.results[0].team.name,
+									homeLogo: oMatch.up_.teams.results[0].team.logo,
+									guestTeam: oMatch.up_.teams.results[1].team.name,
+									guestLogo: oMatch.up_.teams.results[1].team.logo,
+									date: oMatch.up_.date,
+								});
 							});
+							resolve();
 						},
 						error: (oErr) => {
 							MessageBox.error("Something went wrong");
@@ -279,10 +297,11 @@ sap.ui.define(
 				});
 
 				// Tutaj bedzie promise all
-				oPromise.then(() => {
+				Promise.all([oPlayersPromise, oMatchesPromise]).then(() => {
 					const oFCL = oView.getParent().getParent();
 					oFCL.setModel(new JSONModel(oTeam), "teamModel");
 					oFCL.setModel(new JSONModel(aPlayers), "teamPlayersModel");
+					oFCL.setModel(new JSONModel(aMatches), "matchesModel");
 
 					if (oFCL.getLayout() === FioriLibrary.LayoutType.OneColumn) {
 						oFCL.setLayout(FioriLibrary.LayoutType.TwoColumnsMidExpanded);

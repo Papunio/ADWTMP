@@ -34,19 +34,74 @@
                         <blocks>
                             <m:Table id="teamsTable" items="{path:'teamPlayersModel>/'}">
                                 <m:columns>
+                                    <m:Column width="5%">
+
+                                    </m:Column>
                                     <m:Column>
                                         <m:Label text="{i18n>name}"/>
                                     </m:Column>
-
                                     <m:Column>
                                         <m:Label text="{i18n>lastName}"/>
+                                    </m:Column>
+                                    <m:Column>
+                                        <m:Label text="{i18n>position}"/>
+                                    </m:Column>
+
+                                    <m:Column width="5%">
+
                                     </m:Column>
                                 </m:columns>
 
                                 <m:items>
                                     <m:ColumnListItem>
+                                        <m:Text text=""/>
                                         <m:Text text="{teamPlayersModel>player/name}"/>
                                         <m:Text text="{teamPlayersModel>player/lastName}"/>
+                                        <m:Text text="{teamPlayersModel>player/position}"/>
+                                    </m:ColumnListItem>
+                                </m:items>
+                            </m:Table>
+                        </blocks>
+                    </ObjectPageSubSection>
+                </subSections>
+            </ObjectPageSection>
+
+            <ObjectPageSection title="Scheluded Matches">
+                <subSections>
+                    <ObjectPageSubSection>
+                        <blocks>
+                            <m:Table id="matchesTable" items="{path:'matchesModel>/'}">
+                                <m:columns>
+                                    <m:Column width="5%">
+                                        <m:Label text="" />
+                                    </m:Column>
+
+                                    <m:Column width="3%"></m:Column>
+                                    <m:Column>
+                                        <m:Label text="{i18n>homeTeam}"/>
+                                    </m:Column>
+
+                                    <m:Column width="3%"></m:Column>
+                                    <m:Column>
+                                        <m:Label text="{i18n>guestTeam}"/>
+                                    </m:Column>
+
+                                    <m:Column>
+                                        <m:Label text="{i18n>matchDate}"/>
+                                    </m:Column>
+
+                                    <m:Column width="5%">
+                                    </m:Column>
+                                </m:columns>
+
+                                <m:items>
+                                    <m:ColumnListItem>
+                                        <m:Text text=""/>
+                                        <m:Image height="100%" width="100%" src="{matchesModel>homeLogo}"/>
+                                        <m:Text text="{matchesModel>homeTeam}"/>
+                                        <m:Image height="100%" width="100%" src="{matchesModel>guestLogo}"/>
+                                        <m:Text text="{matchesModel>guestTeam}"/>
+                                        <m:Text text="{path: 'matchesModel>date', formatter: '.formatter.formatDate'}"/>
                                     </m:ColumnListItem>
                                 </m:items>
                             </m:Table>
