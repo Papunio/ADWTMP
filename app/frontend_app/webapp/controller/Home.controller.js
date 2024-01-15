@@ -56,26 +56,17 @@ sap.ui.define(
 				const sHomeTeamID = oView.byId("homeTeam").getSelectedKey();
 				const sGuestTeamID = oView.byId("guestTeam").getSelectedKey();
 
-				const sHomeTeamName = oView
-					.byId("homeTeam")
-					.getItemByKey(sHomeTeamID)
-					.getProperty("text");
-				const sGuestTeamName = oView
-					.byId("guestTeam")
-					.getItemByKey(sGuestTeamID)
-					.getProperty("text");
-
-				if (sHomeTeamID === sGuestTeamID) {
-					MessageBox.error("Cant have the same team!");
-					return;
-				}
-
 				if (sHomeTeamID === "") {
 					MessageBox.error("Choose home team!");
 					return;
 				}
 				if (sGuestTeamID === "") {
 					MessageBox.error("Choose guest team!");
+					return;
+				}
+
+				if (sHomeTeamID === sGuestTeamID) {
+					MessageBox.error("Cant have the same team!");
 					return;
 				}
 				if (sMatchDate === "") {
@@ -86,6 +77,15 @@ sap.ui.define(
 					MessageBox.error("Pick match place!");
 					return;
 				}
+
+				const sHomeTeamName = oView
+					.byId("homeTeam")
+					.getItemByKey(sHomeTeamID)
+					.getProperty("text");
+				const sGuestTeamName = oView
+					.byId("guestTeam")
+					.getItemByKey(sGuestTeamID)
+					.getProperty("text");
 
 				const aTeams = [
 					{
