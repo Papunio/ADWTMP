@@ -7,7 +7,7 @@ sap.ui.define(["sap/ui/core/format/DateFormat"], (DateFormat) => {
 				return "";
 			}
 			return DateFormat.getDateInstance({
-				pattern: "dd-MM-yyyy",
+				pattern: "dd-MM-yyyy HH:mm",
 			}).format(sDate);
 		},
 

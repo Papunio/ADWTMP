@@ -104,7 +104,6 @@ sap.ui.define(
 					place: sMatchPlace,
 					date: sMatchDate,
 				};
-				console.log(oPayload);
 
 				oModel.create("/Matches", oPayload, {
 					method: "POST",
@@ -223,8 +222,11 @@ sap.ui.define(
 				let oHomeData;
 				let oGuestData;
 
-				const oHomePromise = new Promise((resolve) => {
+				const oHomePromise = new Promise((resolve, reject) => {
 					oModel.read(`/Teams(${sHomeTeamID})`, {
+						urlParameters: {
+							$select: "scored,wins,losses,conceded,draws,logo",
+						},
 						success: (oData) => {
 							oHomeData = oData;
 							resolve();
@@ -232,12 +234,16 @@ sap.ui.define(
 						error: (oErr) => {
 							MessageBox.error("Something went wrong");
 							console.error(oErr.message);
+							reject();
 						},
 					});
 				});
 
-				const oGuestPromise = new Promise((resolve) => {
+				const oGuestPromise = new Promise((resolve, reject) => {
 					oModel.read(`/Teams(${sGuestTeamID})`, {
+						urlParameters: {
+							$select: "scored,wins,losses,conceded,draws,logo",
+						},
 						success: (oData) => {
 							oGuestData = oData;
 							resolve();
@@ -245,6 +251,7 @@ sap.ui.define(
 						error: (oErr) => {
 							MessageBox.error("Something went wrong");
 							console.error(oErr.message);
+							reject();
 						},
 					});
 				});
@@ -347,13 +354,12 @@ sap.ui.define(
 				const oMatchesModel = new JSONModel();
 				const aTeams = [];
 
-				const oPromise = new Promise((resolve) => {
+				const oPromise = new Promise((resolve, reject) => {
 					oModel.read("/Matches", {
 						urlParameters: {
 							$expand: "teams/team",
 						},
 						success: (oData) => {
-							console.log(oData);
 							oData.results.forEach((oMatchData) => {
 								const oHomeTeam = oMatchData.teams.results[0].team;
 								const oGuestTeam = oMatchData.teams.results[1].team;
@@ -370,6 +376,7 @@ sap.ui.define(
 						error: (oErr) => {
 							MessageBox.error("{i18n>Something went wrong}");
 							console.error(oErr.message);
+							reject();
 						},
 					});
 				});

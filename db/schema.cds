@@ -66,7 +66,7 @@ entity Matches : cuid {
     place : String;
 
     @title: 'Match date'
-    date  : Date;
+    date  : DateTime;
 }
 
 @title: 'Entity that represents already played matches'
