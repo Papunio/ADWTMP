@@ -79,7 +79,7 @@ sap.ui.define(
 
 				oModel.create("/Teams", oPayload, {
 					method: "POST",
-					success: (oRes) => {
+					success: () => {
 						this.refreshView();
 						MessageBox.success(`Team ${sTeamName} added`);
 					},
@@ -128,7 +128,7 @@ sap.ui.define(
 				});
 			},
 
-			updateTeam: function (oDialog) {
+			updateTeam: function () {
 				const oView = this.getView();
 				const oModel = oView.getModel();
 				const oTeamModel = oView.getModel("teamModel");
@@ -156,7 +156,7 @@ sap.ui.define(
 				};
 
 				oModel.update(`/Teams(${sTeamID})`, oPayload, {
-					success: (oData) => {
+					success: () => {
 						aSelectedPlayers.forEach((sPlayerID) => {
 							const oPlayerInTeamPayload = {
 								up__ID: sTeamID,
@@ -197,7 +197,7 @@ sap.ui.define(
 				const oModel = oView.getModel();
 				let bTeamInMatch = false;
 
-				const oPromise = new Promise((resolve) => {
+				const oPromise = new Promise((resolve, reject) => {
 					oModel.read(`/Matches_teams`, {
 						success: (oData) => {
 							oData.results.forEach((oMatchTeamLink) => {
@@ -212,6 +212,7 @@ sap.ui.define(
 						error: (oErr) => {
 							MessageBox.error("Something went wrong");
 							console.error(oErr.message);
+							reject();
 						},
 					});
 				});
@@ -303,7 +304,6 @@ sap.ui.define(
 					});
 				});
 
-				// Tutaj bedzie promise all
 				Promise.all([oPlayersPromise, oMatchesPromise]).then(() => {
 					const oFCL = oView.getParent().getParent();
 					oTeam.allMatches = oTeam.wins + oTeam.losses + oTeam.draws;

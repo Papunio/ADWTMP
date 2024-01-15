@@ -32,7 +32,7 @@ sap.ui.define(
 				const oHomePlayers = this.getOwnerComponent().getModel("homePlayersModel");
 				const oGuestPlayers = this.getOwnerComponent().getModel("guestPlayersModel");
 
-				const oPromise = new Promise((resolve) => {
+				const oPromise = new Promise((resolve, reject) => {
 					oModel.read(`/Matches/${oEvent.getParameter("arguments").MatchID}`, {
 						urlParameters: {
 							$expand: "teams",
@@ -61,17 +61,14 @@ sap.ui.define(
 						error: (oErr) => {
 							MessageBox.error("{i18n>Something went wrong}");
 							console.error(oErr.message);
+							reject();
 						},
 					});
 					resolve();
 				});
 
 				oPromise.then(() => {
-					console.log(this.getView().getModel("homePlayersModel"));
-					// console.log(oHomeTeamDetails);
-					// console.log(oGuestTeamDetails);
-					// oMatchesModel.setData(aTeams);
-					// oView.setModel(oMatchesModel, "MatchesModel");
+					// refresh bindings?
 				});
 			},
 

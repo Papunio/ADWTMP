@@ -76,7 +76,7 @@ sap.ui.define(
 
 				oModel.create("/Players", oPayload, {
 					method: "POST",
-					success: (oRes) => {
+					success: () => {
 						this.refreshView();
 						MessageBox.success(`Player ${sName} ${sLastName} added`);
 					},
@@ -137,7 +137,7 @@ sap.ui.define(
 				};
 
 				oModel.update(`/Players(${sPlayerID})`, oPayload, {
-					success: (oRes) => {
+					success: () => {
 						this.refreshView();
 						MessageBox.success(`Player ${sName} ${sLastName} updated`);
 					},
@@ -170,7 +170,7 @@ sap.ui.define(
 				const oModel = oView.getModel();
 				let bInTeam = false;
 
-				const oPromise = new Promise((resolve) => {
+				const oPromise = new Promise((resolve, reject) => {
 					oModel.read(`/Teams_players`, {
 						success: (oData) => {
 							oData.results.forEach((oTeamPlayerLink) => {
@@ -185,6 +185,7 @@ sap.ui.define(
 						error: (oErr) => {
 							MessageBox.error("Something went wrong");
 							console.error(oErr.message);
+							reject();
 						},
 					});
 				});

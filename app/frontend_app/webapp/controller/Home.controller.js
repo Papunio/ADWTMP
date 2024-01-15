@@ -107,7 +107,7 @@ sap.ui.define(
 
 				oModel.create("/Matches", oPayload, {
 					method: "POST",
-					success: (oRes) => {
+					success: () => {
 						this.refreshView();
 						MessageBox.success(
 							`Added match between ${sHomeTeamName} and ${sGuestTeamName} at ${sMatchPlace} on ${sMatchDate}`
@@ -196,7 +196,7 @@ sap.ui.define(
 				};
 
 				oModel.create(`/FinishedMatches`, oPayload, {
-					success: (oRes) => {
+					success: () => {
 						oView.byId("finishMatchDialog").close();
 						MessageBox.success("Score submitted!");
 						this.deleteMatch(oData.ID);
