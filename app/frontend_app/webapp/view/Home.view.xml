@@ -99,6 +99,28 @@
 							<Button text="PLAYERS LIST" press="onPressPlayers"/>
 						</VBox>
 					</f:SidePanelItem>
+					<f:SidePanelItem icon="sap-icon://competitor" text="Ranking" >
+						<VBox>
+							<Text text="TEAM RANKING" class="sapUiSmallMarginBottom" />
+							<Table id="teamRankingTable" items="{path:'/Teams', sorter : {path : 'wins', descending: true}}" alternateRowColors="true" growing="true" growingThreshold="10">
+							<columns>
+								<Column >
+									<Label text="{i18n>teamName}" />
+								</Column>
+
+								<Column >
+									<Label text="{i18n>wins}" />
+								</Column>
+							</columns>
+							<items>
+								<ColumnListItem>
+									<Text text="{name}"/>
+									<Text text="{wins}"/>
+								</ColumnListItem>
+							</items>
+						</Table>
+						</VBox>
+					</f:SidePanelItem>
 				</f:items>
 			</f:SidePanel>
 		</content>

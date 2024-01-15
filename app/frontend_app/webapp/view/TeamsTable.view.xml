@@ -15,7 +15,7 @@
                 </contentRight>
             </Bar>
 
-            <Table id="teamsTable" items="{path:'/Teams'}" alternateRowColors="true" growing="true" growingThreshold="22" growingScrollToLoad="true">
+            <Table id="teamsTable" items="{path:'/Teams', sorter: {path : 'name'}}" alternateRowColors="true" growing="true" growingThreshold="22" growingScrollToLoad="true">
                 <columns>
                     <Column width="5%">
 

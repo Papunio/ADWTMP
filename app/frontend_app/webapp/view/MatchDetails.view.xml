@@ -19,7 +19,7 @@
                             <Text text="Goals conceded: {homeTeamDetailsModel>/conceded}" wrapping="true" />
                         </HBox>
                         <Text text="L: {homeTeamDetailsModel>/losses}" wrapping="true" class="redText"/>
-                        <Table id="homeTeamTable" items="{path:'homePlayersModel>/'}">
+                        <Table id="homeTeamTable" items="{path:'homePlayersModel>/'}" alternateRowColors="true">
                             <columns>
                                 <Column>
                                     <Label text="{i18n>name}"/>
@@ -51,7 +51,7 @@
                             <Text text="Goals conceded: {guestTeamDetailsModel>/conceded}" wrapping="true" />
                         </HBox>
                         <Text text="L: {guestTeamDetailsModel>/losses}" wrapping="true" class="redText"/>
-                        <Table id="guestTeamTable" items="{path:'guestPlayersModel>/'}">
+                        <Table id="guestTeamTable" items="{path:'guestPlayersModel>/'}" alternateRowColors="true">
                             <columns>
                                 <Column>
                                     <Label text="{i18n>name}"/>

@@ -8,16 +8,4 @@ module.exports = (srv) => {
 			oData.logo =
 				"https://www.seekpng.com/png/small/28-289657_espn-soccer-team-logo-default.png";
 	});
-
-	srv.after("READ", "Players", (aPlayers) => {
-		aPlayers.sort((oPlayer, oOtherPlayer) => {
-			return oPlayer.position.localeCompare(oOtherPlayer.position);
-		});
-	});
-
-	srv.after("READ", "Teams", (aTeams) => {
-		aTeams.sort((oTeam, oOtherTeam) => {
-			return oTeam.name.localeCompare(oOtherTeam.name);
-		});
-	});
 };
