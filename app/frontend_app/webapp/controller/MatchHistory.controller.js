@@ -13,6 +13,16 @@ sap.ui.define(["sap/ui/core/mvc/Controller"], function (BaseController) {
 
 			if (oSmartTable) {
 				oSmartTable.rebindTable();
+				oSmartTable.applyVariant({
+					sort: {
+						sortItems: [
+							{
+								columnKey: "date",
+								operation: "Ascending",
+							},
+						],
+					},
+				});
 			}
 		},
 
