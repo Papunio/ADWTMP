@@ -17,8 +17,8 @@ entity Players : cuid {
     age      : UInt8;
 
     @title: 'Teams with this player'
-    teams    : Association to many Teams.players
-                   on teams.player = $self;
+    team     : Association to Teams.players
+                   on team.player = $self;
 }
 
 @title: 'Entity that represents football team'

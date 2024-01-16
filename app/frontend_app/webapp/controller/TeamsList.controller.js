@@ -30,6 +30,9 @@ sap.ui.define(
 				this.handleClose();
 			},
 			onPressAddTeam: function () {
+				const oView = this.getView();
+				const oModel = oView.getModel();
+
 				if (!this.createNewTeamDialog) {
 					this.createNewTeamDialog = this.loadFragment({
 						name: "frontendapp.view.fragment.AddNewTeamDialog",
@@ -37,6 +40,31 @@ sap.ui.define(
 				}
 				this.createNewTeamDialog.then(function (oDialog) {
 					oDialog.open();
+					const aPlayers = [];
+					const oPromise = new Promise((resolve, reject) => {
+						oModel.read(`/Players`, {
+							urlParameters: {
+								$expand: "team",
+							},
+							success: (oData) => {
+								oData.results.forEach((oPlayer) => {
+									if (!oPlayer.team) {
+										aPlayers.push(oPlayer);
+									}
+									resolve();
+								});
+							},
+							error: (oErr) => {
+								MessageBox.error("{i18n>Something went wrong}");
+								console.error(oErr.message);
+								reject();
+							},
+						});
+					});
+					oPromise.then(() => {
+						const oAvailablePlayersModel = new JSONModel(aPlayers);
+						oDialog.setModel(oAvailablePlayersModel, "AvailablePlayers");
+					});
 				});
 			},
 
@@ -94,6 +122,7 @@ sap.ui.define(
 
 				const oTeamModel = new JSONModel(oTeam);
 				const aSelectedPlayers = [];
+				const aPlayers = [];
 
 				if (!this.updateTeamDialog) {
 					this.updateTeamDialog = this.loadFragment({
@@ -104,21 +133,34 @@ sap.ui.define(
 					oView.setModel(oTeamModel, "teamModel");
 					oDialog.open();
 
-					oModel.read(`/Teams(${oTeam.ID})`, {
-						urlParameters: {
-							$expand: "players",
-						},
-						success: (oData) => {
-							const aPlayersData = oData.players.results;
-							aPlayersData.forEach((oPlayer) => {
-								aSelectedPlayers.push(oPlayer.player_ID);
-							});
-							oView.byId("selectedPlayersU").setSelectedKeys(aSelectedPlayers);
-						},
-						error: (oErr) => {
-							MessageBox.error("{i18n>Something went wrong}");
-							console.error(oErr.message);
-						},
+					const oPromise = new Promise((resolve, reject) => {
+						oModel.read(`/Players`, {
+							urlParameters: {
+								$expand: "team",
+							},
+							success: (oData) => {
+								oData.results.forEach((oPlayer) => {
+									if (!oPlayer.team) {
+										aPlayers.push(oPlayer);
+									} else if (oPlayer.team.up__ID === oTeam.ID) {
+										aSelectedPlayers.push(oPlayer.ID);
+										aPlayers.push(oPlayer);
+									}
+								});
+								resolve();
+							},
+							error: (oErr) => {
+								MessageBox.error("{i18n>Something went wrong}");
+								console.error(oErr.message);
+								reject();
+							},
+						});
+					});
+
+					oPromise.then(() => {
+						const oAvailablePlayersModel = new JSONModel(aPlayers);
+						oDialog.setModel(oAvailablePlayersModel, "AvailablePlayers");
+						oView.byId("selectedPlayersU").setSelectedKeys(aSelectedPlayers);
 					});
 				});
 			},
@@ -132,6 +174,7 @@ sap.ui.define(
 				const sTeamName = oView.byId("teamNameU").getValue();
 				const sLogo = oView.byId("badgeLinkU").getValue();
 				const aSelectedPlayers = oView.byId("selectedPlayersU").getSelectedKeys();
+				console.log(aSelectedPlayers);
 
 				if (sTeamName === "") {
 					MessageBox.error("Enter Team Name!");

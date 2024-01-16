@@ -23,8 +23,8 @@
                         </f:FormElement>
                         <f:FormElement label="{i18n>selectedPlayers}">
                             <f:fields>
-                                <MultiComboBox id="selectedPlayers" items="{path: '/Players', sorter: {path:'position', group:true}}" required="true" maxWidth="100%">
-                                    <core:Item key="{ID}" text="{name} {lastName}"/>
+                                <MultiComboBox id="selectedPlayers" items="{path: 'AvailablePlayers>/', sorter: {path:'position', group:true}}" required="true" maxWidth="100%">
+                                    <core:Item key="{AvailablePlayers>ID}" text="{AvailablePlayers>name} {AvailablePlayers>lastName}"/>
                                 </MultiComboBox>
                             </f:fields>
                         </f:FormElement>
