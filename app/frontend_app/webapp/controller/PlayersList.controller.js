@@ -212,18 +212,17 @@ sap.ui.define(
 				const oView = this.getView();
 				const oModel = oView.getModel();
 				const oPlayer = oEvent.getSource().getBindingContext().getObject();
-				let sTeams = "";
+				let sTeam;
 
 				const oPromise = new Promise((resolve) => {
 					oModel.read(`/Players(${oPlayer.ID})`, {
 						urlParameters: {
-							$expand: "teams/up_",
+							$expand: "team/up_",
 						},
 						success: (oData) => {
-							oData.teams.results.forEach((oTeam) => {
-								const sTeamName = oTeam.up_.name;
-								sTeams += sTeamName + "\n";
-							});
+							if (oData.team) {
+								sTeam = oData.team.up_.name;
+							}
 							resolve();
 						},
 						error: (oErr) => {
@@ -234,9 +233,9 @@ sap.ui.define(
 				});
 
 				oPromise.then(() => {
-					if (sTeams.length !== 0) {
+					if (sTeam) {
 						MessageBox.information(
-							`${oPlayer.name} ${oPlayer.lastName} is currently in:\n  ${sTeams}`
+							`${oPlayer.name} ${oPlayer.lastName} is currently in team ${sTeam}`
 						);
 					} else {
 						MessageBox.information("Player isn't currently in any team");
