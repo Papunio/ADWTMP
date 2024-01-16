@@ -38,22 +38,21 @@ sap.ui.define(
 							$expand: "teams",
 						},
 						success: (oData) => {
+							const sHomeTeamID = oData.homeTeamID;
 							const aTeams = oData.teams.results;
-							let bHomeTeam = true;
 							aTeams.forEach((oTeam) => {
 								oModel.read(`/Teams(${oTeam.team_ID})`, {
 									urlParameters: {
 										$expand: "players/player",
 									},
 									success: (oTeamData) => {
-										if (bHomeTeam) {
+										if (sHomeTeamID === oTeamData.ID) {
 											oHomeTeamDetails.setData(oTeamData);
 											oHomePlayers.setData(oTeamData.players.results);
 										} else {
 											oGuestTeamDetails.setData(oTeamData);
 											oGuestPlayers.setData(oTeamData.players.results);
 										}
-										bHomeTeam = false;
 									},
 								});
 							});
