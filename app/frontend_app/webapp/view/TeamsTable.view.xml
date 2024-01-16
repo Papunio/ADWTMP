@@ -34,13 +34,13 @@
                 </columns>
 
                 <items>
-                    <ColumnListItem type="Navigation" press="onTeamPress">
+                    <ColumnListItem type="Navigation" press="onPressTeam">
                         <Text text="" />
                         <Image height="100%" width="100%" src="{logo}"/>
                         <Text text="{name}"/>
                         <FlexBox>
-                            <Button id="updateTeam" type="Transparent" icon="sap-icon://edit" press="onUpdateTeamPress"/>
-                            <Button id="deleteTeam" type="Transparent" icon="sap-icon://delete" press="onDeleteTeamPress"/>
+                            <Button id="updateTeam" type="Transparent" icon="sap-icon://edit" press="onPressUpdateTeam"/>
+                            <Button id="deleteTeam" type="Transparent" icon="sap-icon://delete" press="onPressDeleteTeam"/>
                         </FlexBox>
                     </ColumnListItem>
                 </items>

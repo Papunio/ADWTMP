@@ -92,7 +92,7 @@ sap.ui.define(
 				this.clearFields();
 			},
 
-			onUpdateTeamPress: function (oEvent) {
+			onPressUpdateTeam: function (oEvent) {
 				const oView = this.getView();
 				const oModel = oView.getModel();
 				const oTeam = oEvent.getSource().getBindingContext().getObject();
@@ -180,7 +180,7 @@ sap.ui.define(
 				this.byId("updateTeamDialog").close();
 			},
 
-			onDeleteTeamPress: function (oEvent) {
+			onPressDeleteTeam: function (oEvent) {
 				const oTeam = oEvent.getSource().getBindingContext().getObject();
 
 				MessageBox.confirm(`Are you sure you want to delete ${oTeam.name}?`, {
@@ -246,7 +246,7 @@ sap.ui.define(
 					.filter(oTableSearchState, "Application");
 			},
 
-			onTeamPress: function (oEvent) {
+			onPressTeam: function (oEvent) {
 				const oView = this.getView();
 				const oModel = oView.getModel();
 				const oTeam = oEvent.getSource().getBindingContext().getObject();

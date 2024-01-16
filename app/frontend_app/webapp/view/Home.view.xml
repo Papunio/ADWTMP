@@ -60,7 +60,7 @@
 								</Column>
 							</columns>
 							<items>
-								<ColumnListItem type="Navigation" press="onMatchPress" highlight="{path: 'MatchesModel>date', formatter: '.formatter.checkDate'}">
+								<ColumnListItem type="Navigation" press="onPressMatch" highlight="{path: 'MatchesModel>date', formatter: '.formatter.checkDate'}">
 									<Text text=""/>
 									<Image height="100%" width="100%" src="{MatchesModel>homeTeam/logo}"/>
 									<Text text="{MatchesModel>homeTeam/name}"/>
@@ -69,8 +69,8 @@
 									<Text text="{path: 'MatchesModel>date', formatter: '.formatter.formatDate'}"/>
 									<Text text="{MatchesModel>place}"/>
 									<FlexBox>
-										<Button id="finishMatch" type="Transparent" icon="sap-icon://accept" press="onFinishMatchPress"/>
-										<Button id="deleteMatch" type="Transparent" icon="sap-icon://delete" press="onDeleteMatchPress"/>
+										<Button id="finishMatch" type="Transparent" icon="sap-icon://accept" press="onPressFinishMatch"/>
+										<Button id="deleteMatch" type="Transparent" icon="sap-icon://delete" press="onPressDeleteMatch"/>
 									</FlexBox>
 								</ColumnListItem>
 							</items>

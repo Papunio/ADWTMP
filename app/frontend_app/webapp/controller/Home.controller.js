@@ -122,7 +122,7 @@ sap.ui.define(
 				this.clearFields();
 			},
 
-			onDeleteMatchPress: function (oEvent) {
+			onPressDeleteMatch: function (oEvent) {
 				const oMatch = oEvent.getSource().getBindingContext("MatchesModel");
 				const oHomeTeam = oMatch.getProperty("homeTeam");
 				const oGuestTeam = oMatch.getProperty("guestTeam");
@@ -153,7 +153,7 @@ sap.ui.define(
 				});
 			},
 
-			onFinishMatchPress: function (oEvent) {
+			onPressFinishMatch: function (oEvent) {
 				const oView = this.getView();
 				const oMatch = oEvent.getSource().getBindingContext("MatchesModel");
 
@@ -289,7 +289,7 @@ sap.ui.define(
 				});
 			},
 
-			onMatchPress: function (oEvent) {
+			onPressMatch: function (oEvent) {
 				const sMatchID = oEvent
 					.getSource()
 					.getBindingContext("MatchesModel")

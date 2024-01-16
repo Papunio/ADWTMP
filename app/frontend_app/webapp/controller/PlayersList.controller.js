@@ -89,7 +89,7 @@ sap.ui.define(
 				this.clearFields();
 			},
 
-			onUpdatePlayerPress: function (oEvent) {
+			onPressUpdatePlayer: function (oEvent) {
 				const oView = this.getView();
 				const oPlayer = oEvent.getSource().getBindingContext().getObject();
 
@@ -150,7 +150,7 @@ sap.ui.define(
 				this.clearFields();
 			},
 
-			onDeletePlayerPress: function (oEvent) {
+			onPressDeletePlayer: function (oEvent) {
 				const oPlayer = oEvent.getSource().getBindingContext().getObject();
 
 				MessageBox.confirm(
@@ -208,7 +208,7 @@ sap.ui.define(
 				});
 			},
 
-			onPlayerPress: function (oEvent) {
+			onPressPlayer: function (oEvent) {
 				const oView = this.getView();
 				const oModel = oView.getModel();
 				const oPlayer = oEvent.getSource().getBindingContext().getObject();
