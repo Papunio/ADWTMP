@@ -287,6 +287,7 @@ sap.ui.define(
 							console.error(oErr.message);
 						},
 					});
+					oView.byId("teamRankingTable").getModel().refresh();
 				});
 			},
 
