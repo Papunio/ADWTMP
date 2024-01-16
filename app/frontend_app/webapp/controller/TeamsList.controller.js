@@ -281,18 +281,21 @@ sap.ui.define(
 							$expand: "up_/teams/team",
 						},
 						success: (oMatches) => {
-							const aScheludedMatches = oMatches.results.filter(
-								// Czy od razu tutaj tego foreacha nizej
-								(oMatch) => oMatch.team_ID === oTeam.ID
-							);
-							aScheludedMatches.forEach((oMatch) => {
-								aMatches.push({
-									homeTeam: oMatch.up_.teams.results[0].team.name,
-									homeLogo: oMatch.up_.teams.results[0].team.logo,
-									guestTeam: oMatch.up_.teams.results[1].team.name,
-									guestLogo: oMatch.up_.teams.results[1].team.logo,
-									date: oMatch.up_.date,
-								});
+							oMatches.results.forEach((oMatch) => {
+								if (oMatch.team_ID === oTeam.ID) {
+									const sHomeTeamID = oMatch.up_.homeTeamID;
+									const oTeam1 = oMatch.up_.teams.results[0].team;
+									const oTeam2 = oMatch.up_.teams.results[1].team;
+									const oHomeTeam = oTeam1.ID === sHomeTeamID ? oTeam1 : oTeam2;
+									const oGuestTeam = oTeam1.ID !== sHomeTeamID ? oTeam1 : oTeam2;
+									aMatches.push({
+										homeTeam: oHomeTeam.name,
+										homeLogo: oHomeTeam.logo,
+										guestTeam: oGuestTeam.name,
+										guestLogo: oGuestTeam.logo,
+										date: oMatch.up_.date,
+									});
+								}
 							});
 							resolve();
 						},

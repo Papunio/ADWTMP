@@ -46,7 +46,7 @@ entity Teams : cuid {
     draws    : Integer;
 
     @title: 'Team Losses'
-    losses    : Integer;
+    losses   : Integer;
 
     @title: 'Goals Scored'
     scored   : Integer;
@@ -57,16 +57,19 @@ entity Teams : cuid {
 
 @title: 'Entity that represents football match'
 entity Matches : cuid {
-    @title: 'Team1'
-    teams : Composition of many {
-                key team : Association to Teams;
-            };
+    @title: 'Teams'
+    teams      : Composition of many {
+                     key team : Association to Teams;
+                 };
+
+    @title: 'Home Team NID'
+    homeTeamID : String;
 
     @title: 'Match localization'
-    place : String;
+    place      : String;
 
     @title: 'Match date'
-    date  : DateTime;
+    date       : DateTime;
 }
 
 @title: 'Entity that represents already played matches'

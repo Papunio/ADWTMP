@@ -101,6 +101,7 @@ sap.ui.define(
 				const oPayload = {
 					ID: sMatchID,
 					teams: aTeams,
+					homeTeamID: sHomeTeamID,
 					place: sMatchPlace,
 					date: sMatchDate,
 				};
@@ -361,12 +362,13 @@ sap.ui.define(
 						},
 						success: (oData) => {
 							oData.results.forEach((oMatchData) => {
-								const oHomeTeam = oMatchData.teams.results[0].team;
-								const oGuestTeam = oMatchData.teams.results[1].team;
+								const oTeam1 = oMatchData.teams.results[0].team;
+								const oTeam2 = oMatchData.teams.results[1].team;
 								aTeams.push({
 									ID: oMatchData.ID,
-									homeTeam: oHomeTeam,
-									guestTeam: oGuestTeam,
+									homeTeam: oMatchData.homeTeamID === oTeam1.ID ? oTeam1 : oTeam2,
+									guestTeam:
+										oMatchData.homeTeamID !== oTeam1.ID ? oTeam1 : oTeam2,
 									date: oMatchData.date,
 									place: oMatchData.place,
 								});
