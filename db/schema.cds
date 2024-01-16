@@ -5,16 +5,16 @@ using {cuid} from '@sap/cds/common';
 @title: 'Entity that represents football player'
 entity Players : cuid {
     @title: 'Player Name'
-    name     : String(100);
+    name     : String(50);
 
     @title: 'Player Last Name'
-    lastName : String(100);
+    lastName : String(50);
 
     @title: 'Player Position'
-    position : String(100);
+    position : String(20);
 
     @title: 'Player Age'
-    age      : Integer;
+    age      : UInt8;
 
     @title: 'Teams with this player'
     teams    : Association to many Teams.players
@@ -40,19 +40,19 @@ entity Teams : cuid {
     logo     : String;
 
     @title: 'Team Wins'
-    wins     : Integer;
+    wins     : Int16 default 0;
 
     @title: 'Team Draws'
-    draws    : Integer;
+    draws    : Int16 default 0;
 
     @title: 'Team Losses'
-    losses   : Integer;
+    losses   : Int16 default 0;
 
     @title: 'Goals Scored'
-    scored   : Integer;
+    scored   : Int16 default 0;
 
     @title: 'Goals Conceded'
-    conceded : Integer;
+    conceded : Int16 default 0;
 }
 
 @title: 'Entity that represents football match'

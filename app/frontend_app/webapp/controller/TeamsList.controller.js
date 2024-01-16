@@ -70,11 +70,6 @@ sap.ui.define(
 					name: sTeamName,
 					logo: sLogo,
 					players: aPlayers,
-					wins: 0,
-					draws: 0,
-					losses: 0,
-					scored: 0,
-					conceded: 0,
 				};
 
 				oModel.create("/Teams", oPayload, {

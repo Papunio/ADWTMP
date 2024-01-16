@@ -17,7 +17,7 @@
 
 			<Table id="playersTable" items="{path:'/Players', sorter: {path: 'position'}}" alternateRowColors="true" growing="true" growingThreshold="22" growingScrollToLoad="true">
 				<columns>
-					<Column width="5%">
+					<Column width="10%">
 
 					</Column>
 					<Column>
