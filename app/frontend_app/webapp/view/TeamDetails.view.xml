@@ -21,15 +21,15 @@
                     <core:Title text="{i18n>teamStats}" />
                     <m:VBox >
                         <m:HBox >
-                            <m:Text text="W: {teamModel>/wins}" wrapping="true" class="sapUiMediumMarginEnd greenText" />
-                            <m:Text text="D: {teamModel>/draws}" wrapping="true" class="sapUiMediumMarginEnd greyText"/>
-                            <m:Text text="L: {teamModel>/losses}" wrapping="true" class="redText"/>
+                            <m:Text text="{i18n>wins}: {teamModel>/wins}" wrapping="true" class="sapUiMediumMarginEnd greenText" />
+                            <m:Text text="{i18n>draws}: {teamModel>/draws}" wrapping="true" class="sapUiMediumMarginEnd greyText"/>
+                            <m:Text text="{i18n>losses}: {teamModel>/losses}" wrapping="true" class="redText"/>
                         </m:HBox>
                         <m:HBox >
-                            <m:Text text="Goals scored: {teamModel>/scored}" wrapping="true" />
+                            <m:Text text="{i18n>goalsScored}: {teamModel>/scored}" wrapping="true" />
                         </m:HBox>
                         <m:HBox >
-                            <m:Text text="Goals conceded: {teamModel>/conceded}" wrapping="true" />
+                            <m:Text text="{i18n>goalsConceded}: {teamModel>/conceded}" wrapping="true" />
                         </m:HBox>
                     </m:VBox>
 
@@ -43,7 +43,7 @@
             </form:SimpleForm>
         </headerContent>
         <sections>
-            <ObjectPageSection title="Players in team">
+            <ObjectPageSection title="{i18n>playersInTeam}">
                 <subSections>
                     <ObjectPageSubSection>
                         <blocks>
@@ -53,13 +53,13 @@
 
                                     </m:Column>
                                     <m:Column>
-                                        <m:Label text="{i18n>name}"/>
+                                        <m:Label text="{i18n>playerName}"/>
                                     </m:Column>
                                     <m:Column>
-                                        <m:Label text="{i18n>lastName}"/>
+                                        <m:Label text="{i18n>playerLastName}"/>
                                     </m:Column>
                                     <m:Column>
-                                        <m:Label text="{i18n>position}"/>
+                                        <m:Label text="{i18n>playerPosition}"/>
                                     </m:Column>
 
                                     <m:Column width="5%">
@@ -81,7 +81,7 @@
                 </subSections>
             </ObjectPageSection>
 
-            <ObjectPageSection title="Scheduled Matches">
+            <ObjectPageSection title="{i18n>scheduledMatches}">
                 <subSections>
                     <ObjectPageSubSection>
                         <blocks>

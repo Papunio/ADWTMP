@@ -5,7 +5,7 @@
     <Page showHeader="true" showNavButton="true" navButtonPress="onNavButton" enableScrolling="true">
         <Bar>
             <contentRight>
-                <Button icon="sap-icon://add" text="ADD TEAM" press="onPressAddTeam"/>
+                <Button icon="sap-icon://add" text="{i18n>addTeam}" press="onPressAddTeam"/>
             </contentRight>
         </Bar>
         <Panel width="auto" class="sapUiResponsiveMargin">
@@ -25,7 +25,7 @@
                     </Column>
 
                     <Column>
-                        <Label text="{i18n>name}"/>
+                        <Label text="{i18n>teamName}"/>
                     </Column>
 
                     <Column width="5%">

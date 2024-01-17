@@ -78,51 +78,51 @@
 					</Panel>
 				</f:mainContent>
 				<f:items>
-					<f:SidePanelItem icon="sap-icon://soccer" text="Matches">
+					<f:SidePanelItem icon="sap-icon://soccer" text="{i18n>matches}">
 						<VBox>
 							<Text text="" class="sapUiSmallMarginBottom" />
 							<Button text="ADD MATCH" press="onPressAddMatch"/>
 							<Button text="MATCH HISTORY" press="onPressMatchHistory"/>
 						</VBox>
 					</f:SidePanelItem>
-					<f:SidePanelItem icon="sap-icon://family-care" text="Teams">
+					<f:SidePanelItem icon="sap-icon://family-care" text="{i18n>teams}">
 						<VBox>
 							<Text text="Static Content" class="sapUiSmallMarginBottom" />
 							<Button text="ADD TEAM" />
 							<Button text="TEAMS LIST" press="onPressTeams"/>
 						</VBox>
 					</f:SidePanelItem>
-					<f:SidePanelItem icon="sap-icon://physical-activity" text="Players">
+					<f:SidePanelItem icon="sap-icon://physical-activity" text="{i18n>players}">
 						<VBox>
 							<Text text="Static Content" class="sapUiSmallMarginBottom" />
 							<Button text="ADD PLAYER" />
 							<Button text="PLAYERS LIST" press="onPressPlayers"/>
 						</VBox>
 					</f:SidePanelItem>
-					<f:SidePanelItem icon="sap-icon://competitor" text="Team Ranking" >
+					<f:SidePanelItem icon="sap-icon://competitor" text="{i18n>teamRanking}">
 						<VBox>
-							<Text text="TEAM RANKING" class="sapUiSmallMarginBottom" />
+							<Text text="{i18n>mostWins}" class="sapUiSmallMarginBottom" />
 							<Table id="teamRankingTable" items="{path:'/Teams', sorter : {path : 'wins', descending: true}}" alternateRowColors="true" growing="true" growingThreshold="10">
-							<columns>
-								<Column width="10%">
-									
-								</Column>
-								<Column width="40%">
-									<Label text="{i18n>teamName}" />
-								</Column>
+								<columns>
+									<Column width="10%">
 
-								<Column width="10%">
-									
-								</Column>
-							</columns>
-							<items>
-								<ColumnListItem>
-									<Image width="100%" height="100%" src="{logo}"/>
-									<Text text="{name}"/>
-									<Text text="{wins}"/>
-								</ColumnListItem>
-							</items>
-						</Table>
+									</Column>
+									<Column width="40%">
+										<Label text="{i18n>team}" />
+									</Column>
+
+									<Column width="10%">
+
+									</Column>
+								</columns>
+								<items>
+									<ColumnListItem>
+										<Image width="100%" height="100%" src="{logo}"/>
+										<Text text="{name}"/>
+										<Text text="{wins}"/>
+									</ColumnListItem>
+								</items>
+							</Table>
 						</VBox>
 					</f:SidePanelItem>
 				</f:items>

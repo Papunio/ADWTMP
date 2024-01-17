@@ -5,7 +5,7 @@
 	<Page showHeader="true" showNavButton="true" navButtonPress="onNavButton" enableScrolling="true">
 		<Bar>
 			<contentRight>
-				<Button icon="sap-icon://add" text="ADD PLAYER" press="onPressAddPlayer"/>
+				<Button icon="sap-icon://add" text="{i18n>addPlayer}" press="onPressAddPlayer"/>
 			</contentRight>
 		</Bar>
 		<Panel width="auto" class="sapUiResponsiveMargin">
@@ -21,16 +21,16 @@
 
 					</Column>
 					<Column>
-						<Label text="{i18n>name}"/>
+						<Label text="{i18n>playerName}"/>
 					</Column>
 					<Column>
-						<Label text="{i18n>lastName}"/>
+						<Label text="{i18n>playerLastName}"/>
 					</Column>
 					<Column>
-						<Label text="{i18n>position}"/>
+						<Label text="{i18n>playerPosition}"/>
 					</Column>
 					<Column>
-						<Label text="{i18n>age}"/>
+						<Label text="{i18n>playerAge}"/>
 					</Column>
 
 					<Column width="5%">

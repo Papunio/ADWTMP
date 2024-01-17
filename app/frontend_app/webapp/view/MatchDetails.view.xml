@@ -11,22 +11,22 @@
                         <Avatar src="{homeTeamDetailsModel>/logo}" displaySize="XL" displayShape="Square" class="sapUiTinyMarginEnd">
                         </Avatar>
                         <HBox >
-                            <Text text="W: {homeTeamDetailsModel>/wins}" wrapping="true" class="sapUiMediumMarginEnd greenText" />
-                            <Text text="Goals scored: {homeTeamDetailsModel>/scored}" wrapping="true" />
+                            <Text text="{i18n>w}: {homeTeamDetailsModel>/wins}" wrapping="true" class="sapUiMediumMarginEnd greenText" />
+                            <Text text="{i18n>goalsScored}: {homeTeamDetailsModel>/scored}" wrapping="true" />
                         </HBox>
                         <HBox >
-                            <Text text="D: {homeTeamDetailsModel>/draws}" wrapping="true" class="sapUiMediumMarginEnd greyText"/>
-                            <Text text="Goals conceded: {homeTeamDetailsModel>/conceded}" wrapping="true" />
+                            <Text text="{i18n>d}: {homeTeamDetailsModel>/draws}" wrapping="true" class="sapUiMediumMarginEnd greyText"/>
+                            <Text text="{i18n>goalsConceded}: {homeTeamDetailsModel>/conceded}" wrapping="true" />
                         </HBox>
-                        <Text text="L: {homeTeamDetailsModel>/losses}" wrapping="true" class="redText"/>
+                        <Text text="{i18n>l}: {homeTeamDetailsModel>/losses}" wrapping="true" class="redText"/>
                         <Table id="homeTeamTable" items="{path:'homePlayersModel>/'}" alternateRowColors="true">
                             <columns>
                                 <Column>
-                                    <Label text="{i18n>name}"/>
+                                    <Label text="{i18n>playerName}"/>
                                 </Column>
 
                                 <Column>
-                                    <Label text="{i18n>lastName}"/>
+                                    <Label text="{i18n>playerLastName}"/>
                                 </Column>
                             </columns>
 
@@ -43,22 +43,22 @@
                         <Avatar src="{guestTeamDetailsModel>/logo}" displaySize="XL" displayShape="Square" class="sapUiTinyMarginEnd">
                         </Avatar>
                         <HBox >
-                            <Text text="W: {guestTeamDetailsModel>/wins}" wrapping="true" class="sapUiMediumMarginEnd greenText" />
-                            <Text text="Goals scored: {guestTeamDetailsModel>/scored}" wrapping="true" />
+                            <Text text="{i18n>w}: {guestTeamDetailsModel>/wins}" wrapping="true" class="sapUiMediumMarginEnd greenText" />
+                            <Text text="{i18n>goalsScored}: {guestTeamDetailsModel>/scored}" wrapping="true" />
                         </HBox>
                         <HBox >
-                            <Text text="D: {guestTeamDetailsModel>/draws}" wrapping="true" class="sapUiMediumMarginEnd greyText"/>
-                            <Text text="Goals conceded: {guestTeamDetailsModel>/conceded}" wrapping="true" />
+                            <Text text="{i18n>d}: {guestTeamDetailsModel>/draws}" wrapping="true" class="sapUiMediumMarginEnd greyText"/>
+                            <Text text="{i18n>goalsConceded}: {guestTeamDetailsModel>/conceded}" wrapping="true" />
                         </HBox>
-                        <Text text="L: {guestTeamDetailsModel>/losses}" wrapping="true" class="redText"/>
+                        <Text text="{i18n>l}: {guestTeamDetailsModel>/losses}" wrapping="true" class="redText"/>
                         <Table id="guestTeamTable" items="{path:'guestPlayersModel>/'}" alternateRowColors="true">
                             <columns>
                                 <Column>
-                                    <Label text="{i18n>name}"/>
+                                    <Label text="{i18n>playerName}"/>
                                 </Column>
 
                                 <Column>
-                                    <Label text="{i18n>lastName}"/>
+                                    <Label text="{i18n>playerLastName}"/>
                                 </Column>
                             </columns>
 
