@@ -33,7 +33,7 @@
 			<f:SidePanel id="homeSidePanel" toggle="onPanelToggle" sidePanelPosition="Right" sidePanelWidth="15%">
 				<f:mainContent>
 					<Panel width="auto" class="sapUiResponsiveMargin">
-						<Table id="toBePlayedTable" items="{path:'MatchesModel>/', sorter : {path : 'MatchesModel>date'}}" alternateRowColors="true" growing="true" growingThreshold="10">
+						<Table id="toBePlayedTable" items="{path:'MatchesModel>/', sorter : {path : 'date'}}" alternateRowColors="true" growing="true" growingThreshold="10">
 							<columns>
 								<Column width="5%">
 									<Label text="" />

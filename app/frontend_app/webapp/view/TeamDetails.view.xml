@@ -72,7 +72,7 @@
                                         <m:Text text=""/>
                                         <m:Text text="{teamPlayersModel>player/name}"/>
                                         <m:Text text="{teamPlayersModel>player/lastName}"/>
-                                        <m:Text text="{teamPlayersModel>player/position}"/>
+                                        <m:Text text="{teamPlayersModel>player/position/name}"/>
                                     </m:ColumnListItem>
                                 </m:items>
                             </m:Table>

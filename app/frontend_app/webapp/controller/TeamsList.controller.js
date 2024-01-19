@@ -174,7 +174,6 @@ sap.ui.define(
 				const sTeamName = oView.byId("teamNameU").getValue();
 				const sLogo = oView.byId("badgeLinkU").getValue();
 				const aSelectedPlayers = oView.byId("selectedPlayersU").getSelectedKeys();
-				console.log(aSelectedPlayers);
 
 				if (sTeamName === "") {
 					MessageBox.error("Enter Team Name!");
@@ -299,7 +298,7 @@ sap.ui.define(
 				const oPlayersPromise = new Promise((resolve, reject) => {
 					oModel.read(`/Teams(${oTeam.ID})`, {
 						urlParameters: {
-							$expand: "players/player",
+							$expand: "players/player/position",
 						},
 						success: (oData) => {
 							aPlayers = oData.players.results;

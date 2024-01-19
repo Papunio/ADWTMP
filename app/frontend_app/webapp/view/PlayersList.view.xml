@@ -15,7 +15,7 @@
 				</contentRight>
 			</Bar>
 
-			<Table id="playersTable" items="{path:'playersModel>/', sorter: {path: 'playersModel>position/name'}}" alternateRowColors="true" growing="true" growingThreshold="22" growingScrollToLoad="true">
+			<Table id="playersTable" items="{path:'playersModel>/', sorter: {path: 'position/name'}}" alternateRowColors="true" growing="true" growingThreshold="22" growingScrollToLoad="true">
 				<columns>
 					<Column width="10%">
 

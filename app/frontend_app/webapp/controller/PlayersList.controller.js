@@ -20,8 +20,6 @@ sap.ui.define(
 
 				const oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 				oRouter.getRoute("PlayersList").attachPatternMatched(this._onPatternMatched, this);
-
-				this.getView().setModel(new JSONModel(oSelectPosition), "SelectModel");
 			},
 
 			_onPatternMatched: function () {
@@ -113,7 +111,7 @@ sap.ui.define(
 
 			onPressUpdatePlayer: function (oEvent) {
 				const oView = this.getView();
-				const oPlayer = oEvent.getSource().getBindingContext().getObject();
+				const oPlayer = oEvent.getSource().getBindingContext("playersModel").getObject();
 
 				const oPlayerModel = new JSONModel(oPlayer);
 
@@ -173,7 +171,7 @@ sap.ui.define(
 			},
 
 			onPressDeletePlayer: function (oEvent) {
-				const oPlayer = oEvent.getSource().getBindingContext().getObject();
+				const oPlayer = oEvent.getSource().getBindingContext("playersModel").getObject();
 
 				MessageBox.confirm(
 					`Are you sure you want to delete ${oPlayer.name} ${oPlayer.lastName}?`,
@@ -235,7 +233,7 @@ sap.ui.define(
 			onPressPlayer: function (oEvent) {
 				const oView = this.getView();
 				const oModel = oView.getModel();
-				const oPlayer = oEvent.getSource().getBindingContext().getObject();
+				const oPlayer = oEvent.getSource().getBindingContext("playersModel").getObject();
 				let sTeam;
 
 				const oPromise = new Promise((resolve) => {
