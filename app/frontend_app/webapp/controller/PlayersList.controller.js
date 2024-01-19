@@ -5,11 +5,13 @@ sap.ui.define(
 		"sap/m/MessageBox",
 		"sap/ui/model/Filter",
 		"sap/ui/model/FilterOperator",
+		"../model/Formatter",
 	],
-	function (BaseController, JSONModel, MessageBox, Filter, FilterOperator) {
+	function (BaseController, JSONModel, MessageBox, Filter, FilterOperator, Formatter) {
 		"use strict";
 
 		return BaseController.extend("frontendapp.controller.PlayersList", {
+			formatter: Formatter,
 			onInit: function () {
 				const oComponent = this.getOwnerComponent();
 				const oPlayersModel = new JSONModel();

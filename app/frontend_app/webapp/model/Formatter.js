@@ -11,6 +11,23 @@ sap.ui.define(["sap/ui/core/format/DateFormat"], (DateFormat) => {
 			}).format(sDate);
 		},
 
+		highlightPosition: function (sPosition) {
+			if (sPosition === "") {
+				return "None";
+			}
+			if (sPosition === "Attacker") {
+				return "Error";
+			}
+			if (sPosition === "Defender") {
+				return "Indication07";
+			}
+			if (sPosition === "Midfielder") {
+				return "Information";
+			} else {
+				return "Success";
+			}
+		},
+
 		checkDate: function (sDate) {
 			if (Date.parse(sDate) < Date.parse(new Date())) {
 				return "Error";

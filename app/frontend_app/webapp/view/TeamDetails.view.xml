@@ -85,7 +85,7 @@
                 <subSections>
                     <ObjectPageSubSection>
                         <blocks>
-                            <m:Table id="matchesTable" items="{path:'matchesModel>/'}" growing="true" growingThreshold="11" alternateRowColors="true">
+                            <m:Table id="matchesTable" items="{path:'matchesModel>/', sorter : {path : 'date'}}" growing="true" growingThreshold="11" alternateRowColors="true">
                                 <m:columns>
                                     <m:Column width="5%">
                                         <m:Label text="" />
