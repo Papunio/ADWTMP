@@ -11,26 +11,48 @@ sap.ui.define(
 
 		return BaseController.extend("frontendapp.controller.PlayersList", {
 			onInit: function () {
-				const oSelectPosition = [
-					{
-						Name: "Attacker",
-						Icon: "sap-icon://feeder-arrow",
-					},
-					{
-						Name: "Midfielder",
-						Icon: "sap-icon://feeder-arrow",
-					},
-					{
-						Name: "Defender",
-						Icon: "sap-icon://feeder-arrow",
-					},
-					{
-						Name: "Goalkeeper",
-						Icon: "sap-icon://feeder-arrow",
-					},
-				];
+				const oComponent = this.getOwnerComponent();
+				const oPlayersModel = new JSONModel();
+				const oSelectPositionModel = new JSONModel();
+
+				oComponent.setModel(oPlayersModel, "playersModel");
+				oComponent.setModel(oSelectPositionModel, "selectPositionModel");
+
+				const oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+				oRouter.getRoute("PlayersList").attachPatternMatched(this._onPatternMatched, this);
 
 				this.getView().setModel(new JSONModel(oSelectPosition), "SelectModel");
+			},
+
+			_onPatternMatched: function () {
+				const oComponent = this.getOwnerComponent();
+				const oModel = this.getView().getModel();
+
+				const oPlayersModel = oComponent.getModel("playersModel");
+				const oSelectPositionModel = oComponent.getModel("selectPositionModel");
+
+				oModel.read(`/Players`, {
+					urlParameters: {
+						$expand: "position",
+					},
+					success: (oData) => {
+						oPlayersModel.setData(oData.results);
+					},
+					error: (oErr) => {
+						MessageBox.error("Something went wrong");
+						console.error(oErr.message);
+					},
+				});
+
+				oModel.read(`/Positions`, {
+					success: (oData) => {
+						oSelectPositionModel.setData(oData.results);
+					},
+					error: (oErr) => {
+						MessageBox.error("Something went wrong");
+						console.error(oErr.message);
+					},
+				});
 			},
 
 			onPressAddPlayer: function () {
@@ -139,7 +161,7 @@ sap.ui.define(
 				oModel.update(`/Players(${sPlayerID})`, oPayload, {
 					success: () => {
 						this.refreshView();
-						MessageBox.success(`Player ${sName} ${sLastName} updated`);
+						MessageBox.success(`Player ${sName} ${sLastName} has been updated`);
 					},
 					error: (oErr) => {
 						MessageBox.error("Something went wrong");
@@ -194,7 +216,9 @@ sap.ui.define(
 					if (!bInTeam) {
 						oModel.remove(`/Players(${sPlayerID})`, {
 							success: () => {
-								MessageBox.success(`${sPlayerName} ${sPlayerLastName} deleted!`);
+								MessageBox.success(
+									`${sPlayerName} ${sPlayerLastName} has been deleted!`
+								);
 							},
 							error: (oErr) => {
 								MessageBox.error("Something went wrong");

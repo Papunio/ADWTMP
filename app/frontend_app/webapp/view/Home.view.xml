@@ -6,7 +6,7 @@
 		<customHeader>
 			<Bar>
 				<contentLeft>
-					<Title titleStyle="Auto" text="Aplikacja wspomagająca organizacje meczów piłkarskich"/>
+					<Title titleStyle="Auto" text="{i18n>appTitle}"/>
 				</contentLeft>
 
 				<contentRight>
@@ -18,13 +18,13 @@
 			<OverflowToolbar>
 				<Bar>
 					<contentLeft>
-						<Button icon="sap-icon://soccer" text="PIŁECZKA"/>
+						<Button icon="sap-icon://soccer"/>
 						<Button text="{i18n>matchHistory}" press="onPressMatchHistory" />
 						<Button text="{i18n>teams}" press="onPressTeams" />
 						<Button text="{i18n>players}" press="onPressPlayers" />
 					</contentLeft>
 					<contentRight>
-						<Button text="ADD MATCH" icon="sap-icon://add" press="onPressAddMatch" />
+						<Button text="{i18n>addMatch}" icon="sap-icon://add" press="onPressAddMatch" />
 					</contentRight>
 				</Bar>
 			</OverflowToolbar>

@@ -15,7 +15,7 @@
 				</contentRight>
 			</Bar>
 
-			<Table id="playersTable" items="{path:'/Players', sorter: {path: 'position'}}" alternateRowColors="true" growing="true" growingThreshold="22" growingScrollToLoad="true">
+			<Table id="playersTable" items="{path:'playersModel>/', sorter: {path: 'playersModel>position/name'}}" alternateRowColors="true" growing="true" growingThreshold="22" growingScrollToLoad="true">
 				<columns>
 					<Column width="10%">
 
@@ -40,10 +40,10 @@
 				<items>
 					<ColumnListItem type="Active" press="onPressPlayer" highlight="{= ${position} === 'Attacker' ? 'Error' : ${position} === 'Defender' ? 'Indication07' : ${position} === 'Midfielder' ? 'Information' : ${position} === 'Goalkeeper' ? 'Success' : 'None' }">
 						<Text text=""/>
-						<Text text="{name}"/>
-						<Text text="{lastName}"/>
-						<Text text="{position}"/>
-						<Text text="{age}"/>
+						<Text text="{playersModel>name}"/>
+						<Text text="{playersModel>lastName}"/>
+						<Text text="{playersModel>position/name}"/>
+						<Text text="{playersModel>age}"/>
 						<FlexBox>
 							<Button id="updatePlayer" type="Transparent" icon="sap-icon://edit" press="onPressUpdatePlayer"/>
 							<Button id="deletePlayer" type="Transparent" icon="sap-icon://delete" press="onPressDeletePlayer"/>

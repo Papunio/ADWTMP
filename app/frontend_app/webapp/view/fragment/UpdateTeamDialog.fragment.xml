@@ -3,7 +3,7 @@
     xmlns:l="sap.ui.layout"
     xmlns:f="sap.ui.layout.form"
     xmlns:core="sap.ui.core">
-    <Dialog id="updateTeamDialog" title="{i18n>updating}" class="sapUiTinyMargin" contentWidth="25%" contentHeight="28%">
+    <Dialog id="updateTeamDialog" title="{i18n>updatingTeam}" class="sapUiTinyMargin" contentWidth="25%" contentHeight="28%">
         <f:Form >
             <f:layout>
                 <f:ResponsiveGridLayout labelSpanXL="4" labelSpanL="3" labelSpanM="4" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="1" emptySpanM="0" emptySpanS="0" singleContainerFullSize="true" />

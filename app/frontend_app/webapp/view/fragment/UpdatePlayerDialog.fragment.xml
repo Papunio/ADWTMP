@@ -3,7 +3,7 @@
     xmlns:l="sap.ui.layout"
     xmlns:f="sap.ui.layout.form"
     xmlns:core="sap.ui.core">
-    <Dialog id="updatePlayerDialog" title="{i18n>updating}" class="sapUiTinyMargin">
+    <Dialog id="updatePlayerDialog" title="{i18n>updatingPlayer}" class="sapUiTinyMargin">
 
         <f:Form>
             <f:layout>
@@ -30,9 +30,9 @@
                         <f:FormElement label="{i18n>playerPosition}">
                             <f:fields>
                                 <Select id="playerPositionU" width="100%" required="true" selectedKey="{playerModel>/position}" forceSelection="false" items="{
-									path: 'SelectModel>/'
+									path: 'selectPositionModel>/'
 								}">
-                                    <core:ListItem text="{SelectModel>Name}" icon="{SelectModel>Icon}"/>
+                                    <core:ListItem text="{selectPositionModel>name}" icon="sap-icon://feeder-arrow"/>
                                 </Select>
                             </f:fields>
                         </f:FormElement>

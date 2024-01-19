@@ -11,7 +11,7 @@ entity Players : cuid {
     lastName : String(50);
 
     @title: 'Player Position'
-    position : String(20);
+    position : Association to one Positions;
 
     @title: 'Player Age'
     age      : UInt8;
@@ -19,6 +19,12 @@ entity Players : cuid {
     @title: 'Teams with this player'
     team     : Association to Teams.players
                    on team.player = $self;
+}
+
+@title: 'Entity that represents positions'
+entity Positions {
+    key ID   : String(1);
+        name : localized String;
 }
 
 @title: 'Entity that represents football team'

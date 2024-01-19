@@ -20,17 +20,17 @@ sap.ui.define(
 			},
 
 			_onPatternMatched: function (oEvent) {
+				const oComponent = this.getOwnerComponent();
 				this.getView().bindElement({
 					path: `/Matches/${oEvent.getParameter("arguments").MatchID}`,
 				});
 
 				const oModel = new sap.ui.model.odata.v2.ODataModel("/v2/football");
 
-				const oHomeTeamDetails = this.getOwnerComponent().getModel("homeTeamDetailsModel");
-				const oGuestTeamDetails =
-					this.getOwnerComponent().getModel("guestTeamDetailsModel");
-				const oHomePlayers = this.getOwnerComponent().getModel("homePlayersModel");
-				const oGuestPlayers = this.getOwnerComponent().getModel("guestPlayersModel");
+				const oHomeTeamDetails = oComponent.getModel("homeTeamDetailsModel");
+				const oGuestTeamDetails = oComponent.getModel("guestTeamDetailsModel");
+				const oHomePlayers = oComponent.getModel("homePlayersModel");
+				const oGuestPlayers = oComponent.getModel("guestPlayersModel");
 
 				const oPromise = new Promise((resolve, reject) => {
 					oModel.read(`/Matches/${oEvent.getParameter("arguments").MatchID}`, {
