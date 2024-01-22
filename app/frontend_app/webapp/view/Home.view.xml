@@ -78,7 +78,7 @@
 					</Panel>
 				</f:mainContent>
 				<f:items>
-					<f:SidePanelItem icon="sap-icon://soccer" text="{i18n>matches}">
+					<!-- <f:SidePanelItem icon="sap-icon://soccer" text="{i18n>matches}">
 						<VBox>
 							<Text text="" class="sapUiSmallMarginBottom" />
 							<Button text="ADD MATCH" press="onPressAddMatch"/>
@@ -98,7 +98,7 @@
 							<Button text="ADD PLAYER" />
 							<Button text="PLAYERS LIST" press="onPressPlayers"/>
 						</VBox>
-					</f:SidePanelItem>
+					</f:SidePanelItem> -->
 					<f:SidePanelItem icon="sap-icon://competitor" text="{i18n>teamRanking}">
 						<VBox>
 							<Text text="{i18n>mostWins}" class="sapUiSmallMarginBottom" />

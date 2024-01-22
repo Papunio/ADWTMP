@@ -18,6 +18,13 @@ sap.ui.define(
 				this.refreshView();
 			},
 
+			getI18nText: function (sText, aArguments) {
+				return this.getOwnerComponent()
+					.getModel("i18n")
+					.getResourceBundle()
+					.getText(sText, aArguments);
+			},
+
 			onPressTeams: function () {
 				const oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 				oRouter.navTo("TeamsList");
@@ -57,24 +64,24 @@ sap.ui.define(
 				const sGuestTeamID = oView.byId("guestTeam").getSelectedKey();
 
 				if (sHomeTeamID === "") {
-					MessageBox.error("Choose home team!");
+					MessageBox.error(this.getI18nText("chooseHomeTeam"));
 					return;
 				}
 				if (sGuestTeamID === "") {
-					MessageBox.error("Choose guest team!");
+					MessageBox.error(this.getI18nText("chooseGuestTeam"));
 					return;
 				}
 
 				if (sHomeTeamID === sGuestTeamID) {
-					MessageBox.error("Cant have the same team!");
+					MessageBox.error(this.getI18nText("cantHaveTheSameTeam"));
 					return;
 				}
 				if (sMatchDate === "") {
-					MessageBox.error("Pick date!");
+					MessageBox.error(this.getI18nText("pickDate"));
 					return;
 				}
 				if (sMatchPlace === "") {
-					MessageBox.error("Pick match place!");
+					MessageBox.error(this.getI18nText("pickPlace"));
 					return;
 				}
 
@@ -111,11 +118,16 @@ sap.ui.define(
 					success: () => {
 						this.refreshView();
 						MessageBox.success(
-							`Added match between ${sHomeTeamName} and ${sGuestTeamName} at ${sMatchPlace} on ${sMatchDate}`
+							this.getI18nText("addedMatch", [
+								sHomeTeamName,
+								sGuestTeamName,
+								sMatchPlace,
+								sMatchDate,
+							])
 						);
 					},
 					error: (oErr) => {
-						MessageBox.error("Something went wrong");
+						MessageBox.error(this.getI18nText("errorMessage"));
 						console.error(oErr.message);
 					},
 				});
@@ -129,7 +141,8 @@ sap.ui.define(
 				const oGuestTeam = oMatch.getProperty("guestTeam");
 
 				MessageBox.confirm(
-					`Are you sure you want to delete match between ${oHomeTeam.name} and ${oGuestTeam.name}?`,
+					// `Are you sure you want to delete match between ${oHomeTeam.name} and ${oGuestTeam.name}?`,
+					this.getI18nText("confirmMatchDelete", [oHomeTeam.name, oGuestTeam.name]),
 					{
 						onClose: function (oAction) {
 							if (oAction === sap.m.MessageBox.Action.OK) {
@@ -148,7 +161,7 @@ sap.ui.define(
 						this.refreshView();
 					},
 					error: (oErr) => {
-						MessageBox.error("Something went wrong");
+						MessageBox.error(this.getI18nText("errorMessage"));
 						console.error(oErr.message);
 					},
 				});
@@ -199,7 +212,7 @@ sap.ui.define(
 				oModel.create(`/FinishedMatches`, oPayload, {
 					success: () => {
 						oView.byId("finishMatchDialog").close();
-						MessageBox.success("Score submitted!");
+						MessageBox.success(this.getI18nText("scoreSubmitted"));
 						this.deleteMatch(oData.ID);
 						this.updateTeamStats(
 							sHomeTeamID,
@@ -210,7 +223,7 @@ sap.ui.define(
 						this.clearFields();
 					},
 					error: (oErr) => {
-						MessageBox.error("Something went wrong");
+						MessageBox.error(this.getI18nText("errorMessage"));
 						console.error(oErr.message);
 					},
 				});
@@ -233,7 +246,7 @@ sap.ui.define(
 							resolve();
 						},
 						error: (oErr) => {
-							MessageBox.error("Something went wrong");
+							MessageBox.error(this.getI18nText("errorMessage"));
 							console.error(oErr.message);
 							reject();
 						},
@@ -250,7 +263,7 @@ sap.ui.define(
 							resolve();
 						},
 						error: (oErr) => {
-							MessageBox.error("Something went wrong");
+							MessageBox.error(this.getI18nText("errorMessage"));
 							console.error(oErr.message);
 							reject();
 						},
@@ -277,13 +290,13 @@ sap.ui.define(
 
 					oModel.update(`/Teams(${sHomeTeamID})`, oHomeData, {
 						error: (oErr) => {
-							MessageBox.error("Something went wrong");
+							MessageBox.error(this.getI18nText("errorMessage"));
 							console.error(oErr.message);
 						},
 					});
 					oModel.update(`/Teams(${sGuestTeamID})`, oGuestData, {
 						error: (oErr) => {
-							MessageBox.error("Something went wrong");
+							MessageBox.error(this.getI18nText("errorMessage"));
 							console.error(oErr.message);
 						},
 					});
@@ -377,7 +390,7 @@ sap.ui.define(
 							resolve();
 						},
 						error: (oErr) => {
-							MessageBox.error("{i18n>Something went wrong}");
+							MessageBox.error(this.getI18nText("errorMessage"));
 							console.error(oErr.message);
 							reject();
 						},

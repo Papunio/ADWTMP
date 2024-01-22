@@ -29,6 +29,14 @@ sap.ui.define(
 			_onPatternMatched: function () {
 				this.handleClose();
 			},
+
+			getI18nText: function (sText, aArguments) {
+				return this.getOwnerComponent()
+					.getModel("i18n")
+					.getResourceBundle()
+					.getText(sText, aArguments);
+			},
+
 			onPressAddTeam: function () {
 				const oView = this.getView();
 				const oModel = oView.getModel();
@@ -55,7 +63,7 @@ sap.ui.define(
 								});
 							},
 							error: (oErr) => {
-								MessageBox.error("{i18n>Something went wrong}");
+								MessageBox.error(this.getI18nText("errorMessage"));
 								console.error(oErr.message);
 								reject();
 							},
@@ -77,12 +85,12 @@ sap.ui.define(
 				const aSelectedPlayers = oView.byId("selectedPlayers").getSelectedKeys();
 
 				if (sTeamName === "") {
-					MessageBox.error("Enter Team Name!");
+					MessageBox.error(this.getI18nText("enterTeamName"));
 					return;
 				}
 
 				if (aSelectedPlayers.length === 0) {
-					MessageBox.error("Select Players!");
+					MessageBox.error(this.getI18nText("selectPlayers"));
 					return;
 				}
 
@@ -104,10 +112,10 @@ sap.ui.define(
 					method: "POST",
 					success: () => {
 						this.refreshView();
-						MessageBox.success(`Team ${sTeamName} added`);
+						MessageBox.success(this.getI18nText("teamAdded", [sTeamName]));
 					},
 					error: (oErr) => {
-						MessageBox.error("Something went wrong");
+						MessageBox.error(this.getI18nText("errorMessage"));
 						console.error(oErr.message);
 					},
 				});
@@ -150,7 +158,7 @@ sap.ui.define(
 								resolve();
 							},
 							error: (oErr) => {
-								MessageBox.error("{i18n>Something went wrong}");
+								MessageBox.error(this.getI18nText("errorMessage"));
 								console.error(oErr.message);
 								reject();
 							},
@@ -176,12 +184,12 @@ sap.ui.define(
 				const aSelectedPlayers = oView.byId("selectedPlayersU").getSelectedKeys();
 
 				if (sTeamName === "") {
-					MessageBox.error("Enter Team Name!");
+					MessageBox.error(this.getI18nText("enterTeamName"));
 					return;
 				}
 
 				if (aSelectedPlayers.length === 0) {
-					MessageBox.error("Select Players!");
+					MessageBox.error(this.getI18nText("selectPlayers"));
 					return;
 				}
 
@@ -201,16 +209,16 @@ sap.ui.define(
 							};
 							oModel.create(`/Teams_players`, oPlayerInTeamPayload, {
 								error: (oErr) => {
-									MessageBox.error("Something went wrong");
+									MessageBox.error(this.getI18nText("errorMessage"));
 									console.error(oErr.message);
 								},
 							});
 						});
 						this.refreshView();
-						MessageBox.success(`Team ${sTeamName} updated`);
+						MessageBox.success(this.getI18nText("teamUpdated", [sTeamName]));
 					},
 					error: (oErr) => {
-						MessageBox.error("Something went wrong");
+						MessageBox.error(this.getI18nText("errorMessage"));
 						console.error(oErr.message);
 					},
 				});
@@ -220,7 +228,7 @@ sap.ui.define(
 			onPressDeleteTeam: function (oEvent) {
 				const oTeam = oEvent.getSource().getBindingContext().getObject();
 
-				MessageBox.confirm(`Are you sure you want to delete ${oTeam.name}?`, {
+				MessageBox.confirm(this.getI18nText("confirmTeamDelete", [oTeam.name]), {
 					onClose: function (oAction) {
 						if (oAction === sap.m.MessageBox.Action.OK) {
 							this.deleteTeam(oTeam.ID);
@@ -247,7 +255,7 @@ sap.ui.define(
 							resolve();
 						},
 						error: (oErr) => {
-							MessageBox.error("Something went wrong");
+							MessageBox.error(this.getI18nText("errorMessage"));
 							console.error(oErr.message);
 							reject();
 						},
@@ -258,13 +266,13 @@ sap.ui.define(
 					if (!bTeamInMatch) {
 						oModel.remove(`/Teams(${sTeamID})`, {
 							error: (oErr) => {
-								MessageBox.error("Something went wrong");
+								MessageBox.error(this.getI18nText("errorMessage"));
 								console.error(oErr.message);
 							},
 						});
 						this.refreshView();
 					} else {
-						MessageBox.error("Team is in a match!");
+						MessageBox.error(this.getI18nText("teamInAMatch"));
 					}
 				});
 			},
@@ -305,7 +313,7 @@ sap.ui.define(
 							resolve();
 						},
 						error: (oErr) => {
-							MessageBox.error("Something went wrong");
+							MessageBox.error(this.getI18nText("errorMessage"));
 							console.error(oErr.message);
 							reject();
 						},
@@ -337,7 +345,7 @@ sap.ui.define(
 							resolve();
 						},
 						error: (oErr) => {
-							MessageBox.error("Something went wrong");
+							MessageBox.error(this.getI18nText("errorMessage"));
 							console.error(oErr.message);
 							reject();
 						},

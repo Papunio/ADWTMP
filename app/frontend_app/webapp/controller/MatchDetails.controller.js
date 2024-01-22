@@ -32,43 +32,42 @@ sap.ui.define(
 				const oHomePlayers = oComponent.getModel("homePlayersModel");
 				const oGuestPlayers = oComponent.getModel("guestPlayersModel");
 
-				const oPromise = new Promise((resolve, reject) => {
-					oModel.read(`/Matches/${oEvent.getParameter("arguments").MatchID}`, {
-						urlParameters: {
-							$expand: "teams",
-						},
-						success: (oData) => {
-							const sHomeTeamID = oData.homeTeamID;
-							const aTeams = oData.teams.results;
-							aTeams.forEach((oTeam) => {
-								oModel.read(`/Teams(${oTeam.team_ID})`, {
-									urlParameters: {
-										$expand: "players/player",
-									},
-									success: (oTeamData) => {
-										if (sHomeTeamID === oTeamData.ID) {
-											oHomeTeamDetails.setData(oTeamData);
-											oHomePlayers.setData(oTeamData.players.results);
-										} else {
-											oGuestTeamDetails.setData(oTeamData);
-											oGuestPlayers.setData(oTeamData.players.results);
-										}
-									},
-								});
+				oModel.read(`/Matches/${oEvent.getParameter("arguments").MatchID}`, {
+					urlParameters: {
+						$expand: "teams",
+					},
+					success: (oData) => {
+						const sHomeTeamID = oData.homeTeamID;
+						const aTeams = oData.teams.results;
+						aTeams.forEach((oTeam) => {
+							oModel.read(`/Teams(${oTeam.team_ID})`, {
+								urlParameters: {
+									$expand: "players/player",
+								},
+								success: (oTeamData) => {
+									if (sHomeTeamID === oTeamData.ID) {
+										oHomeTeamDetails.setData(oTeamData);
+										oHomePlayers.setData(oTeamData.players.results);
+									} else {
+										oGuestTeamDetails.setData(oTeamData);
+										oGuestPlayers.setData(oTeamData.players.results);
+									}
+								},
 							});
-						},
-						error: (oErr) => {
-							MessageBox.error("{i18n>Something went wrong}");
-							console.error(oErr.message);
-							reject();
-						},
-					});
-					resolve();
+						});
+					},
+					error: (oErr) => {
+						MessageBox.error(this.getI18nText("errorMessage"));
+						console.error(oErr.message);
+					},
 				});
+			},
 
-				oPromise.then(() => {
-					// refresh bindings?
-				});
+			getI18nText: function (sText, aArguments) {
+				return this.getOwnerComponent()
+					.getModel("i18n")
+					.getResourceBundle()
+					.getText(sText, aArguments);
 			},
 
 			onNavButton: function () {
