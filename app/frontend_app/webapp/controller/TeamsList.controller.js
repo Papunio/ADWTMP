@@ -52,7 +52,7 @@ sap.ui.define(
 					const oPromise = new Promise((resolve, reject) => {
 						oModel.read(`/Players`, {
 							urlParameters: {
-								$expand: "team",
+								$expand: "team,position",
 							},
 							success: (oData) => {
 								oData.results.forEach((oPlayer) => {
@@ -144,7 +144,7 @@ sap.ui.define(
 					const oPromise = new Promise((resolve, reject) => {
 						oModel.read(`/Players`, {
 							urlParameters: {
-								$expand: "team",
+								$expand: "team,position",
 							},
 							success: (oData) => {
 								oData.results.forEach((oPlayer) => {
