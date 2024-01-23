@@ -94,12 +94,11 @@ sap.ui.define(
 					MessageBox.error(this.getI18nText("selectPosition"));
 					return;
 				}
-				const sPosition = oPosition.getText();
 
 				const oPayload = {
 					name: sName,
 					lastName: sLastName,
-					position: sPosition,
+					position: { name: oPosition.getText() },
 					age: sAge,
 				};
 
