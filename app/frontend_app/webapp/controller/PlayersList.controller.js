@@ -25,34 +25,7 @@ sap.ui.define(
 			},
 
 			_onPatternMatched: function () {
-				const oComponent = this.getOwnerComponent();
-				const oModel = this.getView().getModel();
-
-				const oPlayersModel = oComponent.getModel("playersModel");
-				const oSelectPositionModel = oComponent.getModel("selectPositionModel");
-
-				oModel.read(`/Players`, {
-					urlParameters: {
-						$expand: "position",
-					},
-					success: (oData) => {
-						oPlayersModel.setData(oData.results);
-					},
-					error: (oErr) => {
-						MessageBox.error(this.getI18nText("errorMessage"));
-						console.error(oErr.message);
-					},
-				});
-
-				oModel.read(`/Positions`, {
-					success: (oData) => {
-						oSelectPositionModel.setData(oData.results);
-					},
-					error: (oErr) => {
-						MessageBox.error(this.getI18nText("errorMessage"));
-						console.error(oErr.message);
-					},
-				});
+				this.refreshTable();
 			},
 
 			getI18nText: function (sText, aArguments) {
@@ -98,14 +71,14 @@ sap.ui.define(
 				const oPayload = {
 					name: sName,
 					lastName: sLastName,
-					position: { name: oPosition.getText() },
+					position_ID: oPosition.getText()[0],
 					age: sAge,
 				};
 
 				oModel.create("/Players", oPayload, {
 					method: "POST",
 					success: () => {
-						this.refreshView();
+						this.refreshTable();
 						MessageBox.success(this.getI18nText("playerAdded", [sName, sLastName]));
 					},
 					error: (oErr) => {
@@ -155,18 +128,17 @@ sap.ui.define(
 					MessageBox.error(this.getI18nText("selectPosition"));
 					return;
 				}
-				const sPosition = oPosition.getText();
 
 				const oPayload = {
 					name: sName,
 					lastName: sLastName,
-					position: sPosition,
+					position_ID: oPosition.getText()[0],
 					age: sAge,
 				};
 
 				oModel.update(`/Players(${sPlayerID})`, oPayload, {
 					success: () => {
-						this.refreshView();
+						this.refreshTable();
 						MessageBox.success(this.getI18nText("playerUpdated", [sName, sLastName]));
 					},
 					error: (oErr) => {
@@ -234,7 +206,7 @@ sap.ui.define(
 								console.error(oErr.message);
 							},
 						});
-						this.refreshView();
+						this.refreshTable();
 					} else {
 						MessageBox.error(this.getI18nText("playerInATeam"));
 					}
@@ -314,6 +286,37 @@ sap.ui.define(
 					this.byId("updatePlayerDialog").close();
 				}
 				this.clearFields();
+			},
+
+			refreshTable: function () {
+				const oComponent = this.getOwnerComponent();
+				const oModel = this.getView().getModel();
+
+				const oPlayersModel = oComponent.getModel("playersModel");
+				const oSelectPositionModel = oComponent.getModel("selectPositionModel");
+
+				oModel.read(`/Players`, {
+					urlParameters: {
+						$expand: "position",
+					},
+					success: (oData) => {
+						oPlayersModel.setData(oData.results);
+					},
+					error: (oErr) => {
+						MessageBox.error(this.getI18nText("errorMessage"));
+						console.error(oErr.message);
+					},
+				});
+
+				oModel.read(`/Positions`, {
+					success: (oData) => {
+						oSelectPositionModel.setData(oData.results);
+					},
+					error: (oErr) => {
+						MessageBox.error(this.getI18nText("errorMessage"));
+						console.error(oErr.message);
+					},
+				});
 			},
 
 			onNavButton: function () {
