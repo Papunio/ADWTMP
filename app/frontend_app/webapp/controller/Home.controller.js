@@ -141,7 +141,6 @@ sap.ui.define(
 				const oGuestTeam = oMatch.getProperty("guestTeam");
 
 				MessageBox.confirm(
-					// `Are you sure you want to delete match between ${oHomeTeam.name} and ${oGuestTeam.name}?`,
 					this.getI18nText("confirmMatchDelete", [oHomeTeam.name, oGuestTeam.name]),
 					{
 						onClose: function (oAction) {
