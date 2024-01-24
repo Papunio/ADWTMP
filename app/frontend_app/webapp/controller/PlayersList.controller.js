@@ -53,7 +53,7 @@ sap.ui.define(
 				const sName = oView.byId("playerName").getValue();
 				const sLastName = oView.byId("playerLastName").getValue();
 				const sAge = oView.byId("playerAge").getValue();
-				const oPosition = oView.byId("playerPosition").getSelectedItem();
+				const sPositionID = oView.byId("playerPosition").getSelectedKey();
 
 				if (sName === "") {
 					MessageBox.error(this.getI18nText("enterName"));
@@ -63,7 +63,7 @@ sap.ui.define(
 					MessageBox.error(this.getI18nText("enterLastName"));
 					return;
 				}
-				if (!oPosition) {
+				if (!sPositionID) {
 					MessageBox.error(this.getI18nText("selectPosition"));
 					return;
 				}
@@ -71,7 +71,7 @@ sap.ui.define(
 				const oPayload = {
 					name: sName,
 					lastName: sLastName,
-					position_ID: oPosition.getText()[0],
+					position_ID: sPositionID,
 					age: sAge,
 				};
 
@@ -114,7 +114,7 @@ sap.ui.define(
 				const sName = oView.byId("playerNameU").getValue();
 				const sLastName = oView.byId("playerLastNameU").getValue();
 				const sAge = oView.byId("playerAgeU").getValue();
-				const oPosition = oView.byId("playerPositionU").getSelectedItem();
+				const sPositionID = oView.byId("playerPositionU").getSelectedKey();
 
 				if (sName === "") {
 					MessageBox.error(this.getI18nText("enterName"));
@@ -124,7 +124,7 @@ sap.ui.define(
 					MessageBox.error(this.getI18nText("enterLastName"));
 					return;
 				}
-				if (!oPosition) {
+				if (!sPositionID) {
 					MessageBox.error(this.getI18nText("selectPosition"));
 					return;
 				}
@@ -132,7 +132,7 @@ sap.ui.define(
 				const oPayload = {
 					name: sName,
 					lastName: sLastName,
-					position_ID: oPosition.getText()[0],
+					position_ID: sPositionID,
 					age: sAge,
 				};
 

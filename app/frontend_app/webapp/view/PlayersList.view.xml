@@ -38,7 +38,7 @@
 					</Column>
 				</columns>
 				<items>
-					<ColumnListItem type="Active" press="onPressPlayer" highlight="{path: 'playersModel>position/name', formatter: '.formatter.highlightPosition'}">
+					<ColumnListItem type="Active" press="onPressPlayer" highlight="{path: 'playersModel>position/ID', formatter: '.formatter.highlightPosition'}">
 						<Text text=""/>
 						<Text text="{playersModel>name}"/>
 						<Text text="{playersModel>lastName}"/>

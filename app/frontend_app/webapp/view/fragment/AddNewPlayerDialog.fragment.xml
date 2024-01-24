@@ -31,7 +31,7 @@
                                 <Select id="playerPosition" width="100%" required="true" forceSelection="false" items="{
 									path: 'selectPositionModel>/'
 								}">
-                                    <core:ListItem text="{selectPositionModel>name}" icon="sap-icon://feeder-arrow"/>
+                                    <core:ListItem key="{selectPositionModel>ID}" text="{selectPositionModel>name}" icon="sap-icon://feeder-arrow"/>
                                 </Select>
                             </f:fields>
                         </f:FormElement>

@@ -108,7 +108,7 @@
 
 									</Column>
 									<Column width="40%">
-										<Label text="{i18n>team}" />
+
 									</Column>
 
 									<Column width="10%">

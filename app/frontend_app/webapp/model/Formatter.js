@@ -2,6 +2,12 @@ sap.ui.define(["sap/ui/core/format/DateFormat"], (DateFormat) => {
 	"use strict";
 
 	return {
+		getI18nText: function (sText, aArguments) {
+			return this.getOwnerComponent()
+				.getModel("i18n")
+				.getResourceBundle()
+				.getText(sText, aArguments);
+		},
 		formatDate: function (sDate) {
 			if (!sDate) {
 				return "";
@@ -15,13 +21,13 @@ sap.ui.define(["sap/ui/core/format/DateFormat"], (DateFormat) => {
 			if (sPosition === "") {
 				return "None";
 			}
-			if (sPosition === "Attacker") {
+			if (sPosition === "A") {
 				return "Error";
 			}
-			if (sPosition === "Defender") {
+			if (sPosition === "D") {
 				return "Indication07";
 			}
-			if (sPosition === "Midfielder") {
+			if (sPosition === "M") {
 				return "Information";
 			} else {
 				return "Success";
